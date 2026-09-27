@@ -1,52 +1,288 @@
-<!-- انسخ الكود ده وحطه في آخر ملف index.html عندك واعمل سيف -->
-<script type="module">
-  import { initializeApp } from "https://gstatic.com";
-  import { getFirestore, collection, addDoc } from "https://gstatic.com";
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentoBene | Menu</title>
+    <style>
+        :root {
+            --primary: #d63031;
+            --dark: #2d3436;
+            --light: #f8f9fa;
+            --grey: #636e72;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .header h1 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 36px;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        .category-title {
+            border-right: 5px solid var(--primary);
+            padding-right: 15px;
+            margin: 40px 0 25px;
+            color: var(--primary);
+            font-size: 24px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        @media(min-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-info h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .product-info p {
+            font-size: 14px;
+            color: var(--grey);
+            margin: 0 0 20px;
+            line-height: 1.6;
+        }
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-info .price {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 18px;
+        }
+        .admin-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+        .admin-box h2 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .admin-box p {
+            color: var(--grey);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+            background-color: #fafafa;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+            background-color: #fff;
+        }
+        .btn {
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAY6MoViXkZAprIM2XXJCY5xeZKng_kTF8",
-    authDomain: "://firebaseapp.com",
-    projectId: "sentobene-menu",
-    storageBucket: "sentobene-menu.firebasestorage.app",
-    messagingSenderId: "773385770580",
-    appId: "1:773385770580:web:9742bf74650a0764833fc1"
-  };
+    <div class="header">
+        <h1>SentoBene®</h1>
+    </div>
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    <div class="container">
+        <!-- أزرار التنقل الأصلية بتاعتك -->
+        <div class="tabs">
+            <button class="tab-btn active" id="btn-show-menu">عرض المينيو</button>
+            <button class="tab-btn" id="btn-show-admin">لوحة إدارة SentoBene</button>
+        </div>
 
-  // داتا الـ 13 صنف مكرونة بتوعك من ملف الإكسيل المرفوع
-  const oldProducts = [
-    { name: "BOLOGNESE", price: 169, description: "مكرونة إسباغيتي وصوص البولونيز المميز", image_url: "https://supabase.co" },
-    { name: "ARABIATA", price: 94, description: "مكرونة بنا مع الفلفل الالوان والطماطم الطازجة مع شرائح الزيتون والفلفل الاخضر الحار وصوص النابوليتان", image_url: "https://supabase.co" },
-    { name: "PESTO", price: 175, description: "مكرونة بنا مع الكريمي بستو صوص وصدور الدجاج المتبل والمشروم", image_url: "https://supabase.co" },
-    { name: "ALFREDO", price: 170, description: "مكرونة بنا مع صدور الدجاج المتبل والمشروم مع صوص الالفريدو المميز", image_url: "https://supabase.co" },
-    { name: "TUNA", price: 265, description: "مكرونة إسباغيتي مع قطع التونة الغنية بالبروتين مع شرائح الزيتون وفلفل الالوان وشرائح البصل مع صوص النابوليتان المميز", image_url: "https://supabase.co" },
-    { name: "SHRIMP", price: 275, description: "مكرونة فيتوتشيني مع الجمبري المتبل وشرائح الزيتون والشبت مع الصوص الابيض المميز", image_url: "https://supabase.co" },
-    { name: "NEGRESCO", price: 196, description: "مكرونة فيتوتشيني مع صدور الدجاج المتبل والصوص الابيض المميز والجبنة الموتزاريلا", image_url: "https://supabase.co" },
-    { name: "MEATBALLS", price: 167, description: "مكرونة بنا مع كرات اللحم والصوص الابيض والبستو المميز والجبنة الموتزاريلا", image_url: "https://supabase.co" },
-    { name: "CHICKEN SUPREME", price: 186, description: "مكرونة بنا مع صدور الدجاج المتبل وشرائح البسطرمة الطازجة وفلفل الالوان وصوص الالفريدو", image_url: "https://supabase.co" },
-    { name: "MAC&CHEESE", price: 189, description: "مكرونة سربينتيني مع خليط من اجود انواع الجبن", image_url: "https://supabase.co" },
-    { name: "MIX BEEF OVEN", price: 198, description: "مكرونة بنا مع شرائح اللحم مع السجق البلدي المتبل وشرائح البسطرمة الطازجة والفلفل الالوان والموتزاريلا مع الصوص الابيض المميز", image_url: "https://supabase.co" },
-    { name: "BEEF CHEESE STEAK", price: 194, description: "مكرونة بنا مع شرائح اللحم المتبل والمشروم وشرائح الفلفل الالوان الطازج وصوص الاستيك الخاص مع خليط من اجود انواع الجبن", image_url: "https://supabase.co" },
-    { name: "FAJITA CHICKEN", price: 179, description: "مكرونة بنا مع صدور الدجاج المتبل مع شرائح الفلفل الالوان الطازج مع شرائح البصل وصوص الفاهيتا الخاص", image_url: "https://supabase.co" }
-  ];
+        <!-- صفحة المنيو للزبائن -->
+        <div id="page-menu">
+            <h2 class="category-title">PASTA / المكرونة</h2>
+            <div class="products-grid" id="products-container">
+                <p style="text-align: center; color: var(--grey);">جارٍ التحميل من سيرفر جوجل السريع...</p>
+            </div>
+        </div>
 
-  async function transferData() {
-    for (const item of oldProducts) {
-      await addDoc(collection(db, "products"), {
-        name: item.name,
-        price: item.price,
-        description: item.description,
-        image_url: item.image_url,
-        category: "PASTA",
-        available: true,
-        created_at: new Date()
-      });
-    }
-    alert("تم نقل الـ 13 صنف مكرونة لـ فايربيز بنجاح تام! 🍝🔥");
-  }
-  
-  // تشغيل النقل تلقائياً
-  transferData();
-</script>
+        <!-- لوحة الإدارة الأصلية الخاصة بك -->
+        <div id="page-admin" class="hidden">
+            <div class="admin-box">
+                <h2>لوحة إدارة SentoBene</h2>
+                <p>من هنا تقدر تضيف وتعدّل الأصناف، ترفع الصور، وتخفي أي صنف غير متاح. التغييرات بتظهر في منيو الزبون مباشرة.</p>
+                
+                <form id="form-add-product">
+                    <div class="form-group">
+                        <label>اسم الصنف</label>
+                        <input type="text" id="ins-name" required placeholder="مثال: ALFREDO">
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف</label>
+                        <textarea id="ins-desc" rows="3" required placeholder="مكونات الوجبة بالتفصيل..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>السعر بالجنيه</label>
+                        <input type="number" id="ins-price" step="0.01" required placeholder="170.00">
+                    </div>
+                    <div class="form-group">
+                        <label>القسم</label>
+                        <select id="ins-cat">
+                            <option value="PASTA">PASTA</option>
+                            <option value="SANDWICHES">SANDWICHES</option>
+                            <option value="PORIZZA">PORIZZA</option>
+                            <option value="DESSERTS">DESSERTS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>صورة الصنف (رابط الصورة)</label>
+                        <input type="url" id="ins-image" placeholder="https://example.com">
+                    </div>
+                    <button type="submit" class="btn">حفظ الصنف</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- كود تشغيل السيرفر وقاعدة البيانات من جوجل -->
+    <script type="module">
+        import { initializeApp } from "https://gstatic.com";
+        import { getFirestore, collection, addDoc, getDocs } from "https://gstatic.com";
+
+        // مفاتيح الاتصال الخاصة بـ Firebase بمشروعك
+        const firebaseConfig = {
+            apiKey: "AIzaSyAY6MoViXkZAprIM2XXJCY5xeZKng_kTF8",
+            authDomain: "://firebaseapp.com",
+            projectId: "sentobene-menu",
+            storageBucket: "sentobene-menu.firebasestorage.app",
+            messagingSenderId: "773385770580",
+            appId: "1:773385770580:web:9742bf74650a0764833fc1",
+            measurementId: "G-KRS032P3Z3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // دالة جلب وعرض المنتجات للزبائن
+        async function loadProducts() {
+            const container = document.getElementById("products-container");
+            if (!container) return;
+            try {
+                const querySnapshot = await getDocs(collection(db, "products"));
+                if (querySnapshot.empty) {
+                    container.innerHTML = "<p style='text-align:center; width:100%; color:var(--grey);'>لا توجد أصناف حالياً، يرجى إضافة وجبات من لوحة التحكم.</p>";
+                    return;
+                }
+                container.innerHTML = "";
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+                    container.innerHTML += `
+                        <div class="product-card">
+                            <img src="${product.image_url || 'https://placeholder.com'}" alt="${product.name}">
+                            <div class="product-info">
+                                <h3>${product.name}</h3>
+                                <p>${product.description || ''}</p>
+                                <div class="product-bottom">
+                                    <div class="price">${product.price} EGP</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                container.innerHTML = `<p style='text-align:center; color:var(--primary);'>خطأ في تحميل المنيو: ${error.message}</p>`;
+            }
