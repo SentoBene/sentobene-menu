@@ -41,7 +41,8 @@ const SUPABASE_KEY='sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const cats=['Pasta','Sandwiches','Purezza','Main Courses','Side Dishes','Desserts','Special Mocktails','Hot Drinks','Fresh Juices','Milkshakes','Iced Drinks'];
 const demo=[
-['Chicken Alfredo Pasta','مكرونة بالدجاج مع صوص الألفريدو والجبن',140,'PASTA'],['Penne Arrabbiata','مكرونة بيني بصوص الطماطم الحار',120,'PASTA'],['Spaghetti Bolognese','مكرونة سباجيتي بصلصة بولونيز',130,'PASTA'],['Pesto Pasta','مكرونة بصوص البيستو',125,'PASTA'],['Chicken Sandwich','ساندوتش دجاج بصوص خاص',160,'SANDWICHES'],['Margherita Porizza','طماطم وموتزاريلا وريحان',170,'PORIZZA']
+const demo=[ ['Chicken Alfredo Pasta','140','PASTA','مكرونة بالفراخ مع صوص الألفريدو والجبن'],['Penne Arrabbiata','120','Pasta','مكرونة بيني بصوص الطماطم الحار'],['Spaghetti Bolognese','130','Pasta','مكرونة سباجيتي بصلصة البولونيز'],['Chicken Sandwich','125','Sandwiches','ساندوتش دجاج بصوص'],['Pesto Pasta','125','Pasta','مكرونة بصوص البيستو'],['Margherita Porizza','170','Purezza','طماطم وموتزاريلا وريحان'],['SANDWICHES'],['PORIZZA'] ];
+
 ];
 let active=cats[0], products=[];
 function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500)}
