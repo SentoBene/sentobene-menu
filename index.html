@@ -53,7 +53,14 @@
 </section>
 </main>
 <div id="loginModal" class="modal"><div class="modalBox"><h2>دخول إدارة SentoBene</h2><p class="hint">الدخول خاص بالإدارة فقط.</p><label>الإيميل</label><input id="email" type="email" autocomplete="username"><label>الباسورد</label><input id="password" type="password" autocomplete="current-password"><div id="loginError" class="error"></div><div style="display:flex;gap:8px;justify-content:flex-start"><button class="btn" onclick="login()">دخول</button><button class="btn dark" onclick="closeLogin()">إلغاء</button></div></div></div>
-<div id="toast" class="toast"></div>
+
+function renderPublic(){
+  document.getElementById('cats').innerHTML=cats.map(c=>`<button class="${c===active?'active':''}" onclick="active='${c}';renderPublic()">${c.toLowerCase().replace(/\b\w/g,l=>l.toUpperCase())}</button>`).join('');
+  document.getElementById('sectionName').textContent=active.toLowerCase().replace(/\b\w/g,l=>l.toUpperCase());
+  const arr=products.filter(x=>x.category===active);
+  document.getElementById('count').textContent=arr.length+' أصناف';
+  document.getElementById('products').innerHTML=arr.length?arr.map(x=>`<article class="card"><div class="photo">${x.image_url?`<img src="${esc(x.image_url)}" alt="${esc(x.name)}" loading="lazy">`:`<span>صورة المنتج</span>`}</div><div class="info"><div class="name">${esc(x.name)}</div><div class="desc">${esc(x.description||'')}</div><div class="bottom"><span class="price">${Number(x.price).toLocaleString('en-US')} LE</span></div></div></article>`).join(''):'<div class="empty">لا توجد أصناف متاحة حاليًا في هذا القسم.</div>';
+}
 <script>
 const SUPABASE_URL='https://xzyobcexywacsjlatntx.supabase.co';
 const SUPABASE_KEY='sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
