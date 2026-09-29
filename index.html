@@ -14,8 +14,11 @@
 
 .cats{display:flex;gap:8px;overflow-x:auto;padding:2px 1px 14px;scrollbar-width:none;direction:ltr}
 .cats::-webkit-scrollbar{display:none}
+.cats button{direction:rtl;white-space:nowrap;border:1px solid #3a352d;background:#111413;color:#ddd;border-radius:999px;padding:9px 14px;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:15px}
 .cats button{direction:rtl;white-space:nowrap;border:1px solid #3a352d;background:#111413;color:#ddd;border-radius:999px;padding:9px 14px;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:15px;text-transform:capitalize}
 .cats button.active{background:var(--gold);border-color:var(--gold);color:#111;font-weight:800}
+.sectionTitle{display:flex;justify-content:space-between;align-items:end;margin:5px 0 12px}.sectionTitle h2{margin:0;font-size:21px}.sectionTitle span{font-size:11px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--card);border:1px solid #292a26;border-radius:17px;overflow:hidden;box-shadow:0 8px 25px #0004}.photo{width:100%;aspect-ratio:1.2;background:radial-gradient(circle at 50% 40%,#30281c,#171a18 70%);display:flex;align-items:center;justify-content:center;color:#8e806a;text-align:center;padding:20px}.photo img{width:100%;height:100%;object-fit:cover}.info{padding:12px}.name{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:17px;line-height:1.3}.desc{font-size:12px;color:var(--muted);line-height:1.55;margin:5px 0 10px;min-height:34px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{color:var(--gold2);font-weight:900}.empty{border:1px dashed #3a362f;border-radius:16px;padding:42px 15px;text-align:center;color:#aaa;grid-column:1/-1}.footer{text-align:center;color:#6f6b64;font-size:11px;padding:30px 0}.footer button{background:none;border:0;color:#777;text-decoration:underline;cursor:pointer}
+.sectionTitle{display:flex;justify-content:space-between;align-items:end;margin:5px 0 12px}..sectionTitle h2{margin:0;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:21px}.sectionTitle span{font-size:11px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--card);border:1px solid #292a26;border-radius:17px;overflow:hidden;box-shadow:0 8px 25px #0004}.photo{width:100%;aspect-ratio:1.2;background:radial-gradient(circle at 50% 40%,#30281c,#171a18 70%);display:flex;align-items:center;justify-content:center;color:#8e806a;text-align:center;padding:20px}.photo img{width:100%;height:100%;object-fit:cover}.info{padding:12px}.name{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:17px;line-height:1.3}.desc{font-size:12px;color:var(--muted);line-height:1.55;margin:5px 0 10px;min-height:34px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{color:var(--gold2);font-weight:900}.empty{border:1px dashed #3a362f;border-radius:16px;padding:42px 15px;text-align:center;color:#aaa;grid-column:1/-1}.footer{text-align:center;color:#6f6b64;font-size:11px;padding:30px 0}.footer button{background:none;border:0;color:#777;text-decoration:underline;cursor:pointer}
 .sectionTitle{display:flex;justify-content:space-between;align-items:end;margin:5px 0 12px}
 .sectionTitle h2{margin:0;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:21px;text-transform:capitalize}
 .sectionTitle span{font-family:Georgia,"Times New Roman",serif;font-size:11px;color:var(--muted)}
@@ -53,14 +56,7 @@
 </section>
 </main>
 <div id="loginModal" class="modal"><div class="modalBox"><h2>دخول إدارة SentoBene</h2><p class="hint">الدخول خاص بالإدارة فقط.</p><label>الإيميل</label><input id="email" type="email" autocomplete="username"><label>الباسورد</label><input id="password" type="password" autocomplete="current-password"><div id="loginError" class="error"></div><div style="display:flex;gap:8px;justify-content:flex-start"><button class="btn" onclick="login()">دخول</button><button class="btn dark" onclick="closeLogin()">إلغاء</button></div></div></div>
-
-function renderPublic(){
-  document.getElementById('cats').innerHTML=cats.map(c=>`<button class="${c===active?'active':''}" onclick="active='${c}';renderPublic()">${c.toLowerCase().replace(/\b\w/g,l=>l.toUpperCase())}</button>`).join('');
-  document.getElementById('sectionName').textContent=active.toLowerCase().replace(/\b\w/g,l=>l.toUpperCase());
-  const arr=products.filter(x=>x.category===active);
-  document.getElementById('count').textContent=arr.length+' أصناف';
-  document.getElementById('products').innerHTML=arr.length?arr.map(x=>`<article class="card"><div class="photo">${x.image_url?`<img src="${esc(x.image_url)}" alt="${esc(x.name)}" loading="lazy">`:`<span>صورة المنتج</span>`}</div><div class="info"><div class="name">${esc(x.name)}</div><div class="desc">${esc(x.description||'')}</div><div class="bottom"><span class="price">${Number(x.price).toLocaleString('en-US')} LE</span></div></div></article>`).join(''):'<div class="empty">لا توجد أصناف متاحة حاليًا في هذا القسم.</div>';
-}
+<div id="toast" class="toast"></div>
 <script>
 const SUPABASE_URL='https://xzyobcexywacsjlatntx.supabase.co';
 const SUPABASE_KEY='sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
