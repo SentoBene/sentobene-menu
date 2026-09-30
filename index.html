@@ -90,7 +90,7 @@ function setupCats(){
   ).join('');
 }
 function esc(s){return String(s??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]))}
-async functionfunction renderPublic(){
+function renderPublic(){
   setupCats();
 
   const sectionProducts = products.filter(x => x.category === active);
@@ -122,7 +122,6 @@ async functionfunction renderPublic(){
 
       <div class="info">
         <div class="name">${esc(x.name)}</div>
-
         <div class="desc">${esc(x.description || '')}</div>
 
         <div class="bottom">
@@ -133,6 +132,7 @@ async functionfunction renderPublic(){
       </div>
     </div>
   `).join('');
+}
 
 async function login(){const email=document.getElementById('email').value.trim(),password=document.getElementById('password').value;document.getElementById('loginError').textContent='';if(!email||!password){document.getElementById('loginError').textContent='اكتب الإيميل والباسورد.';return}const {error}=await sb.auth.signInWithPassword({email,password});if(error){document.getElementById('loginError').textContent='بيانات الدخول غير صحيحة أو الحساب غير مؤكد.';return}closeLogin();await showAdmin()}
 function openLogin(){document.getElementById('loginModal').classList.add('show');setTimeout(()=>document.getElementById('email').focus(),100)}function closeLogin(){document.getElementById('loginModal').classList.remove('show');document.getElementById('loginError').textContent=''}
