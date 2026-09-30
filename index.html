@@ -64,7 +64,7 @@ const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const cats = [
   { db: 'PASTA', name: 'Pasta' },
   { db: 'SANDWICHES', name: 'Sandwiches' },
-  { db: 'PORIZZA', name: 'Pizza' },
+  { db: 'PORIZZA', name: 'Purezza' },
   { db: 'MAIN COURSE', name: 'Main Course' },
   { db: 'SIDE ITEM', name: 'Side Items' },
   { db: 'DESSERTS', name: 'Desserts' },
@@ -134,6 +134,24 @@ function renderPublic(){
   `).join('');
 }
 
+async function loadPublic(){
+  const {data,error}=await sb
+    .from('products')
+    .select('*')
+    .eq('available',true)
+    .order('created_at',{ascending:false});
+
+  if(error){
+    console.error(error);
+    document.getElementById('count').textContent='';
+    document.getElementById('products').innerHTML =
+      '<div class="empty">تعذر تحميل المنيو حاليًا.</div>';
+    return;
+  }
+
+  products=data||[];
+  renderPublic();
+}
 async function login(){const email=document.getElementById('email').value.trim(),password=document.getElementById('password').value;document.getElementById('loginError').textContent='';if(!email||!password){document.getElementById('loginError').textContent='اكتب الإيميل والباسورد.';return}const {error}=await sb.auth.signInWithPassword({email,password});if(error){document.getElementById('loginError').textContent='بيانات الدخول غير صحيحة أو الحساب غير مؤكد.';return}closeLogin();await showAdmin()}
 function openLogin(){document.getElementById('loginModal').classList.add('show');setTimeout(()=>document.getElementById('email').focus(),100)}function closeLogin(){document.getElementById('loginModal').classList.remove('show');document.getElementById('loginError').textContent=''}
 async function logout(){await sb.auth.signOut();showPublic();toast('تم تسجيل الخروج')}
