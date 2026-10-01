@@ -1162,8 +1162,17 @@ const SUPABASE_URL =
   'https://xzyobcexywacsjlatntx.supabase.co';
 
 const SUPABASE_ANON_KEY =
-  'PASTE_YOUR_EXISTING_ANON_KEY_HERE';
+const SUPABASE_URL =
+  'https://xzyobcexywacsjlatntx.supabase.co';
 
+const SUPABASE_ANON_KEY =
+  'sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
+
+const sb =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
 /*
   مهم:
   لو عندك ANON KEY حقيقي في نسختك الحالية،
