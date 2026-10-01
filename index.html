@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en" dir="ltr">
 
@@ -892,7 +893,6 @@ body.adminMode .footer{
   id="public"
 >
 
-
   <header class="header">
 
     <img
@@ -1005,7 +1005,6 @@ body.adminMode .footer{
 </div>
 
 
-
 <!-- =========================
      ADMIN
 ========================= -->
@@ -1043,7 +1042,6 @@ body.adminMode .footer{
 
 
   <div class="adminGrid">
-
 
     <div class="panel">
 
@@ -1179,7 +1177,6 @@ body.adminMode .footer{
 </section>
 
 
-
 <!-- =========================
      LOGIN MODAL
 ========================= -->
@@ -1255,7 +1252,6 @@ body.adminMode .footer{
   </div>
 
 </div>
-
 
 
 <script>
@@ -1469,10 +1465,68 @@ function renderPublic(){
   setupCats();
 
 
-  const sectionProducts =
+  let sectionProducts =
     products.filter(
       x => x.category === active
     );
+
+
+  /* =========================================
+     HOT DRINKS SPECIAL ORDER
+     Espresso -> Turkish Coffee -> Rest
+  ========================================= */
+
+  if(active === 'HOT DRINKS'){
+
+    sectionProducts.sort((a,b) => {
+
+      const aName =
+        String(a.name || '')
+          .trim()
+          .toLowerCase();
+
+      const bName =
+        String(b.name || '')
+          .trim()
+          .toLowerCase();
+
+
+      const order = {
+        'espresso':0,
+        'turkish coffee':1
+      };
+
+
+      const aOrder =
+        Object.prototype.hasOwnProperty.call(
+          order,
+          aName
+        )
+          ? order[aName]
+          : 2;
+
+
+      const bOrder =
+        Object.prototype.hasOwnProperty.call(
+          order,
+          bName
+        )
+          ? order[bName]
+          : 2;
+
+
+      if(aOrder !== bOrder){
+
+        return aOrder - bOrder;
+
+      }
+
+
+      return 0;
+
+    });
+
+  }
 
 
   const currentCat =
@@ -2481,27 +2535,52 @@ async function seedDemo(){
 
 
 /* =========================================
+   ADMIN URL CHECK
+========================================= */
+
+function isAdminUrl(){
+
+  return new URLSearchParams(
+    window.location.search
+  ).get('admin') === '1';
+
+}
+
+
+/* =========================================
    AUTH STATE
 ========================================= */
 
 sb.auth.onAuthStateChange(
   async (event,session) => {
 
-    if(
-      event === 'SIGNED_IN' &&
-      session?.user
-    ){
+    /*
+      مهم جدًا:
+      تسجيل الدخول المحفوظ لا يفتح الإدارة
+      على الرابط العادي.
+    */
 
-      showAdmin();
+    if(event === 'SIGNED_OUT'){
+
+      showPublic();
+
+      return;
 
     }
 
 
+    /*
+      الإدارة لا تُفتح تلقائيًا إلا إذا
+      كان المستخدم على رابط الإدارة.
+    */
+
     if(
-      event === 'SIGNED_OUT'
+      event === 'SIGNED_IN' &&
+      session?.user &&
+      isAdminUrl()
     ){
 
-      showPublic();
+      showAdmin();
 
     }
 
@@ -2514,6 +2593,8 @@ sb.auth.onAuthStateChange(
 ========================================= */
 
 setupAdminCategorySelect();
+
+showPublic();
 
 loadPublic();
 
@@ -2543,14 +2624,10 @@ document.addEventListener(
 
 
 /* =========================================
-   ?admin=1
+   ADMIN URL
 ========================================= */
 
-if(
-  new URLSearchParams(
-    window.location.search
-  ).get('admin') === '1'
-){
+if(isAdminUrl()){
 
   openLogin();
 
@@ -2560,3 +2637,4 @@ if(
 
 </body>
 </html>
+```
