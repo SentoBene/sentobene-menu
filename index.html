@@ -1,17 +1,16 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
 <title>SentoBene | Menu</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-
 <style>
+
 :root{
   --bg:#090b0a;
   --card:#111413;
@@ -27,12 +26,14 @@
   box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
   background:var(--bg);
   color:var(--text);
-  font-family:Arial,Tahoma,sans-serif;
+  font-family:"Times New Roman",Times,serif;
+  direction:ltr;
 }
 
 body{
@@ -46,37 +47,42 @@ select{
   font:inherit;
 }
 
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+}
+
+
 /* =========================
    HEADER
 ========================= */
 
 .header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(9,11,10,.96);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--line);
-  padding:15px 16px 12px;
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:20px 16px 8px;
   text-align:center;
 }
 
 .logo{
-  width:118px;
-  height:auto;
   display:block;
-  margin:auto;
-  mix-blend-mode:screen;
+  width:min(220px,72vw);
+  max-height:130px;
+  object-fit:contain;
+  margin:0 auto;
 }
 
 .tag{
-  color:var(--gold2);
-  font-size:11px;
-  margin-top:5px;
+  min-height:4px;
 }
 
+
 /* =========================
-   SOCIAL ICONS
+   SOCIAL
 ========================= */
 
 .social{
@@ -85,11 +91,12 @@ select{
   align-items:center;
   gap:12px;
   margin-top:9px;
+  direction:ltr;
 }
 
 .social a{
-  width:30px;
-  height:30px;
+  width:32px;
+  height:32px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -102,13 +109,14 @@ select{
 }
 
 .social a:hover{
-  border-color:var(--gold2);
-  transform:translateY(-1px);
+  background:var(--gold);
+  color:#111;
+  border-color:var(--gold);
 }
 
 .social svg{
-  width:16px;
-  height:16px;
+  width:17px;
+  height:17px;
   fill:none;
   stroke:currentColor;
   stroke-width:1.8;
@@ -121,19 +129,50 @@ select{
   stroke:none;
 }
 
+.socialName{
+  font-family:"Times New Roman",Times,serif;
+  font-size:16px;
+  font-weight:700;
+  color:var(--gold2);
+  letter-spacing:.3px;
+  text-transform:capitalize;
+}
+
+
 /* =========================
    MAIN
 ========================= */
 
-.wrap{
+.public{
   width:min(1100px,100%);
-  margin:auto;
-  padding:0 14px;
+  margin:0 auto;
+  padding:0 14px 30px;
+  direction:ltr;
 }
+
+.hero{
+  text-align:center;
+  padding:5px 0 8px;
+  direction:ltr;
+}
+
+.hero h1{
+  margin:0;
+  font-family:"Times New Roman",Times,serif;
+  font-size:30px;
+  font-weight:700;
+  text-transform:capitalize;
+}
+
+.hero p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
 
 /* =========================
    CATEGORIES
-   HORIZONTAL SCROLL
 ========================= */
 
 .cats{
@@ -144,10 +183,13 @@ select{
   width:100%;
   overflow-x:auto;
   overflow-y:hidden;
+
   padding:15px 2px 14px;
+
   scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
-  direction:rtl;
+
+  direction:ltr;
   white-space:nowrap;
   scroll-behavior:smooth;
 }
@@ -160,16 +202,21 @@ select{
   flex:0 0 auto;
   direction:ltr;
   white-space:nowrap;
+
   border:1px solid #3a352d;
   background:#111413;
   color:#ddd;
+
   border-radius:999px;
   padding:9px 14px;
-  font-family:"Poppins",Arial,Tahoma,sans-serif;
+
+  font-family:"Times New Roman",Times,serif;
   font-weight:700;
-  font-size:14px;
+  font-size:15px;
   line-height:1.2;
+
   text-transform:capitalize;
+
   cursor:pointer;
   transition:.2s ease;
 }
@@ -185,31 +232,42 @@ select{
   font-weight:800;
 }
 
+
 /* =========================
    SECTION TITLE
 ========================= */
 
 .sectionTitle{
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:end;
-  margin:5px 0 12px;
+  gap:10px;
+
+  margin:5px 0 14px;
+  padding-bottom:9px;
+
+  border-bottom:1px solid var(--line);
+
+  direction:ltr;
 }
 
 .sectionTitle h2{
   margin:0;
-  font-family:"Poppins",Arial,Tahoma,sans-serif;
-  font-weight:800;
+
+  font-family:"Times New Roman",Times,serif;
+  font-weight:700;
   font-size:21px;
   line-height:1.2;
+
   text-transform:capitalize;
 }
 
 .sectionTitle span{
   font-size:11px;
   color:var(--muted);
-  font-family:"Poppins",Arial,Tahoma,sans-serif;
+  font-family:"Times New Roman",Times,serif;
 }
+
 
 /* =========================
    PRODUCTS GRID
@@ -218,34 +276,37 @@ select{
 .grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+  gap:14px;
+  direction:ltr;
 }
 
 .card{
-  background:var(--card);
-  border:1px solid #292a26;
-  border-radius:17px;
   overflow:hidden;
-  box-shadow:0 8px 25px #0004;
-}
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,.16);
 
-/* =========================
-   PRODUCT IMAGE
-========================= */
+  direction:ltr;
+}
 
 .photo{
   width:100%;
   aspect-ratio:1.55;
+
   background:radial-gradient(
     circle at 50% 40%,
     #30281c,
     #171a18 70%
   );
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   color:#8e806a;
   text-align:center;
+
   padding:12px;
 }
 
@@ -254,29 +315,32 @@ select{
   height:100%;
   object-fit:cover;
   border-radius:8px;
+  display:block;
 }
 
-/* =========================
-   PRODUCT INFO
-========================= */
-
 .info{
-  padding:12px;
+  padding:12px 13px 13px;
+  direction:ltr;
+  text-align:left;
 }
 
 .name{
-  font-family:"Poppins",Arial,Tahoma,sans-serif;
+  font-family:"Times New Roman",Times,serif;
   font-weight:700;
-  font-size:16px;
-  line-height:1.35;
+  font-size:17px;
+  line-height:1.3;
+
   text-transform:capitalize;
+
+  color:var(--text);
 }
 
 .desc{
-  font-family:Arial,Tahoma,sans-serif;
+  font-family:"Times New Roman",Times,serif;
   font-size:12px;
   color:var(--muted);
   line-height:1.55;
+
   margin:5px 0 10px;
   min-height:34px;
 }
@@ -284,46 +348,46 @@ select{
 .bottom{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:8px;
+  justify-content:flex-start;
 }
 
 .price{
   color:var(--gold2);
-  font-family:"Poppins",Arial,Tahoma,sans-serif;
-  font-weight:800;
-  font-size:16px;
+
+  font-family:"Times New Roman",Times,serif;
+  font-weight:900;
+  font-size:17px;
   line-height:1.2;
+
+  white-space:nowrap;
   text-transform:none;
 }
 
+
 /* =========================
-   EMPTY / FOOTER
+   EMPTY
 ========================= */
 
 .empty{
-  border:1px dashed #3a362f;
-  border-radius:16px;
-  padding:42px 15px;
+  padding:35px 15px;
   text-align:center;
-  color:#aaa;
-  grid-column:1/-1;
+  color:var(--muted);
+  border:1px dashed var(--line);
+  border-radius:14px;
 }
+
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
   text-align:center;
-  color:#6f6b64;
+  color:#777;
   font-size:11px;
-  padding:30px 0;
+  padding:25px 10px 35px;
 }
 
-.footer button{
-  background:none;
-  border:0;
-  color:#777;
-  text-decoration:underline;
-  cursor:pointer;
-}
 
 /* =========================
    ADMIN
@@ -331,166 +395,194 @@ select{
 
 .admin{
   display:none;
+  width:min(1100px,100%);
+  margin:0 auto;
+  padding:20px 14px 40px;
+  direction:rtl;
 }
 
 .admin.show{
   display:block;
 }
 
-.public.hide{
-  display:none;
+.adminHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  margin-bottom:20px;
+}
+
+.adminHead h2{
+  margin:0;
+  font-family:"Times New Roman",Times,serif;
+  font-size:24px;
+}
+
+.adminActions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:1px solid var(--line);
+  background:#151816;
+  color:#eee;
+  border-radius:9px;
+  padding:9px 13px;
+  font-weight:700;
+}
+
+.btn:hover{
+  border-color:var(--gold);
+}
+
+.btn.gold{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:#111;
+}
+
+.btn.danger{
+  background:#351919;
+  border-color:#5c2828;
+  color:#f1caca;
+}
+
+.adminGrid{
+  display:grid;
+  grid-template-columns:360px minmax(0,1fr);
+  gap:18px;
 }
 
 .panel{
-  background:#101311;
-  border:1px solid #2d2b26;
-  border-radius:16px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
   padding:15px;
+}
+
+.panel h3{
+  margin:0 0 14px;
+  font-size:18px;
+  font-family:"Times New Roman",Times,serif;
+}
+
+.formGroup{
   margin-bottom:12px;
 }
 
-.panel h2,
-.panel h3{
-  margin:0 0 12px;
+.formGroup label{
+  display:block;
+  margin-bottom:5px;
+  color:#ddd;
+  font-size:13px;
+  font-weight:700;
 }
 
-.row{
+.formGroup input,
+.formGroup textarea,
+.formGroup select{
+  width:100%;
+  border:1px solid #3a352d;
+  background:#0c0f0e;
+  color:#fff;
+  border-radius:9px;
+  padding:10px 11px;
+  outline:none;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus{
+  border-color:var(--gold);
+}
+
+.formGroup textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.formRow{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
 }
 
-label{
-  font-size:12px;
-  color:#c7c1b7;
-}
-
-input,
-textarea,
-select{
-  width:100%;
-  margin:5px 0 10px;
-  padding:11px;
-  border-radius:9px;
-  border:1px solid #3a3731;
-  background:#0a0c0b;
-  color:#fff;
-  outline:none;
-}
-
-textarea{
-  min-height:80px;
-  resize:vertical;
-}
-
-.btn{
-  border:0;
-  border-radius:9px;
-  padding:10px 14px;
-  background:var(--gold);
-  color:#111;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.btn.dark{
-  background:#272622;
-  color:#eee;
-}
-
-.btn.danger{
-  background:#522525;
-  color:#ffdede;
-}
-
-.btn:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-.items{
-  display:grid;
+.formButtons{
+  display:flex;
   gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
 }
 
-.item{
+.adminList{
+  display:grid;
+  gap:10px;
+}
+
+.adminItem{
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  border:1px solid #2b2b27;
-  border-radius:11px;
+  gap:12px;
+
   padding:10px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:#0c0f0e;
 }
 
-.itemMain{
-  display:flex;
-  align-items:center;
-  gap:10px;
+.adminItemInfo{
   min-width:0;
 }
 
-.thumb{
-  width:55px;
-  height:55px;
-  object-fit:cover;
-  border-radius:8px;
-  background:#222;
-  flex:0 0 auto;
-}
+.adminItemName{
+  font-family:"Times New Roman",Times,serif;
+  font-weight:700;
+  font-size:16px;
+  text-transform:capitalize;
 
-.itemText{
-  min-width:0;
-}
-
-.itemText b{
-  display:block;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
 
-.small{
+.adminItemMeta{
+  color:var(--muted);
   font-size:11px;
-  color:#999;
+  margin-top:3px;
 }
 
-.actions{
+.adminItemActions{
   display:flex;
   gap:6px;
   flex-wrap:wrap;
   justify-content:flex-end;
 }
 
-.status{
-  border:0;
-  border-radius:20px;
-  padding:7px 10px;
-  background:#173a23;
-  color:#77e497;
-  cursor:pointer;
+.smallBtn{
+  border:1px solid #3a352d;
+  background:#151816;
+  color:#ddd;
+  border-radius:7px;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:700;
 }
 
-.status.off{
-  background:#482020;
-  color:#ff9c9c;
+.smallBtn:hover{
+  border-color:var(--gold);
 }
 
-.preview{
-  width:90px;
-  height:90px;
-  object-fit:cover;
-  border-radius:9px;
-  background:#222;
-  display:block;
-  margin-bottom:10px;
+.smallBtn.active{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:#111;
 }
 
-.hint{
-  font-size:12px;
-  color:#aaa;
-  line-height:1.6;
-}
 
 /* =========================
    LOGIN MODAL
@@ -499,12 +591,15 @@ textarea{
 .modal{
   position:fixed;
   inset:0;
-  background:#000b;
+
   display:none;
   align-items:center;
   justify-content:center;
-  padding:18px;
-  z-index:100;
+
+  background:rgba(0,0,0,.78);
+  padding:20px;
+
+  z-index:9999;
 }
 
 .modal.show{
@@ -512,80 +607,85 @@ textarea{
 }
 
 .modalBox{
-  width:min(420px,100%);
+  width:min(400px,100%);
+
   background:#111413;
-  border:1px solid #3c3529;
-  border-radius:18px;
-  padding:18px;
-  box-shadow:0 20px 60px #000;
+  border:1px solid var(--line);
+  border-radius:15px;
+
+  padding:20px;
+
+  box-shadow:0 20px 70px rgba(0,0,0,.5);
 }
 
 .modalBox h2{
-  margin-top:0;
+  margin:0 0 16px;
+  text-align:center;
+
+  font-family:"Times New Roman",Times,serif;
 }
 
-.error{
-  color:#ff9b9b;
+.modalButtons{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.modalButtons button{
+  flex:1;
+}
+
+.loginError{
+  color:#ef8d8d;
   font-size:12px;
   min-height:18px;
+  margin-top:7px;
 }
+
 
 /* =========================
-   TOAST
+   LOADING
 ========================= */
 
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:20px;
-  transform:translateX(-50%);
-  background:#171a18;
-  border:1px solid #3a352d;
-  padding:11px 15px;
-  border-radius:12px;
-  display:none;
-  z-index:120;
+.loading{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 10px;
 }
 
-.toast.show{
-  display:block;
-}
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:600px){
+@media(max-width:700px){
 
   .header{
-    padding:14px 12px 11px;
+    padding-top:15px;
   }
 
   .logo{
-    width:112px;
+    width:min(190px,70vw);
+    max-height:110px;
   }
 
-  .wrap{
-    padding:0 10px;
+  .public{
+    padding-left:10px;
+    padding-right:10px;
   }
 
-  .cats{
-    padding-top:13px;
-    padding-bottom:13px;
-  }
-
-  .cats button{
-    font-size:13px;
-    padding:9px 13px;
-  }
-
+  /* صنفين جنب بعض على الموبايل */
   .grid{
-    grid-template-columns:1fr;
-    gap:12px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
   }
 
   .photo{
-    aspect-ratio:1.55;
+    aspect-ratio:1.25;
+  }
+
+  .info{
+    padding:10px;
   }
 
   .name{
@@ -596,252 +696,350 @@ textarea{
     font-size:16px;
   }
 
-  .sectionTitle h2{
-    font-size:20px;
-  }
-
-  .row{
+  .adminGrid{
     grid-template-columns:1fr;
   }
 
-  .item{
+  .adminHead{
     align-items:flex-start;
     flex-direction:column;
   }
 
-  .actions{
-    width:100%;
-    justify-content:flex-start;
-  }
 }
+
+@media(max-width:430px){
+
+  .name{
+    font-size:15px;
+  }
+
+  .price{
+    font-size:15px;
+  }
+
+  .cats button{
+    font-size:14px;
+    padding:8px 13px;
+  }
+
+}
+
+
+/* =========================
+   PUBLIC / ADMIN SWITCH
+========================= */
+
+body.adminMode .public{
+  display:none;
+}
+
+body.adminMode .admin{
+  display:block;
+}
+
+body.adminMode .footer{
+  display:none;
+}
+
 </style>
 </head>
 
 <body>
 
-<header class="header">
 
-  <img
-    class="logo"
-    src="ChatGPT Image Sep 1, 2026, 08_20_26 PM.png"
-    alt="SentoBene"
-  >
+<!-- =========================
+     PUBLIC MENU
+========================= -->
 
-  <div class="tag"></div>
+<div class="public" id="public">
 
-  <div class="social">
+  <header class="header">
 
-    <!-- Instagram -->
-    <a
-      href="https://www.instagram.com/sentobene.eg?stkn=MTZnYmlrajlnc3NybA=="
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Instagram"
+    <img
+      class="logo"
+      src="ChatGPT Image Sep 1, 2026, 08_20_26 PM.png"
+      alt="SentoBene"
     >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect
-          x="3"
-          y="3"
-          width="18"
-          height="18"
-          rx="5"
-        ></rect>
 
-        <circle
-          cx="12"
-          cy="12"
-          r="4"
-        ></circle>
-
-        <circle
-          cx="17.5"
-          cy="6.5"
-          r="1"
-        ></circle>
-      </svg>
-    </a>
-
-    <!-- Facebook -->
-    <a
-      href="https://www.facebook.com/SentoBene.EG"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Facebook"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z"></path>
-      </svg>
-    </a>
-
-  </div>
-
-</header>
+    <div class="tag"></div>
 
 
-<main class="wrap">
+    <!-- SOCIAL LINKS -->
 
-  <!-- =========================
-       PUBLIC MENU
-  ========================== -->
+    <div class="social">
 
-  <section id="public" class="public">
+      <!-- INSTAGRAM -->
 
-    <div id="cats" class="cats"></div>
+      <a
+        href="https://www.instagram.com/sentobene.eg?stkn=MTZnYmlrajlnc3NybA=="
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+      >
 
-    <div class="sectionTitle">
-      <h2 id="sectionName">Pasta</h2>
-      <span id="count">جارٍ التحميل...</span>
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+
+          <rect
+            x="3"
+            y="3"
+            width="18"
+            height="18"
+            rx="5"
+          ></rect>
+
+          <circle
+            cx="12"
+            cy="12"
+            r="4"
+          ></circle>
+
+          <circle
+            cx="17.5"
+            cy="6.5"
+            r="1"
+          ></circle>
+
+        </svg>
+
+      </a>
+
+
+      <!-- NAME -->
+
+      <span class="socialName">
+        SentoBene
+      </span>
+
+
+      <!-- FACEBOOK -->
+
+      <a
+        href="https://www.facebook.com/SentoBene.EG"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Facebook"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+
+          <path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z"></path>
+
+        </svg>
+
+      </a>
+
     </div>
 
-    <div id="products" class="grid"></div>
+  </header>
 
-    <div class="footer">
-      SentoBene®
-    </div>
+
+  <section class="hero">
+
+    <h1>
+      SentoBene
+    </h1>
+
+    <p>
+      Good Food • Good Mood
+    </p>
 
   </section>
 
 
-  <!-- =========================
-       ADMIN
-  ========================== -->
+  <!-- CATEGORY BAR -->
 
-  <section id="admin" class="admin">
+  <div
+    id="cats"
+    class="cats"
+  ></div>
 
-    <div class="panel">
 
-      <h2>لوحة إدارة SentoBene</h2>
+  <!-- SECTION TITLE -->
 
-      <p class="hint">
-        من هنا تقدر تضيف وتعدّل الأصناف، ترفع الصور،
-        وتخفي أي صنف غير متاح.
-        التغييرات بتظهر في منيو الزبون مباشرة.
-      </p>
+  <section class="sectionTitle">
 
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <h2 id="sectionName">
+      Pasta
+    </h2>
 
-        <button
-          class="btn dark"
-          onclick="showPublic()"
-        >
-          عرض المينيو
-        </button>
+    <span id="count">
+      0 Items
+    </span>
 
-        <button
-          class="btn dark"
-          onclick="logout()"
-        >
-          تسجيل الخروج
-        </button>
+  </section>
 
-        <button
-          class="btn"
-          onclick="seedDemo()"
-        >
-          إضافة الأصناف التجريبية
-        </button>
 
-      </div>
+  <!-- PRODUCTS -->
+
+  <main
+    id="products"
+    class="grid"
+  >
+
+    <div class="loading">
+      Loading...
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+    SentoBene®
+  </footer>
+
+</div>
+
+
+
+<!-- =========================
+     ADMIN
+========================= -->
+
+<section
+  id="admin"
+  class="admin"
+>
+
+  <div class="adminHead">
+
+    <h2>
+      SentoBene Admin
+    </h2>
+
+    <div class="adminActions">
+
+      <button
+        class="btn"
+        onclick="showPublic()"
+      >
+        عرض المينيو
+      </button>
+
+      <button
+        class="btn danger"
+        onclick="logout()"
+      >
+        تسجيل الخروج
+      </button>
 
     </div>
 
+  </div>
+
+
+  <div class="adminGrid">
+
+
+    <!-- FORM -->
 
     <div class="panel">
 
-      <h3 id="formTitle">
-        إضافة صنف
+      <h3>
+        إضافة / تعديل صنف
       </h3>
 
       <input
         type="hidden"
-        id="pid"
-      >
-
-      <label>
-        اسم الصنف
-      </label>
-
-      <input
-        id="pname"
-        placeholder="Chicken Alfredo Pasta"
+        id="editId"
       >
 
 
-      <label>
-        الوصف
-      </label>
+      <div class="formGroup">
 
-      <textarea
-        id="pdesc"
-        placeholder="وصف مختصر"
-      ></textarea>
+        <label>
+          اسم الصنف
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          placeholder="Chicken Alfredo Pasta"
+        >
+
+      </div>
 
 
-      <div class="row">
+      <div class="formGroup">
 
-        <div>
+        <label>
+          الوصف
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="وصف الصنف"
+        ></textarea>
+
+      </div>
+
+
+      <div class="formRow">
+
+        <div class="formGroup">
+
+          <label>
+            القسم
+          </label>
+
+          <select id="category"></select>
+
+        </div>
+
+
+        <div class="formGroup">
 
           <label>
             السعر بالجنيه
           </label>
 
           <input
-            id="pprice"
+            id="price"
             type="number"
             min="0"
             step="0.01"
+            placeholder="140"
           >
-
-        </div>
-
-
-        <div>
-
-          <label>
-            القسم
-          </label>
-
-          <select id="pcat"></select>
 
         </div>
 
       </div>
 
 
-      <label>
-        صورة الصنف
-      </label>
+      <div class="formGroup">
 
-      <input
-        id="pimage"
-        type="file"
-        accept="image/*"
-      >
+        <label>
+          صورة المنتج
+        </label>
 
-      <img
-        id="preview"
-        class="preview"
-        style="display:none"
-      >
+        <input
+          id="image"
+          type="file"
+          accept="image/*"
+        >
+
+      </div>
 
 
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div class="formButtons">
 
         <button
-          id="saveBtn"
-          class="btn"
+          class="btn gold"
           onclick="saveProduct()"
         >
           حفظ الصنف
         </button>
 
         <button
-          id="cancelBtn"
-          class="btn dark"
-          onclick="resetForm()"
-          style="display:none"
+          class="btn"
+          onclick="clearForm()"
         >
-          إلغاء التعديل
+          إلغاء
         </button>
 
       </div>
@@ -849,30 +1047,35 @@ textarea{
     </div>
 
 
+    <!-- LIST -->
+
     <div class="panel">
 
       <h3>
-        الأصناف الحالية
+        الأصناف
       </h3>
 
       <div
-        id="adminItems"
-        class="items"
+        id="adminList"
+        class="adminList"
       >
-        <div class="small">
-          جارٍ التحميل...
+
+        <div class="loading">
+          Loading...
         </div>
+
       </div>
 
     </div>
 
-  </section>
+  </div>
 
-</main>
+</section>
+
 
 
 <!-- =========================
-     LOGIN
+     LOGIN MODAL
 ========================= -->
 
 <div
@@ -886,52 +1089,56 @@ textarea{
       دخول إدارة SentoBene
     </h2>
 
-    <p class="hint">
-      الدخول خاص بالإدارة فقط.
-    </p>
+
+    <div class="formGroup">
+
+      <label>
+        البريد الإلكتروني
+      </label>
+
+      <input
+        id="loginEmail"
+        type="email"
+        autocomplete="username"
+        placeholder="Email"
+      >
+
+    </div>
 
 
-    <label>
-      الإيميل
-    </label>
+    <div class="formGroup">
 
-    <input
-      id="email"
-      type="email"
-      autocomplete="username"
-    >
+      <label>
+        كلمة المرور
+      </label>
 
+      <input
+        id="loginPassword"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Password"
+      >
 
-    <label>
-      الباسورد
-    </label>
-
-    <input
-      id="password"
-      type="password"
-      autocomplete="current-password"
-    >
+    </div>
 
 
     <div
       id="loginError"
-      class="error"
+      class="loginError"
     ></div>
 
 
-    <div
-      style="display:flex;gap:8px;justify-content:flex-start"
-    >
+    <div class="modalButtons">
 
       <button
-        class="btn"
+        class="btn gold"
         onclick="login()"
       >
         دخول
       </button>
 
       <button
-        class="btn dark"
+        class="btn"
         onclick="closeLogin()"
       >
         إلغاء
@@ -944,34 +1151,35 @@ textarea{
 </div>
 
 
-<div
-  id="toast"
-  class="toast"
-></div>
-
 
 <script>
 
-/* =========================
+/* =========================================
    SUPABASE
-========================= */
+========================================= */
 
 const SUPABASE_URL =
   'https://xzyobcexywacsjlatntx.supabase.co';
 
-const SUPABASE_KEY =
-  'sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
+const SUPABASE_ANON_KEY =
+  'PASTE_YOUR_EXISTING_ANON_KEY_HERE';
+
+/*
+  مهم:
+  لو عندك ANON KEY حقيقي في نسختك الحالية،
+  خليه مكان السطر اللي فوق.
+*/
 
 const sb =
-  supabase.createClient(
+  window.supabase.createClient(
     SUPABASE_URL,
-    SUPABASE_KEY
+    SUPABASE_ANON_KEY
   );
 
 
-/* =========================
+/* =========================================
    CATEGORIES
-========================= */
+========================================= */
 
 const cats = [
 
@@ -1033,141 +1241,130 @@ const cats = [
 ];
 
 
-/* =========================
-   DEMO DATA
-========================= */
+/* =========================================
+   STATE
+========================================= */
 
-const demo = [
-
-  [
-    'Chicken Alfredo Pasta',
-    'مكرونة بالدجاج مع صوص الألفريدو والجبن',
-    140,
-    'PASTA'
-  ],
-
-  [
-    'Penne Arrabbiata',
-    'مكرونة بيني بصوص الطماطم الحار',
-    120,
-    'PASTA'
-  ],
-
-  [
-    'Spaghetti Bolognese',
-    'مكرونة سباجيتي بصلصة بولونيز',
-    130,
-    'PASTA'
-  ],
-
-  [
-    'Pesto Pasta',
-    'مكرونة بصوص البيستو',
-    125,
-    'PASTA'
-  ],
-
-  [
-    'Chicken Sandwich',
-    'ساندوتش دجاج بصوص خاص',
-    160,
-    'SANDWICHES'
-  ],
-
-  [
-    'Margherita Porizza',
-    'طماطم وموتزاريلا وريحان',
-    170,
-    'PORIZZA'
-  ]
-
-];
-
-
-let active = cats[0].db;
 let products = [];
 
+let active = cats[0].db;
 
-/* =========================
+
+/* =========================================
    HELPERS
-========================= */
+========================================= */
 
-function toast(t){
+function esc(value){
 
-  const el =
-    document.getElementById('toast');
-
-  el.textContent = t;
-
-  el.classList.add('show');
-
-  setTimeout(
-    () => el.classList.remove('show'),
-    2500
-  );
+  return String(value ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
 
 }
 
 
-function esc(s){
-
-  return String(s ?? '').replace(
-    /[&<>'"]/g,
-    m => ({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      "'":'&#39;',
-      '"':'&quot;'
-    }[m])
-  );
-
-}
-
-
-/* =========================
-   FORMAT ENGLISH TEXT
-========================= */
+/*
+  English text:
+  First Letter Capital
+  باقي الحروف Small
+*/
 
 function titleCase(text){
 
   return String(text || '')
     .toLowerCase()
-    .replace(/\b\w/g, char => char.toUpperCase());
+    .replace(/\b\w/g, char =>
+      char.toUpperCase()
+    );
 
 }
 
 
-/* =========================
-   SETUP CATEGORIES
-========================= */
+/* =========================================
+   CATEGORY BAR
+========================================= */
 
 function setupCats(){
 
-  document.getElementById('cats').innerHTML =
+  const container =
+    document.getElementById('cats');
+
+  container.innerHTML =
     cats.map(c => `
+
       <button
         class="${c.db === active ? 'active' : ''}"
-        onclick="active='${c.db}';renderPublic()"
+        onclick="selectCategory('${c.db}')"
       >
-        ${c.name}
+        ${esc(titleCase(c.name))}
       </button>
-    `).join('');
 
-
-  document.getElementById('pcat').innerHTML =
-    cats.map(c => `
-      <option value="${c.db}">
-        ${c.name}
-      </option>
     `).join('');
 
 }
 
 
-/* =========================
-   PUBLIC MENU
-========================= */
+function selectCategory(category){
+
+  active = category;
+
+  renderPublic();
+
+}
+
+
+/* =========================================
+   LOAD PUBLIC PRODUCTS
+========================================= */
+
+async function loadPublic(){
+
+  const container =
+    document.getElementById('products');
+
+  container.innerHTML = `
+    <div class="loading">
+      Loading...
+    </div>
+  `;
+
+  const {
+    data,
+    error
+  } = await sb
+    .from('products')
+    .select('*')
+    .eq('available',true)
+    .order('created_at',{
+      ascending:false
+    });
+
+  if(error){
+
+    console.error(error);
+
+    container.innerHTML = `
+      <div class="empty">
+        حصل خطأ أثناء تحميل المينيو.
+      </div>
+    `;
+
+    return;
+  }
+
+  products = data || [];
+
+  renderPublic();
+
+}
+
+
+/* =========================================
+   RENDER PUBLIC
+========================================= */
 
 function renderPublic(){
 
@@ -1186,13 +1383,17 @@ function renderPublic(){
     );
 
 
-  document.getElementById('sectionName').textContent =
+  document.getElementById(
+    'sectionName'
+  ).textContent =
     currentCat
-      ? currentCat.name
-      : active;
+      ? titleCase(currentCat.name)
+      : titleCase(active);
 
 
-  document.getElementById('count').textContent =
+  document.getElementById(
+    'count'
+  ).textContent =
     `${sectionProducts.length} ${
       sectionProducts.length === 1
         ? 'Item'
@@ -1206,11 +1407,13 @@ function renderPublic(){
 
   if(!sectionProducts.length){
 
-    container.innerHTML =
-      '<div class="empty">لا توجد أصناف متاحة في هذا القسم حاليًا.</div>';
+    container.innerHTML = `
+      <div class="empty">
+        لا توجد أصناف متاحة في هذا القسم حاليًا.
+      </div>
+    `;
 
     return;
-
   }
 
 
@@ -1223,15 +1426,15 @@ function renderPublic(){
 
           ${
             x.image_url
-
               ? `
+
                 <img
                   src="${esc(x.image_url)}"
-                  alt="${esc(x.name)}"
+                  alt="${esc(titleCase(x.name))}"
                   loading="lazy"
                 >
-              `
 
+              `
               : 'صورة المنتج'
           }
 
@@ -1253,7 +1456,7 @@ function renderPublic(){
           <div class="bottom">
 
             <div class="price">
-              ${Number(x.price).toLocaleString('en-US')} LE
+              ${Number(x.price).toLocaleString('en-US')} EGP
             </div>
 
           </div>
@@ -1267,139 +1470,132 @@ function renderPublic(){
 }
 
 
-/* =========================
-   LOAD PUBLIC
-========================= */
+/* =========================================
+   ADMIN - SHOW / HIDE
+========================================= */
 
-async function loadPublic(){
+function showPublic(){
 
-  const {
-    data,
-    error
-  } = await sb
-    .from('products')
-    .select('*')
-    .eq('available',true)
-    .order(
-      'created_at',
-      {ascending:false}
-    );
-
-
-  if(error){
-
-    console.error(error);
-
-    document.getElementById('count')
-      .textContent = '';
-
-    document.getElementById('products')
-      .innerHTML =
-      '<div class="empty">تعذر تحميل المنيو حاليًا.</div>';
-
-    return;
-
-  }
-
-
-  products = data || [];
-
-  renderPublic();
+  document.body.classList.remove(
+    'adminMode'
+  );
 
 }
 
 
-/* =========================
+function showAdmin(){
+
+  document.body.classList.add(
+    'adminMode'
+  );
+
+  loadAdmin();
+
+}
+
+
+/* =========================================
    LOGIN
-========================= */
-
-async function login(){
-
-  const email =
-    document.getElementById('email')
-      .value
-      .trim();
-
-  const password =
-    document.getElementById('password')
-      .value;
-
-
-  document.getElementById('loginError')
-    .textContent = '';
-
-
-  if(!email || !password){
-
-    document.getElementById('loginError')
-      .textContent =
-      'اكتب الإيميل والباسورد.';
-
-    return;
-
-  }
-
-
-  const {error} =
-    await sb.auth.signInWithPassword({
-      email,
-      password
-    });
-
-
-  if(error){
-
-    document.getElementById('loginError')
-      .textContent =
-      'بيانات الدخول غير صحيحة أو الحساب غير مؤكد.';
-
-    return;
-
-  }
-
-
-  closeLogin();
-
-  await showAdmin();
-
-}
-
+========================================= */
 
 function openLogin(){
 
-  document
-    .getElementById('loginModal')
-    .classList.add('show');
+  document.getElementById(
+    'loginModal'
+  ).classList.add('show');
 
+  setTimeout(() => {
 
-  setTimeout(
-    () =>
-      document
-        .getElementById('email')
-        .focus(),
-    100
-  );
+    document.getElementById(
+      'loginEmail'
+    ).focus();
+
+  },100);
 
 }
 
 
 function closeLogin(){
 
-  document
-    .getElementById('loginModal')
-    .classList.remove('show');
+  document.getElementById(
+    'loginModal'
+  ).classList.remove('show');
 
-
-  document
-    .getElementById('loginError')
-    .textContent = '';
+  document.getElementById(
+    'loginError'
+  ).textContent = '';
 
 }
 
 
-/* =========================
+async function login(){
+
+  const email =
+    document.getElementById(
+      'loginEmail'
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      'loginPassword'
+    ).value;
+
+
+  const errorBox =
+    document.getElementById(
+      'loginError'
+    );
+
+
+  errorBox.textContent = '';
+
+
+  if(!email || !password){
+
+    errorBox.textContent =
+      'اكتب البريد الإلكتروني وكلمة المرور.';
+
+    return;
+  }
+
+
+  const {
+    data,
+    error
+  } = await sb.auth.signInWithPassword({
+
+    email,
+    password
+
+  });
+
+
+  if(error){
+
+    console.error(error);
+
+    errorBox.textContent =
+      'بيانات الدخول غير صحيحة.';
+
+    return;
+  }
+
+
+  if(data?.user){
+
+    closeLogin();
+
+    showAdmin();
+
+  }
+
+}
+
+
+/* =========================================
    LOGOUT
-========================= */
+========================================= */
 
 async function logout(){
 
@@ -1407,76 +1603,27 @@ async function logout(){
 
   showPublic();
 
-  toast('تم تسجيل الخروج');
-
 }
 
 
-/* =========================
-   SHOW ADMIN
-========================= */
-
-async function showAdmin(){
-
-  const {
-    data:{user}
-  } = await sb.auth.getUser();
-
-
-  if(!user){
-
-    openLogin();
-
-    return;
-
-  }
-
-
-  document
-    .getElementById('public')
-    .classList.add('hide');
-
-
-  document
-    .getElementById('admin')
-    .classList.add('show');
-
-
-  setupCats();
-
-  resetForm();
-
-  await loadAdmin();
-
-}
-
-
-/* =========================
-   SHOW PUBLIC
-========================= */
-
-async function showPublic(){
-
-  document
-    .getElementById('admin')
-    .classList.remove('show');
-
-
-  document
-    .getElementById('public')
-    .classList.remove('hide');
-
-
-  await loadPublic();
-
-}
-
-
-/* =========================
-   LOAD ADMIN
-========================= */
+/* =========================================
+   ADMIN LOAD
+========================================= */
 
 async function loadAdmin(){
+
+  const list =
+    document.getElementById(
+      'adminList'
+    );
+
+
+  list.innerHTML = `
+    <div class="loading">
+      Loading...
+    </div>
+  `;
+
 
   const {
     data,
@@ -1484,214 +1631,216 @@ async function loadAdmin(){
   } = await sb
     .from('products')
     .select('*')
-    .order(
-      'created_at',
-      {ascending:false}
-    );
+    .order('created_at',{
+      ascending:false
+    });
 
 
   if(error){
 
-    toast('حصل خطأ في تحميل الأصناف');
+    console.error(error);
+
+    list.innerHTML = `
+      <div class="empty">
+        حصل خطأ أثناء تحميل الأصناف.
+      </div>
+    `;
 
     return;
-
   }
 
 
-  products = data || [];
-
-  renderAdmin();
-
-}
+  const allProducts =
+    data || [];
 
 
-/* =========================
-   RENDER ADMIN
-========================= */
+  if(!allProducts.length){
 
-function renderAdmin(){
+    list.innerHTML = `
+      <div class="empty">
+        لا توجد أصناف حتى الآن.
+      </div>
+    `;
 
-  document.getElementById('adminItems').innerHTML =
-    products.length
-
-      ? products.map(x => `
-
-          <div class="item">
-
-            <div class="itemMain">
-
-              ${
-                x.image_url
-
-                  ? `
-                    <img
-                      class="thumb"
-                      src="${esc(x.image_url)}"
-                    >
-                  `
-
-                  : '<div class="thumb"></div>'
-              }
+    return;
+  }
 
 
-              <div class="itemText">
+  list.innerHTML =
+    allProducts.map(x => `
 
-                <b>
-                  ${esc(titleCase(x.name))}
-                </b>
+      <div class="adminItem">
 
-                <div class="small">
+        <div class="adminItemInfo">
 
-                  ${esc(x.category)}
-                  •
-                  ${Number(x.price).toLocaleString('en-US')} جنيه
-                  •
-                  ${x.available ? 'متاح' : 'غير متاح'}
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div class="actions">
-
-              <button
-                class="status ${x.available ? '' : 'off'}"
-                onclick="toggleAvailability('${x.id}',${!x.available})"
-              >
-                ${x.available ? 'إخفاء' : 'إظهار'}
-              </button>
-
-
-              <button
-                class="btn dark"
-                onclick="editProduct('${x.id}')"
-              >
-                تعديل
-              </button>
-
-
-              <button
-                class="btn danger"
-                onclick="deleteProduct('${x.id}')"
-              >
-                حذف
-              </button>
-
-            </div>
-
+          <div class="adminItemName">
+            ${esc(titleCase(x.name))}
           </div>
 
-        `).join('')
+          <div class="adminItemMeta">
+            ${esc(x.category)}
+            —
+            ${Number(x.price).toLocaleString('en-US')} EGP
+            —
+            ${x.available ? 'متاح' : 'مخفي'}
+          </div>
 
-      : `
-        <div class="small">
-          لا توجد أصناف.
-          اضغط إضافة الأصناف التجريبية أو أضف صنفًا جديدًا.
         </div>
-      `;
+
+
+        <div class="adminItemActions">
+
+          <button
+            class="smallBtn ${x.available ? 'active' : ''}"
+            onclick="toggleAvailability(${x.id},${x.available})"
+          >
+            ${x.available ? 'إخفاء' : 'إظهار'}
+          </button>
+
+
+          <button
+            class="smallBtn"
+            onclick="editProduct(${x.id})"
+          >
+            تعديل
+          </button>
+
+
+          <button
+            class="smallBtn"
+            onclick="deleteProduct(${x.id})"
+          >
+            حذف
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join('');
 
 }
 
 
-/* =========================
-   RESET FORM
-========================= */
+/* =========================================
+   CATEGORY SELECT
+========================================= */
 
-function resetForm(){
+function setupAdminCategorySelect(){
 
-  document.getElementById('pid').value = '';
-
-  document.getElementById('pname').value = '';
-
-  document.getElementById('pdesc').value = '';
-
-  document.getElementById('pprice').value = '';
-
-  document.getElementById('pcat').value =
-    cats[0].db;
-
-  document.getElementById('pimage').value = '';
-
-  document.getElementById('preview')
-    .style.display = 'none';
-
-  document.getElementById('formTitle')
-    .textContent = 'إضافة صنف';
-
-  document.getElementById('saveBtn')
-    .textContent = 'حفظ الصنف';
-
-  document.getElementById('cancelBtn')
-    .style.display = 'none';
-
-}
-
-
-/* =========================
-   EDIT PRODUCT
-========================= */
-
-function editProduct(id){
-
-  const x =
-    products.find(
-      p => String(p.id) === String(id)
+  const select =
+    document.getElementById(
+      'category'
     );
 
 
-  if(!x) return;
+  select.innerHTML =
+    cats.map(c => `
+
+      <option value="${esc(c.db)}">
+        ${esc(titleCase(c.name))}
+      </option>
+
+    `).join('');
+
+}
 
 
-  document.getElementById('pid').value =
-    x.id;
+/* =========================================
+   CLEAR FORM
+========================================= */
 
-  document.getElementById('pname').value =
-    x.name;
+function clearForm(){
 
-  document.getElementById('pdesc').value =
-    x.description || '';
-
-  document.getElementById('pprice').value =
-    x.price;
-
-  document.getElementById('pcat').value =
-    x.category;
-
-  document.getElementById('pimage').value =
-    '';
+  document.getElementById(
+    'editId'
+  ).value = '';
 
 
-  if(x.image_url){
+  document.getElementById(
+    'name'
+  ).value = '';
 
-    document.getElementById('preview').src =
-      x.image_url;
 
-    document.getElementById('preview')
-      .style.display = 'block';
+  document.getElementById(
+    'description'
+  ).value = '';
 
-  }else{
 
-    document.getElementById('preview')
-      .style.display = 'none';
+  document.getElementById(
+    'price'
+  ).value = '';
 
+
+  document.getElementById(
+    'image'
+  ).value = '';
+
+
+  document.getElementById(
+    'category'
+  ).value = cats[0].db;
+
+}
+
+
+/* =========================================
+   EDIT PRODUCT
+========================================= */
+
+async function editProduct(id){
+
+  const {
+    data,
+    error
+  } = await sb
+    .from('products')
+    .select('*')
+    .eq('id',id)
+    .single();
+
+
+  if(error){
+
+    alert(
+      'حصل خطأ أثناء تحميل الصنف.'
+    );
+
+    return;
   }
 
 
-  document.getElementById('formTitle')
-    .textContent = 'تعديل الصنف';
-
-  document.getElementById('saveBtn')
-    .textContent = 'حفظ التعديل';
-
-  document.getElementById('cancelBtn')
-    .style.display = 'inline-block';
+  document.getElementById(
+    'editId'
+  ).value = data.id;
 
 
-  scrollTo({
+  document.getElementById(
+    'name'
+  ).value = data.name || '';
+
+
+  document.getElementById(
+    'description'
+  ).value = data.description || '';
+
+
+  document.getElementById(
+    'category'
+  ).value = data.category;
+
+
+  document.getElementById(
+    'price'
+  ).value = data.price;
+
+
+  document.getElementById(
+    'image'
+  ).value = '';
+
+
+  window.scrollTo({
     top:0,
     behavior:'smooth'
   });
@@ -1699,341 +1848,457 @@ function editProduct(id){
 }
 
 
-/* =========================
-   UPLOAD IMAGE
-========================= */
-
-async function uploadImage(file){
-
-  if(!file) return null;
-
-
-  const ext =
-    (file.name.split('.').pop() || 'jpg')
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g,'');
-
-
-  const path =
-    `${Date.now()}-${crypto.randomUUID()}.${ext || 'jpg'}`;
-
-
-  const {
-    error
-  } =
-    await sb.storage
-      .from('product-images')
-      .upload(
-        path,
-        file,
-        {
-          upsert:false,
-          contentType:
-            file.type || 'image/jpeg'
-        }
-      );
-
-
-  if(error)
-    throw error;
-
-
-  const {
-    data
-  } =
-    sb.storage
-      .from('product-images')
-      .getPublicUrl(path);
-
-
-  return data.publicUrl;
-
-}
-
-
-/* =========================
+/* =========================================
    SAVE PRODUCT
-========================= */
+========================================= */
 
 async function saveProduct(){
 
+  const editId =
+    document.getElementById(
+      'editId'
+    ).value;
+
+
   const name =
-    document.getElementById('pname')
-      .value
-      .trim();
+    document.getElementById(
+      'name'
+    ).value.trim();
+
+
+  const description =
+    document.getElementById(
+      'description'
+    ).value.trim();
+
+
+  const category =
+    document.getElementById(
+      'category'
+    ).value;
+
+
+  const price =
+    Number(
+      document.getElementById(
+        'price'
+      ).value
+    );
+
+
+  const imageFile =
+    document.getElementById(
+      'image'
+    ).files[0];
 
 
   if(!name){
 
-    toast('اكتب اسم الصنف');
+    alert(
+      'اكتب اسم الصنف.'
+    );
 
     return;
+  }
+
+
+  if(!category){
+
+    alert(
+      'اختار القسم.'
+    );
+
+    return;
+  }
+
+
+  if(Number.isNaN(price)){
+
+    alert(
+      'اكتب السعر.'
+    );
+
+    return;
+  }
+
+
+  let imageUrl = null;
+
+
+  /* =========================
+     EDIT EXISTING PRODUCT
+  ========================= */
+
+  if(editId){
+
+    const {
+      data:oldProduct,
+      error:oldError
+    } = await sb
+      .from('products')
+      .select('*')
+      .eq('id',editId)
+      .single();
+
+
+    if(oldError){
+
+      alert(
+        'حصل خطأ أثناء تحميل الصنف.'
+      );
+
+      return;
+    }
+
+
+    imageUrl =
+      oldProduct.image_url || null;
+
+
+    /* =========================
+       UPLOAD NEW IMAGE
+    ========================= */
+
+    if(imageFile){
+
+      const fileExt =
+        imageFile.name
+          .split('.')
+          .pop()
+          .toLowerCase();
+
+
+      const fileName =
+        `${Date.now()}-${Math.random()
+          .toString(36)
+          .slice(2)}.${fileExt}`;
+
+
+      const {
+        error:uploadError
+      } = await sb.storage
+        .from('product-images')
+        .upload(
+          fileName,
+          imageFile,
+          {
+            upsert:false
+          }
+        );
+
+
+      if(uploadError){
+
+        console.error(uploadError);
+
+        alert(
+          'حصل خطأ أثناء رفع الصورة.'
+        );
+
+        return;
+      }
+
+
+      const {
+        data:publicData
+      } = sb.storage
+        .from('product-images')
+        .getPublicUrl(fileName);
+
+
+      imageUrl =
+        publicData.publicUrl;
+
+    }
+
+
+    const {
+      error:updateError
+    } = await sb
+      .from('products')
+      .update({
+
+        name,
+        description,
+        category,
+        price,
+        image_url:imageUrl
+
+      })
+      .eq('id',editId);
+
+
+    if(updateError){
+
+      console.error(updateError);
+
+      alert(
+        'حصل خطأ أثناء حفظ التعديل.'
+      );
+
+      return;
+    }
+
+
+    alert(
+      'تم تعديل الصنف بنجاح.'
+    );
 
   }
 
 
-  const btn =
-    document.getElementById('saveBtn');
+  /* =========================
+     ADD NEW PRODUCT
+  ========================= */
+
+  else{
+
+    if(imageFile){
+
+      const fileExt =
+        imageFile.name
+          .split('.')
+          .pop()
+          .toLowerCase();
 
 
-  btn.disabled = true;
-
-  btn.textContent =
-    'جاري الحفظ...';
-
-
-  try{
-
-    const id =
-      document.getElementById('pid').value;
-
-
-    const file =
-      document.getElementById('pimage')
-        .files[0];
-
-
-    let image_url = null;
-
-
-    if(file){
-
-      image_url =
-        await uploadImage(file);
-
-    }
-
-
-    const payload = {
-
-      name,
-
-      description:
-        document.getElementById('pdesc')
-          .value
-          .trim(),
-
-      price:
-        Number(
-          document.getElementById('pprice')
-            .value || 0
-        ),
-
-      category:
-        document.getElementById('pcat')
-          .value
-
-    };
-
-
-    if(image_url){
-
-      payload.image_url =
-        image_url;
-
-    }
-
-
-    if(id){
-
-      const {
-        error
-      } =
-        await sb
-          .from('products')
-          .update(payload)
-          .eq('id',id);
-
-
-      if(error)
-        throw error;
-
-
-      toast('تم تعديل الصنف');
-
-    }else{
-
-      payload.available = true;
+      const fileName =
+        `${Date.now()}-${Math.random()
+          .toString(36)
+          .slice(2)}.${fileExt}`;
 
 
       const {
-        error
-      } =
-        await sb
-          .from('products')
-          .insert(payload);
+        error:uploadError
+      } = await sb.storage
+        .from('product-images')
+        .upload(
+          fileName,
+          imageFile,
+          {
+            upsert:false
+          }
+        );
 
 
-      if(error)
-        throw error;
+      if(uploadError){
+
+        console.error(uploadError);
+
+        alert(
+          'حصل خطأ أثناء رفع الصورة.'
+        );
+
+        return;
+      }
 
 
-      toast('تمت إضافة الصنف');
+      const {
+        data:publicData
+      } = sb.storage
+        .from('product-images')
+        .getPublicUrl(fileName);
+
+
+      imageUrl =
+        publicData.publicUrl;
 
     }
 
 
-    resetForm();
+    const {
+      error:insertError
+    } = await sb
+      .from('products')
+      .insert({
 
-    await loadAdmin();
+        name,
+        description,
+        category,
+        price,
+        image_url:imageUrl,
+        available:true
+
+      });
 
 
-  }catch(e){
+    if(insertError){
 
-    console.error(e);
+      console.error(insertError);
 
-    toast('حصل خطأ أثناء الحفظ');
+      alert(
+        'حصل خطأ أثناء إضافة الصنف.'
+      );
+
+      return;
+    }
 
 
-  }finally{
-
-    btn.disabled = false;
-
-    btn.textContent =
-      document.getElementById('pid').value
-        ? 'حفظ التعديل'
-        : 'حفظ الصنف';
+    alert(
+      'تم إضافة الصنف بنجاح.'
+    );
 
   }
+
+
+  clearForm();
+
+  await loadAdmin();
+
+  await loadPublic();
 
 }
 
 
-/* =========================
-   AVAILABILITY
-========================= */
+/* =========================================
+   TOGGLE AVAILABILITY
+========================================= */
 
-async function toggleAvailability(id,value){
+async function toggleAvailability(
+  id,
+  current
+){
 
   const {
     error
-  } =
-    await sb
-      .from('products')
-      .update({
-        available:value
-      })
-      .eq('id',id);
+  } = await sb
+    .from('products')
+    .update({
+
+      available:!current
+
+    })
+    .eq('id',id);
 
 
   if(error){
 
-    toast('تعذر تغيير الحالة');
+    console.error(error);
+
+    alert(
+      'حصل خطأ أثناء تغيير حالة الصنف.'
+    );
 
     return;
-
   }
 
 
   await loadAdmin();
 
-  toast(
-    value
-      ? 'تم إظهار الصنف'
-      : 'تم إخفاء الصنف'
-  );
+  await loadPublic();
 
 }
 
 
-/* =========================
+/* =========================================
    DELETE PRODUCT
-========================= */
+========================================= */
 
 async function deleteProduct(id){
 
-  const x =
-    products.find(
-      p => String(p.id) === String(id)
+  const confirmed =
+    confirm(
+      'هل أنت متأكد من حذف هذا الصنف؟'
     );
 
 
-  if(!x) return;
-
-
-  if(
-    !confirm(
-      `حذف "${x.name}" نهائيًا؟`
-    )
-  )
+  if(!confirmed){
     return;
+  }
 
 
   const {
     error
-  } =
-    await sb
-      .from('products')
-      .delete()
-      .eq('id',id);
+  } = await sb
+    .from('products')
+    .delete()
+    .eq('id',id);
 
 
   if(error){
 
-    toast('تعذر حذف الصنف');
+    console.error(error);
+
+    alert(
+      'حصل خطأ أثناء حذف الصنف.'
+    );
 
     return;
-
   }
+
+
+  alert(
+    'تم حذف الصنف.'
+  );
 
 
   await loadAdmin();
 
-  toast('تم حذف الصنف');
+  await loadPublic();
 
 }
 
 
-/* =========================
-   DEMO PRODUCTS
-========================= */
+/* =========================================
+   DEMO DATA
+========================================= */
 
 async function seedDemo(){
 
-  if(
-    !confirm(
-      'إضافة الأصناف التجريبية الستة إلى قاعدة البيانات؟'
-    )
-  )
-    return;
+  const demo = [
 
+    [
+      'Chicken Alfredo Pasta',
+      'مكرونة بالدجاج مع صوص الألفريدو والجبن',
+      140,
+      'PASTA'
+    ],
 
-  const {
-    count
-  } =
-    await sb
-      .from('products')
-      .select(
-        'id',
-        {
-          count:'exact',
-          head:true
-        }
-      );
+    [
+      'Penne Arrabbiata',
+      'مكرونة بيني بصوص الطماطم الحار',
+      120,
+      'PASTA'
+    ],
 
+    [
+      'Spaghetti Bolognese',
+      'مكرونة سباجيتي بصلصة بولونيز',
+      130,
+      'PASTA'
+    ],
 
-  if(count > 0){
+    [
+      'Pesto Pasta',
+      'مكرونة بصوص البيستو',
+      125,
+      'PASTA'
+    ],
 
-    toast(
-      'قاعدة البيانات فيها أصناف بالفعل'
-    );
+    [
+      'Chicken Sandwich',
+      'ساندوتش دجاج بصوص خاص',
+      160,
+      'SANDWICHES'
+    ],
 
-    return;
+    [
+      'Margherita Porizza',
+      'طماطم وموتزاريلا وريحان',
+      170,
+      'PORIZZA'
+    ]
 
-  }
+  ];
 
 
   const rows =
-    demo.map(d => ({
+    demo.map(x => ({
 
-      name:d[0],
-
-      description:d[1],
-
-      price:d[2],
-
-      category:d[3],
-
+      name:x[0],
+      description:x[1],
+      price:x[2],
+      category:x[3],
       available:true
 
     }));
@@ -2041,88 +2306,88 @@ async function seedDemo(){
 
   const {
     error
-  } =
-    await sb
-      .from('products')
-      .insert(rows);
+  } = await sb
+    .from('products')
+    .insert(rows);
 
 
   if(error){
 
-    toast(
-      'تعذر إضافة الأصناف التجريبية'
+    console.error(error);
+
+    alert(
+      'حصل خطأ أثناء إضافة الأصناف التجريبية.'
     );
 
     return;
-
   }
+
+
+  alert(
+    'تمت إضافة الأصناف التجريبية.'
+  );
 
 
   await loadAdmin();
 
-  toast(
-    'تمت إضافة الأصناف التجريبية'
-  );
+  await loadPublic();
 
 }
 
 
-/* =========================
-   IMAGE PREVIEW
-========================= */
+/* =========================================
+   AUTH STATE
+========================================= */
 
-document
-  .getElementById('pimage')
-  .addEventListener(
-    'change',
-    e => {
+sb.auth.onAuthStateChange(
+  async (event,session) => {
 
-      const f =
-        e.target.files[0];
+    if(
+      event === 'SIGNED_IN' &&
+      session?.user
+    ){
 
-      if(!f) return;
-
-
-      const r =
-        new FileReader();
-
-
-      r.onload = () => {
-
-        document.getElementById('preview')
-          .src = r.result;
-
-        document.getElementById('preview')
-          .style.display = 'block';
-
-      };
-
-
-      r.readAsDataURL(f);
+      showAdmin();
 
     }
-  );
-
-
-/* =========================
-   KEYBOARD SHORTCUTS
-========================= */
-
-document.addEventListener(
-  'keydown',
-  e => {
-
-    if(e.key === 'Escape')
-      closeLogin();
 
 
     if(
-      e.ctrlKey &&
-      e.shiftKey &&
-      e.key.toLowerCase() === 'a'
+      event === 'SIGNED_OUT'
     ){
 
-      e.preventDefault();
+      showPublic();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   INIT
+========================================= */
+
+setupAdminCategorySelect();
+
+loadPublic();
+
+
+/* =========================================
+   ADMIN SHORTCUT
+========================================= */
+
+document.addEventListener(
+  'keydown',
+  event => {
+
+    if(
+      event.ctrlKey &&
+      event.shiftKey &&
+      event.key.toLowerCase() === 'a'
+    ){
+
+      event.preventDefault();
 
       openLogin();
 
@@ -2132,43 +2397,19 @@ document.addEventListener(
 );
 
 
-/* =========================
-   AUTH STATE
-========================= */
-
-sb.auth.onAuthStateChange(
-  (event,session) => {
-
-    if(event === 'SIGNED_OUT')
-      showPublic();
-
-  }
-);
-
-
-/* =========================
-   START
-========================= */
-
-setupCats();
-
-loadPublic();
-
-
-/* =========================
-   ADMIN URL
-========================= */
-
-const params =
-  new URLSearchParams(
-    location.search
-  );
-
+/* =========================================
+   ?admin=1
+========================================= */
 
 if(
-  params.get('admin') === '1'
-)
+  new URLSearchParams(
+    window.location.search
+  ).get('admin') === '1'
+){
+
   openLogin();
+
+}
 
 </script>
 
