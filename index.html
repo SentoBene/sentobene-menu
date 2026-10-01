@@ -1576,16 +1576,15 @@ function renderPublic(){
           </div>
 
 
-          <div class="bottom">
+         <div class="bottom">
 
-            <div class="price">
-              EGP ${Number(x.price).toLocaleString('en-US')}
-            </div>
-
-          </div>
-
-
-        </div>
+  <div class="price">
+    ${
+      x.name.toLowerCase() === 'espresso'
+        ? 'Single 56 EGP | Double 64 EGP'
+        : `EGP ${Number(x.price).toLocaleString('en-US')}`
+    }
+  </div>
 
       </div>
 
