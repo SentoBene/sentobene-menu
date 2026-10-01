@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="en" dir="ltr">
 
@@ -391,7 +390,7 @@ a{
    MULTI PRICE
 ========================= */
 
-.price.espressoPrice{
+.price.multiPrice{
   white-space:normal;
   line-height:1.4;
   font-size:15px;
@@ -821,7 +820,7 @@ a{
     font-size:16px;
   }
 
-  .price.espressoPrice{
+  .price.multiPrice{
     font-size:14px;
   }
 
@@ -847,7 +846,7 @@ a{
     font-size:15px;
   }
 
-  .price.espressoPrice{
+  .price.multiPrice{
     font-size:13px;
     line-height:1.35;
   }
@@ -1524,21 +1523,36 @@ function renderPublic(){
           .trim()
           .toLowerCase();
 
+
+      /* =========================
+         SPECIAL MULTI-PRICE ITEMS
+      ========================= */
+
       const isEspresso =
         productName === 'espresso';
+
 
       const isTurkishCoffee =
         productName === 'turkish coffee';
 
+
       const isMultiPrice =
         isEspresso || isTurkishCoffee;
 
+
+      /* =========================
+         DESCRIPTION
+      ========================= */
 
       const displayDescription =
         isMultiPrice
           ? ''
           : esc(x.description || '');
 
+
+      /* =========================
+         PRICE
+      ========================= */
 
       const displayPrice =
         isEspresso
@@ -1585,7 +1599,7 @@ function renderPublic(){
 
             <div class="bottom">
 
-              <div class="price ${isMultiPrice ? 'espressoPrice' : ''}">
+              <div class="price ${isMultiPrice ? 'multiPrice' : ''}">
                 ${displayPrice}
               </div>
 
@@ -2546,4 +2560,3 @@ if(
 
 </body>
 </html>
-```
