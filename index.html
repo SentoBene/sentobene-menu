@@ -861,14 +861,7 @@ body.adminMode .footer{
 >
 
 
-  <!-- =========================
-       HEADER
-  ========================= -->
-
   <header class="header">
-
-
-    <!-- LOGO -->
 
     <img
       class="logo"
@@ -876,15 +869,7 @@ body.adminMode .footer{
       alt="SentoBene"
     >
 
-
-    <!-- =========================
-         SOCIAL LINKS
-    ========================= -->
-
     <div class="social">
-
-
-      <!-- INSTAGRAM -->
 
       <a
         href="https://www.instagram.com/sentobene.eg?stkn=MTZnYmlrajlnc3NybA=="
@@ -922,15 +907,9 @@ body.adminMode .footer{
 
       </a>
 
-
-      <!-- SENTO BENE -->
-
       <span class="socialName">
         SentoBene
       </span>
-
-
-      <!-- FACEBOOK -->
 
       <a
         href="https://www.facebook.com/SentoBene.EG"
@@ -950,26 +929,16 @@ body.adminMode .footer{
 
       </a>
 
-
     </div>
-
 
   </header>
 
-
-  <!-- =========================
-       CATEGORY BAR
-  ========================= -->
 
   <div
     id="cats"
     class="cats"
   ></div>
 
-
-  <!-- =========================
-       SECTION TITLE
-  ========================= -->
 
   <section class="sectionTitle">
 
@@ -984,10 +953,6 @@ body.adminMode .footer{
   </section>
 
 
-  <!-- =========================
-       PRODUCTS
-  ========================= -->
-
   <main
     id="products"
     class="grid"
@@ -999,10 +964,6 @@ body.adminMode .footer{
 
   </main>
 
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
 
   <footer class="footer">
     SentoBene®
@@ -1022,13 +983,11 @@ body.adminMode .footer{
   class="admin"
 >
 
-
   <div class="adminHead">
 
     <h2>
       SentoBene Admin
     </h2>
-
 
     <div class="adminActions">
 
@@ -1038,7 +997,6 @@ body.adminMode .footer{
       >
         عرض المينيو
       </button>
-
 
       <button
         class="btn danger"
@@ -1054,8 +1012,6 @@ body.adminMode .footer{
 
   <div class="adminGrid">
 
-
-    <!-- FORM -->
 
     <div class="panel">
 
@@ -1101,7 +1057,6 @@ body.adminMode .footer{
 
       <div class="formRow">
 
-
         <div class="formGroup">
 
           <label>
@@ -1128,7 +1083,6 @@ body.adminMode .footer{
           >
 
         </div>
-
 
       </div>
 
@@ -1157,7 +1111,6 @@ body.adminMode .footer{
           حفظ الصنف
         </button>
 
-
         <button
           class="btn"
           onclick="clearForm()"
@@ -1167,18 +1120,14 @@ body.adminMode .footer{
 
       </div>
 
-
     </div>
 
-
-    <!-- LIST -->
 
     <div class="panel">
 
       <h3>
         الأصناف
       </h3>
-
 
       <div
         id="adminList"
@@ -1192,7 +1141,6 @@ body.adminMode .footer{
       </div>
 
     </div>
-
 
   </div>
 
@@ -1208,7 +1156,6 @@ body.adminMode .footer{
   id="loginModal"
   class="modal"
 >
-
 
   <div class="modalBox">
 
@@ -1264,7 +1211,6 @@ body.adminMode .footer{
         دخول
       </button>
 
-
       <button
         class="btn"
         onclick="closeLogin()"
@@ -1273,7 +1219,6 @@ body.adminMode .footer{
       </button>
 
     </div>
-
 
   </div>
 
@@ -1543,7 +1488,6 @@ function renderPublic(){
 
       <div class="card">
 
-
         <div class="photo">
 
           ${
@@ -1565,7 +1509,6 @@ function renderPublic(){
 
         <div class="info">
 
-
           <div class="name">
             ${esc(titleCase(x.name))}
           </div>
@@ -1576,15 +1519,19 @@ function renderPublic(){
           </div>
 
 
-         <div class="bottom">
+          <div class="bottom">
 
-  <div class="price">
-    ${
-      x.name.toLowerCase() === 'espresso'
-        ? 'Single 56 EGP | Double 64 EGP'
-        : `EGP ${Number(x.price).toLocaleString('en-US')}`
-    }
-  </div>
+            <div class="price">
+              ${
+                String(x.name || '').toLowerCase() === 'espresso'
+                  ? 'Single 56 EGP | Double 64 EGP'
+                  : `EGP ${Number(x.price).toLocaleString('en-US')}`
+              }
+            </div>
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -1796,14 +1743,11 @@ async function loadAdmin(){
 
       <div class="adminItem">
 
-
         <div class="adminItemInfo">
-
 
           <div class="adminItemName">
             ${esc(titleCase(x.name))}
           </div>
-
 
           <div class="adminItemMeta">
             ${esc(x.category)}
@@ -1813,12 +1757,10 @@ async function loadAdmin(){
             ${x.available ? 'متاح' : 'مخفي'}
           </div>
 
-
         </div>
 
 
         <div class="adminItemActions">
-
 
           <button
             class="smallBtn ${x.available ? 'active' : ''}"
@@ -1843,9 +1785,7 @@ async function loadAdmin(){
             حذف
           </button>
 
-
         </div>
-
 
       </div>
 
@@ -2086,10 +2026,6 @@ async function saveProduct(){
     imageUrl =
       oldProduct.image_url || null;
 
-
-    /* =========================
-       UPLOAD NEW IMAGE
-    ========================= */
 
     if(imageFile){
 
