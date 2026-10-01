@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en" dir="ltr">
 
@@ -283,6 +284,8 @@ a{
     0 8px 25px rgba(0,0,0,.16);
 
   direction:ltr;
+
+  min-width:0;
 }
 
 .photo{
@@ -325,6 +328,8 @@ a{
   direction:ltr;
 
   text-align:left;
+
+  min-width:0;
 }
 
 .name{
@@ -337,6 +342,8 @@ a{
   text-transform:capitalize;
 
   color:var(--text);
+
+  overflow-wrap:anywhere;
 }
 
 .desc{
@@ -350,13 +357,17 @@ a{
   margin:5px 0 10px;
 
   min-height:34px;
+
+  overflow-wrap:anywhere;
 }
 
 .bottom{
   display:flex;
 
-  align-items:center;
+  align-items:flex-start;
   justify-content:flex-start;
+
+  min-width:0;
 }
 
 .price{
@@ -371,6 +382,19 @@ a{
   white-space:nowrap;
 
   text-transform:none;
+
+  min-width:0;
+}
+
+
+/* =========================
+   ESPRESSO PRICE
+========================= */
+
+.price.espressoPrice{
+  white-space:normal;
+  line-height:1.4;
+  font-size:15px;
 }
 
 
@@ -797,6 +821,10 @@ a{
     font-size:16px;
   }
 
+  .price.espressoPrice{
+    font-size:14px;
+  }
+
   .adminGrid{
     grid-template-columns:1fr;
   }
@@ -817,6 +845,11 @@ a{
 
   .price{
     font-size:15px;
+  }
+
+  .price.espressoPrice{
+    font-size:13px;
+    line-height:1.35;
   }
 
   .cats button{
@@ -1484,58 +1517,71 @@ function renderPublic(){
 
 
   container.innerHTML =
-    sectionProducts.map(x => `
+    sectionProducts.map(x => {
 
-      <div class="card">
+      const isEspresso =
+        String(x.name || '').trim().toLowerCase() === 'espresso';
 
-        <div class="photo">
+      const displayDescription =
+        isEspresso
+          ? ''
+          : esc(x.description || '');
 
-          ${
-            x.image_url
-              ? `
+      const displayPrice =
+        isEspresso
+          ? 'Single 56 EGP<br>Double 64 EGP'
+          : `EGP ${Number(x.price).toLocaleString('en-US')}`;
 
-                <img
-                  src="${esc(x.image_url)}"
-                  alt="${esc(titleCase(x.name))}"
-                  loading="lazy"
-                >
+      return `
 
-              `
-              : 'صورة المنتج'
-          }
+        <div class="card">
 
-        </div>
+          <div class="photo">
 
+            ${
+              x.image_url
+                ? `
 
-        <div class="info">
+                  <img
+                    src="${esc(x.image_url)}"
+                    alt="${esc(titleCase(x.name))}"
+                    loading="lazy"
+                  >
 
-          <div class="name">
-            ${esc(titleCase(x.name))}
+                `
+                : 'صورة المنتج'
+            }
+
           </div>
 
 
-          <div class="desc">
-            ${esc(x.description || '')}
-          </div>
+          <div class="info">
+
+            <div class="name">
+              ${esc(titleCase(x.name))}
+            </div>
 
 
-          <div class="bottom">
+            <div class="desc">
+              ${displayDescription}
+            </div>
 
-            <div class="price">
-              ${
-                String(x.name || '').toLowerCase() === 'espresso'
-                  ? 'Single 56 EGP | Double 64 EGP'
-                  : `EGP ${Number(x.price).toLocaleString('en-US')}`
-              }
+
+            <div class="bottom">
+
+              <div class="price ${isEspresso ? 'espressoPrice' : ''}">
+                ${displayPrice}
+              </div>
+
             </div>
 
           </div>
 
         </div>
 
-      </div>
+      `;
 
-    `).join('');
+    }).join('');
 
 }
 
@@ -2484,3 +2530,4 @@ if(
 
 </body>
 </html>
+```
