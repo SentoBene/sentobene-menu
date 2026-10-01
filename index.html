@@ -388,7 +388,7 @@ a{
 
 
 /* =========================
-   ESPRESSO PRICE
+   MULTI PRICE
 ========================= */
 
 .price.espressoPrice{
@@ -1519,18 +1519,34 @@ function renderPublic(){
   container.innerHTML =
     sectionProducts.map(x => {
 
+      const productName =
+        String(x.name || '')
+          .trim()
+          .toLowerCase();
+
       const isEspresso =
-        String(x.name || '').trim().toLowerCase() === 'espresso';
+        productName === 'espresso';
+
+      const isTurkishCoffee =
+        productName === 'turkish coffee';
+
+      const isMultiPrice =
+        isEspresso || isTurkishCoffee;
+
 
       const displayDescription =
-        isEspresso
+        isMultiPrice
           ? ''
           : esc(x.description || '');
+
 
       const displayPrice =
         isEspresso
           ? 'Single 56 EGP<br>Double 64 EGP'
-          : `EGP ${Number(x.price).toLocaleString('en-US')}`;
+          : isTurkishCoffee
+            ? 'Single 52 EGP<br>Double 60 EGP'
+            : `EGP ${Number(x.price).toLocaleString('en-US')}`;
+
 
       return `
 
@@ -1569,7 +1585,7 @@ function renderPublic(){
 
             <div class="bottom">
 
-              <div class="price ${isEspresso ? 'espressoPrice' : ''}">
+              <div class="price ${isMultiPrice ? 'espressoPrice' : ''}">
                 ${displayPrice}
               </div>
 
