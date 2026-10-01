@@ -4,10 +4,51 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>SentoBene | Menu</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#090b0a;--card:#111413;--gold:#d7a33a;--gold2:#f0c15d;--text:#f7f3eb;--muted:#aaa49b;--line:#302b23;--danger:#b94b4b}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Tahoma,sans-serif}body{min-height:100vh}button,input,textarea,select{font:inherit}button,input,textarea,select{font:inherit}
+:root{
+  --bg:#090b0a;
+  --card:#111413;
+  --gold:#d7a33a;
+  --gold2:#f0c15d;
+  --text:#f7f3eb;
+  --muted:#aaa49b;
+  --line:#302b23;
+  --danger:#b94b4b;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+  min-height:100vh;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
   position:sticky;
@@ -34,193 +75,2102 @@
   margin-top:5px;
 }
 
+/* =========================
+   SOCIAL ICONS
+========================= */
+
 .social{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:10px;
-  margin-top:8px;
+  gap:12px;
+  margin-top:9px;
 }
 
 .social a{
+  width:30px;
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   color:var(--gold2);
   text-decoration:none;
-  font-size:11px;
+  border:1px solid #3a352d;
+  border-radius:50%;
+  background:#111413;
+  transition:.2s ease;
+}
+
+.social a:hover{
+  border-color:var(--gold2);
+  transform:translateY(-1px);
+}
+
+.social svg{
+  width:16px;
+  height:16px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.social a:last-child svg{
+  fill:currentColor;
+  stroke:none;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.wrap{
+  width:min(1100px,100%);
+  margin:auto;
+  padding:0 14px;
+}
+
+/* =========================
+   CATEGORIES
+   HORIZONTAL SCROLL
+========================= */
+
+.cats{
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:15px 2px 14px;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  direction:rtl;
+  white-space:nowrap;
+  scroll-behavior:smooth;
+}
+
+.cats::-webkit-scrollbar{
+  display:none;
+}
+
+.cats button{
+  flex:0 0 auto;
+  direction:ltr;
+  white-space:nowrap;
+  border:1px solid #3a352d;
+  background:#111413;
+  color:#ddd;
+  border-radius:999px;
+  padding:9px 14px;
+  font-family:"Poppins",Arial,Tahoma,sans-serif;
   font-weight:700;
+  font-size:14px;
+  line-height:1.2;
+  text-transform:capitalize;
+  cursor:pointer;
+  transition:.2s ease;
 }
 
-.social span{
+.cats button:hover{
+  border-color:var(--gold);
+}
+
+.cats button.active{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:#111;
+  font-weight:800;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.sectionTitle{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin:5px 0 12px;
+}
+
+.sectionTitle h2{
+  margin:0;
+  font-family:"Poppins",Arial,Tahoma,sans-serif;
+  font-weight:800;
+  font-size:21px;
+  line-height:1.2;
+  text-transform:capitalize;
+}
+
+.sectionTitle span{
+  font-size:11px;
+  color:var(--muted);
+  font-family:"Poppins",Arial,Tahoma,sans-serif;
+}
+
+/* =========================
+   PRODUCTS GRID
+========================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid #292a26;
+  border-radius:17px;
+  overflow:hidden;
+  box-shadow:0 8px 25px #0004;
+}
+
+/* =========================
+   PRODUCT IMAGE
+========================= */
+
+.photo{
+  width:100%;
+  aspect-ratio:1.55;
+  background:radial-gradient(
+    circle at 50% 40%,
+    #30281c,
+    #171a18 70%
+  );
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#8e806a;
+  text-align:center;
+  padding:12px;
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+/* =========================
+   PRODUCT INFO
+========================= */
+
+.info{
+  padding:12px;
+}
+
+.name{
+  font-family:"Poppins",Arial,Tahoma,sans-serif;
+  font-weight:700;
+  font-size:16px;
+  line-height:1.35;
+  text-transform:capitalize;
+}
+
+.desc{
+  font-family:Arial,Tahoma,sans-serif;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.55;
+  margin:5px 0 10px;
+  min-height:34px;
+}
+
+.bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.price{
+  color:var(--gold2);
+  font-family:"Poppins",Arial,Tahoma,sans-serif;
+  font-weight:800;
+  font-size:16px;
+  line-height:1.2;
+  text-transform:none;
+}
+
+/* =========================
+   EMPTY / FOOTER
+========================= */
+
+.empty{
+  border:1px dashed #3a362f;
+  border-radius:16px;
+  padding:42px 15px;
+  text-align:center;
+  color:#aaa;
+  grid-column:1/-1;
+}
+
+.footer{
+  text-align:center;
   color:#6f6b64;
-  font-size:10px;
+  font-size:11px;
+  padding:30px 0;
 }
 
-.cats::-webkit-scrollbar{display:none}
-.cats button{direction:rtl;white-space:nowrap;border:1px solid #3a352d;background:#111413;color:#ddd;border-radius:999px;padding:9px 14px;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:15px}
-.cats button{direction:rtl;white-space:nowrap;border:1px solid #3a352d;background:#111413;color:#ddd;border-radius:999px;padding:9px 14px;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:15px;text-transform:capitalize}
-.cats button.active{background:var(--gold);border-color:var(--gold);color:#111;font-weight:800}
-.sectionTitle{display:flex;justify-content:space-between;align-items:end;margin:5px 0 12px}.sectionTitle h2{margin:0;font-size:21px}.sectionTitle span{font-size:11px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--card);border:1px solid #292a26;border-radius:17px;overflow:hidden;box-shadow:0 8px 25px #0004}.photo{width:100%;aspect-ratio:1.2;background:radial-gradient(circle at 50% 40%,#30281c,#171a18 70%);display:flex;align-items:center;justify-content:center;color:#8e806a;text-align:center;padding:20px}.photo img{width:100%;height:100%;object-fit:cover}.info{padding:12px}.name{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:17px;line-height:1.3}.desc{font-size:12px;color:var(--muted);line-height:1.55;margin:5px 0 10px;min-height:34px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{color:var(--gold2);font-weight:900}.empty{border:1px dashed #3a362f;border-radius:16px;padding:42px 15px;text-align:center;color:#aaa;grid-column:1/-1}.footer{text-align:center;color:#6f6b64;font-size:11px;padding:30px 0}.footer button{background:none;border:0;color:#777;text-decoration:underline;cursor:pointer}
-.sectionTitle{display:flex;justify-content:space-between;align-items:end;margin:5px 0 12px}.sectionTitle h2{margin:0;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:21px}.sectionTitle span{font-size:11px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--card);border:1px solid #292a26;border-radius:17px;overflow:hidden;box-shadow:0 8px 25px #0004}.photo{width:100%;aspect-ratio:1.2;background:radial-gradient(circle at 50% 40%,#30281c,#171a18 70%);display:flex;align-items:center;justify-content:center;color:#8e806a;text-align:center;padding:20px}.photo img{width:100%;height:100%;object-fit:cover}.info{padding:12px}.name{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:17px;line-height:1.3}.desc{font-size:12px;color:var(--muted);line-height:1.55;margin:5px 0 10px;min-height:34px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{color:var(--gold2);font-weight:900}.empty{border:1px dashed #3a362f;border-radius:16px;padding:42px 15px;text-align:center;color:#aaa;grid-column:1/-1}.footer{text-align:center;color:#6f6b64;font-size:11px;padding:30px 0}.footer button{background:none;border:0;color:#777;text-decoration:underline;cursor:pointer}
-.sectionTitle{display:flex;justify-content:space-between;align-items:end;margin:5px 0 12px}
-.sectionTitle h2{margin:0;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:21px;text-transform:capitalize}
-.sectionTitle span{font-family:Georgia,"Times New Roman",serif;font-size:11px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{background:var(--card);border:1px solid #292a26;border-radius:17px;overflow:hidden;box-shadow:0 8px 25px #0004}
-.photo{width:100%;aspect-ratio:1.2;background:radial-gradient(circle at 50% 40%,#30281c,#171a18 70%);display:flex;align-items:center;justify-content:center;color:#8e806a;text-align:center;padding:20px}
-.photo img{width:100%;height:100%;object-fit:cover}
-.info{padding:12px}
-.name{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:17px;line-height:1.3;text-transform:capitalize}
-.desc{font-family:Georgia,"Times New Roman",serif;font-size:12px;color:var(--muted);line-height:1.55;margin:5px 0 10px;min-height:34px}
-.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.price{font-family:Georgia,"Times New Roman",serif;color:var(--gold2);font-weight:900;font-size:17px;text-transform:capitalize}
-.empty{border:1px dashed #3a362f;border-radius:16px;padding:42px 15px;text-align:center;color:#aaa;grid-column:1/-1}
-.footer{text-align:center;color:#6f6b64;font-size:11px;padding:30px 0}
-.footer button{background:none;border:0;color:#777;text-decoration:underline;cursor:pointer}
-.admin{display:none}.admin.show{display:block}.public.hide{display:none}.panel{background:#101311;border:1px solid #2d2b26;border-radius:16px;padding:15px;margin-bottom:12px}.panel h2,.panel h3{margin:0 0 12px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{font-size:12px;color:#c7c1b7}input,textarea,select{width:100%;margin:5px 0 10px;padding:11px;border-radius:9px;border:1px solid #3a3731;background:#0a0c0b;color:#fff;outline:none}textarea{min-height:80px;resize:vertical}.btn{border:0;border-radius:9px;padding:10px 14px;background:var(--gold);color:#111;font-weight:800;cursor:pointer}.btn.dark{background:#272622;color:#eee}.btn.danger{background:#522525;color:#ffdede}.btn:disabled{opacity:.5;cursor:not-allowed}.items{display:grid;gap:8px}.item{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid #2b2b27;border-radius:11px;padding:10px}.itemMain{display:flex;align-items:center;gap:10px;min-width:0}.thumb{width:55px;height:55px;object-fit:cover;border-radius:8px;background:#222;flex:0 0 auto}.itemText{min-width:0}.itemText b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.small{font-size:11px;color:#999}.actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.status{border:0;border-radius:20px;padding:7px 10px;background:#173a23;color:#77e497;cursor:pointer}.status.off{background:#482020;color:#ff9c9c}.preview{width:90px;height:90px;object-fit:cover;border-radius:9px;background:#222;display:block;margin-bottom:10px}.hint{font-size:12px;color:#aaa;line-height:1.6}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:100}.modal.show{display:flex}.modalBox{width:min(420px,100%);background:#111413;border:1px solid #3c3529;border-radius:18px;padding:18px;box-shadow:0 20px 60px #000}.modalBox h2{margin-top:0}.error{color:#ff9b9b;font-size:12px;min-height:18px}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#171a18;border:1px solid #3a352d;padding:11px 15px;border-radius:12px;display:none;z-index:120}.toast.show{display:block}
+.footer button{
+  background:none;
+  border:0;
+  color:#777;
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+.admin{
+  display:none;
+}
+
+.admin.show{
+  display:block;
+}
+
+.public.hide{
+  display:none;
+}
+
+.panel{
+  background:#101311;
+  border:1px solid #2d2b26;
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:12px;
+}
+
+.panel h2,
+.panel h3{
+  margin:0 0 12px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+label{
+  font-size:12px;
+  color:#c7c1b7;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  margin:5px 0 10px;
+  padding:11px;
+  border-radius:9px;
+  border:1px solid #3a3731;
+  background:#0a0c0b;
+  color:#fff;
+  outline:none;
+}
+
+textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.btn{
+  border:0;
+  border-radius:9px;
+  padding:10px 14px;
+  background:var(--gold);
+  color:#111;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.btn.dark{
+  background:#272622;
+  color:#eee;
+}
+
+.btn.danger{
+  background:#522525;
+  color:#ffdede;
+}
+
+.btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.items{
+  display:grid;
+  gap:8px;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border:1px solid #2b2b27;
+  border-radius:11px;
+  padding:10px;
+}
+
+.itemMain{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.thumb{
+  width:55px;
+  height:55px;
+  object-fit:cover;
+  border-radius:8px;
+  background:#222;
+  flex:0 0 auto;
+}
+
+.itemText{
+  min-width:0;
+}
+
+.itemText b{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.small{
+  font-size:11px;
+  color:#999;
+}
+
+.actions{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.status{
+  border:0;
+  border-radius:20px;
+  padding:7px 10px;
+  background:#173a23;
+  color:#77e497;
+  cursor:pointer;
+}
+
+.status.off{
+  background:#482020;
+  color:#ff9c9c;
+}
+
+.preview{
+  width:90px;
+  height:90px;
+  object-fit:cover;
+  border-radius:9px;
+  background:#222;
+  display:block;
+  margin-bottom:10px;
+}
+
+.hint{
+  font-size:12px;
+  color:#aaa;
+  line-height:1.6;
+}
+
+/* =========================
+   LOGIN MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#000b;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:100;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modalBox{
+  width:min(420px,100%);
+  background:#111413;
+  border:1px solid #3c3529;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 20px 60px #000;
+}
+
+.modalBox h2{
+  margin-top:0;
+}
+
+.error{
+  color:#ff9b9b;
+  font-size:12px;
+  min-height:18px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:20px;
+  transform:translateX(-50%);
+  background:#171a18;
+  border:1px solid #3a352d;
+  padding:11px 15px;
+  border-radius:12px;
+  display:none;
+  z-index:120;
+}
+
+.toast.show{
+  display:block;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+  .header{
+    padding:14px 12px 11px;
+  }
+
+  .logo{
+    width:112px;
+  }
+
+  .wrap{
+    padding:0 10px;
+  }
+
+  .cats{
+    padding-top:13px;
+    padding-bottom:13px;
+  }
+
+  .cats button{
+    font-size:13px;
+    padding:9px 13px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .photo{
+    aspect-ratio:1.55;
+  }
+
+  .name{
+    font-size:16px;
+  }
+
+  .price{
+    font-size:16px;
+  }
+
+  .sectionTitle h2{
+    font-size:20px;
+  }
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .item{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .actions{
+    width:100%;
+    justify-content:flex-start;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header class="header">
-  <img class="logo" src="ChatGPT Image Sep 1, 2026, 08_20_26 PM.png" alt="SentoBene">
+
+  <img
+    class="logo"
+    src="ChatGPT Image Sep 1, 2026, 08_20_26 PM.png"
+    alt="SentoBene"
+  >
 
   <div class="tag"></div>
 
   <div class="social">
-    <a href="https://www.instagram.com/sentobene.eg?stkn=MTZnYmlrajlnc3NybA==" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <span>•</span>
-    <a href="https://www.facebook.com/SentoBene.EG" target="_blank" rel="noopener noreferrer">Facebook</a>
+
+    <!-- Instagram -->
+    <a
+      href="https://www.instagram.com/sentobene.eg?stkn=MTZnYmlrajlnc3NybA=="
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Instagram"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect
+          x="3"
+          y="3"
+          width="18"
+          height="18"
+          rx="5"
+        ></rect>
+
+        <circle
+          cx="12"
+          cy="12"
+          r="4"
+        ></circle>
+
+        <circle
+          cx="17.5"
+          cy="6.5"
+          r="1"
+        ></circle>
+      </svg>
+    </a>
+
+    <!-- Facebook -->
+    <a
+      href="https://www.facebook.com/SentoBene.EG"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Facebook"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z"></path>
+      </svg>
+    </a>
+
   </div>
+
 </header>
+
+
 <main class="wrap">
-<section id="public" class="public">
 
-<div id="cats" class="cats"></div>
-<div class="sectionTitle"><h2 id="sectionName">PASTA</h2><span id="count">جارٍ التحميل...</span></div>
-<div id="products" class="grid"></div>
-<div class="footer">SentoBene®</div>
-</section>
-<section id="admin" class="admin">
-<div class="panel"><h2>لوحة إدارة SentoBene</h2><p class="hint">من هنا تقدر تضيف وتعدّل الأصناف، ترفع الصور، وتخفي أي صنف غير متاح. التغييرات بتظهر في منيو الزبون مباشرة.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn dark" onclick="showPublic()">عرض المينيو</button><button class="btn dark" onclick="logout()">تسجيل الخروج</button><button class="btn" onclick="seedDemo()">إضافة الأصناف التجريبية</button></div></div>
-<div class="panel"><h3 id="formTitle">إضافة صنف</h3><input type="hidden" id="pid"><label>اسم الصنف</label><input id="pname" placeholder="Chicken Alfredo Pasta"><label>الوصف</label><textarea id="pdesc" placeholder="وصف مختصر"></textarea><div class="row"><div><label>السعر بالجنيه</label><input id="pprice" type="number" min="0" step="0.01"></div><div><label>القسم</label><select id="pcat"></select></div></div><label>صورة الصنف</label><input id="pimage" type="file" accept="image/*"><img id="preview" class="preview" style="display:none"><div style="display:flex;gap:8px;flex-wrap:wrap"><button id="saveBtn" class="btn" onclick="saveProduct()">حفظ الصنف</button><button id="cancelBtn" class="btn dark" onclick="resetForm()" style="display:none">إلغاء التعديل</button></div></div>
-<div class="panel"><h3>الأصناف الحالية</h3><div id="adminItems" class="items"><div class="small">جارٍ التحميل...</div></div></div>
-</section>
-</main>
-<div id="loginModal" class="modal"><div class="modalBox"><h2>دخول إدارة SentoBene</h2><p class="hint">الدخول خاص بالإدارة فقط.</p><label>الإيميل</label><input id="email" type="email" autocomplete="username"><label>الباسورد</label><input id="password" type="password" autocomplete="current-password"><div id="loginError" class="error"></div><div style="display:flex;gap:8px;justify-content:flex-start"><button class="btn" onclick="login()">دخول</button><button class="btn dark" onclick="closeLogin()">إلغاء</button></div></div></div>
-<div id="toast" class="toast"></div>
-<script>
-const SUPABASE_URL='https://xzyobcexywacsjlatntx.supabase.co';
-const SUPABASE_KEY='sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
-const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const cats = [
-  { db: 'PASTA', name: 'Pasta' },
-  { db: 'SANDWICHES', name: 'Sandwiches' },
-  { db: 'PORIZZA', name: 'Purezza' },
-  { db: 'MAIN COURSE', name: 'Main Course' },
-  { db: 'SIDE ITEM', name: 'Side Items' },
-  { db: 'DESSERTS', name: 'Desserts' },
-  { db: 'SPECIAL MOCKTAILS', name: 'Special Mocktails' },
-  { db: 'HOT DRINKS', name: 'Hot Drinks' },
-  { db: 'FRESH JUICE', name: 'Fresh Juices' },
-  { db: 'MILK SHAKE', name: 'Milkshakes' },
-  { db: 'ICED DRINKS', name: 'Iced Drinks' }
-];
+  <!-- =========================
+       PUBLIC MENU
+  ========================== -->
 
-const demo=[
-['Chicken Alfredo Pasta','مكرونة بالدجاج مع صوص الألفريدو والجبن',140,'PASTA'],['Penne Arrabbiata','مكرونة بيني بصوص الطماطم الحار',120,'PASTA'],['Spaghetti Bolognese','مكرونة سباجيتي بصلصة بولونيز',130,'PASTA'],['Pesto Pasta','مكرونة بصوص البيستو',125,'PASTA'],['Chicken Sandwich','ساندوتش دجاج بصوص خاص',160,'SANDWICHES'],['Margherita Porizza','طماطم وموتزاريلا وريحان',170,'PORIZZA']
-];
-let active=cats[0].db, products=[];
-function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500)}
-function setupCats(){
-  document.getElementById('cats').innerHTML=cats.map(c=>
-    `<button class="${c.db===active?'active':''}" onclick="active='${c.db}';renderPublic()">${c.name}</button>`
-  ).join('');
+  <section id="public" class="public">
 
-  document.getElementById('pcat').innerHTML=cats.map(c=>
-    `<option value="${c.db}">${c.name}</option>`
-  ).join('');
-}
-function esc(s){return String(s??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]))}
-function renderPublic(){
-  setupCats();
+    <div id="cats" class="cats"></div>
 
-  const sectionProducts = products.filter(x => x.category === active);
-  const currentCat = cats.find(c => c.db === active);
+    <div class="sectionTitle">
+      <h2 id="sectionName">Pasta</h2>
+      <span id="count">جارٍ التحميل...</span>
+    </div>
 
-  document.getElementById('sectionName').textContent =
-    currentCat ? currentCat.name : active;
+    <div id="products" class="grid"></div>
 
-  document.getElementById('count').textContent =
-    `${sectionProducts.length} ${sectionProducts.length === 1 ? 'Item' : 'Items'}`;
+    <div class="footer">
+      SentoBene®
+    </div>
 
-  const container = document.getElementById('products');
+  </section>
 
-  if(!sectionProducts.length){
-    container.innerHTML =
-      '<div class="empty">لا توجد أصناف متاحة في هذا القسم حاليًا.</div>';
-    return;
-  }
 
-  container.innerHTML = sectionProducts.map(x => `
-    <div class="card">
-      <div class="photo">
-        ${
-          x.image_url
-            ? `<img src="${esc(x.image_url)}" alt="${esc(x.name)}" loading="lazy">`
-            : 'صورة المنتج'
-        }
+  <!-- =========================
+       ADMIN
+  ========================== -->
+
+  <section id="admin" class="admin">
+
+    <div class="panel">
+
+      <h2>لوحة إدارة SentoBene</h2>
+
+      <p class="hint">
+        من هنا تقدر تضيف وتعدّل الأصناف، ترفع الصور،
+        وتخفي أي صنف غير متاح.
+        التغييرات بتظهر في منيو الزبون مباشرة.
+      </p>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+        <button
+          class="btn dark"
+          onclick="showPublic()"
+        >
+          عرض المينيو
+        </button>
+
+        <button
+          class="btn dark"
+          onclick="logout()"
+        >
+          تسجيل الخروج
+        </button>
+
+        <button
+          class="btn"
+          onclick="seedDemo()"
+        >
+          إضافة الأصناف التجريبية
+        </button>
+
       </div>
 
-      <div class="info">
-        <div class="name">${esc(x.name)}</div>
-        <div class="desc">${esc(x.description || '')}</div>
+    </div>
 
-        <div class="bottom">
-          <div class="price">
-            ${Number(x.price).toLocaleString('en-US')} EGP
-          </div>
+
+    <div class="panel">
+
+      <h3 id="formTitle">
+        إضافة صنف
+      </h3>
+
+      <input
+        type="hidden"
+        id="pid"
+      >
+
+      <label>
+        اسم الصنف
+      </label>
+
+      <input
+        id="pname"
+        placeholder="Chicken Alfredo Pasta"
+      >
+
+
+      <label>
+        الوصف
+      </label>
+
+      <textarea
+        id="pdesc"
+        placeholder="وصف مختصر"
+      ></textarea>
+
+
+      <div class="row">
+
+        <div>
+
+          <label>
+            السعر بالجنيه
+          </label>
+
+          <input
+            id="pprice"
+            type="number"
+            min="0"
+            step="0.01"
+          >
+
+        </div>
+
+
+        <div>
+
+          <label>
+            القسم
+          </label>
+
+          <select id="pcat"></select>
+
+        </div>
+
+      </div>
+
+
+      <label>
+        صورة الصنف
+      </label>
+
+      <input
+        id="pimage"
+        type="file"
+        accept="image/*"
+      >
+
+      <img
+        id="preview"
+        class="preview"
+        style="display:none"
+      >
+
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+        <button
+          id="saveBtn"
+          class="btn"
+          onclick="saveProduct()"
+        >
+          حفظ الصنف
+        </button>
+
+        <button
+          id="cancelBtn"
+          class="btn dark"
+          onclick="resetForm()"
+          style="display:none"
+        >
+          إلغاء التعديل
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <h3>
+        الأصناف الحالية
+      </h3>
+
+      <div
+        id="adminItems"
+        class="items"
+      >
+        <div class="small">
+          جارٍ التحميل...
         </div>
       </div>
+
     </div>
-  `).join('');
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div
+  id="loginModal"
+  class="modal"
+>
+
+  <div class="modalBox">
+
+    <h2>
+      دخول إدارة SentoBene
+    </h2>
+
+    <p class="hint">
+      الدخول خاص بالإدارة فقط.
+    </p>
+
+
+    <label>
+      الإيميل
+    </label>
+
+    <input
+      id="email"
+      type="email"
+      autocomplete="username"
+    >
+
+
+    <label>
+      الباسورد
+    </label>
+
+    <input
+      id="password"
+      type="password"
+      autocomplete="current-password"
+    >
+
+
+    <div
+      id="loginError"
+      class="error"
+    ></div>
+
+
+    <div
+      style="display:flex;gap:8px;justify-content:flex-start"
+    >
+
+      <button
+        class="btn"
+        onclick="login()"
+      >
+        دخول
+      </button>
+
+      <button
+        class="btn dark"
+        onclick="closeLogin()"
+      >
+        إلغاء
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+  'https://xzyobcexywacsjlatntx.supabase.co';
+
+const SUPABASE_KEY =
+  'sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
+
+const sb =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* =========================
+   CATEGORIES
+========================= */
+
+const cats = [
+
+  {
+    db:'PASTA',
+    name:'Pasta'
+  },
+
+  {
+    db:'SANDWICHES',
+    name:'Sandwiches'
+  },
+
+  {
+    db:'PORIZZA',
+    name:'Purezza'
+  },
+
+  {
+    db:'MAIN COURSE',
+    name:'Main Course'
+  },
+
+  {
+    db:'SIDE ITEM',
+    name:'Side Items'
+  },
+
+  {
+    db:'DESSERTS',
+    name:'Desserts'
+  },
+
+  {
+    db:'SPECIAL MOCKTAILS',
+    name:'Special Mocktails'
+  },
+
+  {
+    db:'HOT DRINKS',
+    name:'Hot Drinks'
+  },
+
+  {
+    db:'FRESH JUICE',
+    name:'Fresh Juices'
+  },
+
+  {
+    db:'MILK SHAKE',
+    name:'Milkshakes'
+  },
+
+  {
+    db:'ICED DRINKS',
+    name:'Iced Drinks'
+  }
+
+];
+
+
+/* =========================
+   DEMO DATA
+========================= */
+
+const demo = [
+
+  [
+    'Chicken Alfredo Pasta',
+    'مكرونة بالدجاج مع صوص الألفريدو والجبن',
+    140,
+    'PASTA'
+  ],
+
+  [
+    'Penne Arrabbiata',
+    'مكرونة بيني بصوص الطماطم الحار',
+    120,
+    'PASTA'
+  ],
+
+  [
+    'Spaghetti Bolognese',
+    'مكرونة سباجيتي بصلصة بولونيز',
+    130,
+    'PASTA'
+  ],
+
+  [
+    'Pesto Pasta',
+    'مكرونة بصوص البيستو',
+    125,
+    'PASTA'
+  ],
+
+  [
+    'Chicken Sandwich',
+    'ساندوتش دجاج بصوص خاص',
+    160,
+    'SANDWICHES'
+  ],
+
+  [
+    'Margherita Porizza',
+    'طماطم وموتزاريلا وريحان',
+    170,
+    'PORIZZA'
+  ]
+
+];
+
+
+let active = cats[0].db;
+let products = [];
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function toast(t){
+
+  const el =
+    document.getElementById('toast');
+
+  el.textContent = t;
+
+  el.classList.add('show');
+
+  setTimeout(
+    () => el.classList.remove('show'),
+    2500
+  );
+
 }
 
+
+function esc(s){
+
+  return String(s ?? '').replace(
+    /[&<>'"]/g,
+    m => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      "'":'&#39;',
+      '"':'&quot;'
+    }[m])
+  );
+
+}
+
+
+/* =========================
+   FORMAT ENGLISH TEXT
+========================= */
+
+function titleCase(text){
+
+  return String(text || '')
+    .toLowerCase()
+    .replace(/\b\w/g, char => char.toUpperCase());
+
+}
+
+
+/* =========================
+   SETUP CATEGORIES
+========================= */
+
+function setupCats(){
+
+  document.getElementById('cats').innerHTML =
+    cats.map(c => `
+      <button
+        class="${c.db === active ? 'active' : ''}"
+        onclick="active='${c.db}';renderPublic()"
+      >
+        ${c.name}
+      </button>
+    `).join('');
+
+
+  document.getElementById('pcat').innerHTML =
+    cats.map(c => `
+      <option value="${c.db}">
+        ${c.name}
+      </option>
+    `).join('');
+
+}
+
+
+/* =========================
+   PUBLIC MENU
+========================= */
+
+function renderPublic(){
+
+  setupCats();
+
+
+  const sectionProducts =
+    products.filter(
+      x => x.category === active
+    );
+
+
+  const currentCat =
+    cats.find(
+      c => c.db === active
+    );
+
+
+  document.getElementById('sectionName').textContent =
+    currentCat
+      ? currentCat.name
+      : active;
+
+
+  document.getElementById('count').textContent =
+    `${sectionProducts.length} ${
+      sectionProducts.length === 1
+        ? 'Item'
+        : 'Items'
+    }`;
+
+
+  const container =
+    document.getElementById('products');
+
+
+  if(!sectionProducts.length){
+
+    container.innerHTML =
+      '<div class="empty">لا توجد أصناف متاحة في هذا القسم حاليًا.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    sectionProducts.map(x => `
+
+      <div class="card">
+
+        <div class="photo">
+
+          ${
+            x.image_url
+
+              ? `
+                <img
+                  src="${esc(x.image_url)}"
+                  alt="${esc(x.name)}"
+                  loading="lazy"
+                >
+              `
+
+              : 'صورة المنتج'
+          }
+
+        </div>
+
+
+        <div class="info">
+
+          <div class="name">
+            ${esc(titleCase(x.name))}
+          </div>
+
+
+          <div class="desc">
+            ${esc(x.description || '')}
+          </div>
+
+
+          <div class="bottom">
+
+            <div class="price">
+              ${Number(x.price).toLocaleString('en-US')} LE
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join('');
+
+}
+
+
+/* =========================
+   LOAD PUBLIC
+========================= */
+
 async function loadPublic(){
-  const {data,error}=await sb
+
+  const {
+    data,
+    error
+  } = await sb
     .from('products')
     .select('*')
     .eq('available',true)
-    .order('created_at',{ascending:false});
+    .order(
+      'created_at',
+      {ascending:false}
+    );
+
 
   if(error){
+
     console.error(error);
-    document.getElementById('count').textContent='';
-    document.getElementById('products').innerHTML =
+
+    document.getElementById('count')
+      .textContent = '';
+
+    document.getElementById('products')
+      .innerHTML =
       '<div class="empty">تعذر تحميل المنيو حاليًا.</div>';
+
     return;
+
   }
 
-  products=data||[];
-  renderPublic();
-}
-async function login(){const email=document.getElementById('email').value.trim(),password=document.getElementById('password').value;document.getElementById('loginError').textContent='';if(!email||!password){document.getElementById('loginError').textContent='اكتب الإيميل والباسورد.';return}const {error}=await sb.auth.signInWithPassword({email,password});if(error){document.getElementById('loginError').textContent='بيانات الدخول غير صحيحة أو الحساب غير مؤكد.';return}closeLogin();await showAdmin()}
-function openLogin(){document.getElementById('loginModal').classList.add('show');setTimeout(()=>document.getElementById('email').focus(),100)}function closeLogin(){document.getElementById('loginModal').classList.remove('show');document.getElementById('loginError').textContent=''}
-async function logout(){await sb.auth.signOut();showPublic();toast('تم تسجيل الخروج')}
-async function showAdmin(){const {data:{user}}=await sb.auth.getUser();if(!user){openLogin();return}document.getElementById('public').classList.add('hide');document.getElementById('admin').classList.add('show');setupCats();resetForm();await loadAdmin()}
-async function showPublic(){document.getElementById('admin').classList.remove('show');document.getElementById('public').classList.remove('hide');await loadPublic()}
-async function loadAdmin(){const {data,error}=await sb.from('products').select('*').order('created_at',{ascending:false});if(error){toast('حصل خطأ في تحميل الأصناف');return}products=data||[];renderAdmin()}
-function renderAdmin(){document.getElementById('adminItems').innerHTML=products.length?products.map(x=>`<div class="item"><div class="itemMain">${x.image_url?`<img class="thumb" src="${esc(x.image_url)}">`:'<div class="thumb"></div>'}<div class="itemText"><b>${esc(x.name)}</b><div class="small">${esc(x.category)} • ${Number(x.price).toLocaleString('en-US')} جنيه • ${x.available?'متاح':'غير متاح'}</div></div></div><div class="actions"><button class="status ${x.available?'':'off'}" onclick="toggleAvailability('${x.id}',${!x.available})">${x.available?'إخفاء':'إظهار'}</button><button class="btn dark" onclick="editProduct('${x.id}')">تعديل</button><button class="btn danger" onclick="deleteProduct('${x.id}')">حذف</button></div></div>`).join(''):'<div class="small">لا توجد أصناف. اضغط إضافة الأصناف التجريبية أو أضف صنفًا جديدًا.</div>'}
-function resetForm(){document.getElementById('pid').value='';document.getElementById('pname').value='';document.getElementById('pdesc').value='';document.getElementById('pprice').value='';document.getElementById('pcat').value=cats[0].db;document.getElementById('pimage').value='';document.getElementById('preview').style.display='none';document.getElementById('formTitle').textContent='إضافة صنف';document.getElementById('saveBtn').textContent='حفظ الصنف';document.getElementById('cancelBtn').style.display='none'}
-function editProduct(id){const x=products.find(p=>String(p.id)===String(id));if(!x)return;document.getElementById('pid').value=x.id;document.getElementById('pname').value=x.name;document.getElementById('pdesc').value=x.description||'';document.getElementById('pprice').value=x.price;document.getElementById('pcat').value=x.category;document.getElementById('pimage').value='';if(x.image_url){document.getElementById('preview').src=x.image_url;document.getElementById('preview').style.display='block'}else document.getElementById('preview').style.display='none';document.getElementById('formTitle').textContent='تعديل الصنف';document.getElementById('saveBtn').textContent='حفظ التعديل';document.getElementById('cancelBtn').style.display='inline-block';scrollTo({top:0,behavior:'smooth'})}
-async function uploadImage(file){if(!file)return null;const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');const path=`${Date.now()}-${crypto.randomUUID()}.${ext||'jpg'}`;const {error}=await sb.storage.from('product-images').upload(path,file,{upsert:false,contentType:file.type||'image/jpeg'});if(error)throw error;const {data}=sb.storage.from('product-images').getPublicUrl(path);return data.publicUrl}
-async function saveProduct(){const name=document.getElementById('pname').value.trim();if(!name){toast('اكتب اسم الصنف');return}const btn=document.getElementById('saveBtn');btn.disabled=true;btn.textContent='جاري الحفظ...';try{const id=document.getElementById('pid').value;const file=document.getElementById('pimage').files[0];let image_url=null;if(file){image_url=await uploadImage(file)}const payload={name,description:document.getElementById('pdesc').value.trim(),price:Number(document.getElementById('pprice').value||0),category:document.getElementById('pcat').value};if(image_url)payload.image_url=image_url;if(id){const {error}=await sb.from('products').update(payload).eq('id',id);if(error)throw error;toast('تم تعديل الصنف')}else{payload.available=true;const {error}=await sb.from('products').insert(payload);if(error)throw error;toast('تمت إضافة الصنف')}resetForm();await loadAdmin()}catch(e){console.error(e);toast('حصل خطأ أثناء الحفظ')}finally{btn.disabled=false;btn.textContent=document.getElementById('pid').value?'حفظ التعديل':'حفظ الصنف'}}
-async function toggleAvailability(id,value){const {error}=await sb.from('products').update({available:value}).eq('id',id);if(error){toast('تعذر تغيير الحالة');return}await loadAdmin();toast(value?'تم إظهار الصنف':'تم إخفاء الصنف')}
-async function deleteProduct(id){const x=products.find(p=>String(p.id)===String(id));if(!x)return;if(!confirm(`حذف "${x.name}" نهائيًا؟`))return;const {error}=await sb.from('products').delete().eq('id',id);if(error){toast('تعذر حذف الصنف');return}await loadAdmin();toast('تم حذف الصنف')}
-async function seedDemo(){if(!confirm('إضافة الأصناف التجريبية الستة إلى قاعدة البيانات؟'))return;const {count}=await sb.from('products').select('id',{count:'exact',head:true});if(count>0){toast('قاعدة البيانات فيها أصناف بالفعل');return}const rows=demo.map(d=>({name:d[0],description:d[1],price:d[2],category:d[3],available:true}));const {error}=await sb.from('products').insert(rows);if(error){toast('تعذر إضافة الأصناف التجريبية');return}await loadAdmin();toast('تمت إضافة الأصناف التجريبية')}
-document.getElementById('pimage').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.getElementById('preview').src=r.result;document.getElementById('preview').style.display='block'};r.readAsDataURL(f)});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLogin();if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='a'){e.preventDefault();openLogin()}});
-sb.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT')showPublic()});
-setupCats();loadPublic();
 
-const params = new URLSearchParams(location.search);
-if(params.get('admin') === '1') openLogin();
+  products = data || [];
+
+  renderPublic();
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function login(){
+
+  const email =
+    document.getElementById('email')
+      .value
+      .trim();
+
+  const password =
+    document.getElementById('password')
+      .value;
+
+
+  document.getElementById('loginError')
+    .textContent = '';
+
+
+  if(!email || !password){
+
+    document.getElementById('loginError')
+      .textContent =
+      'اكتب الإيميل والباسورد.';
+
+    return;
+
+  }
+
+
+  const {error} =
+    await sb.auth.signInWithPassword({
+      email,
+      password
+    });
+
+
+  if(error){
+
+    document.getElementById('loginError')
+      .textContent =
+      'بيانات الدخول غير صحيحة أو الحساب غير مؤكد.';
+
+    return;
+
+  }
+
+
+  closeLogin();
+
+  await showAdmin();
+
+}
+
+
+function openLogin(){
+
+  document
+    .getElementById('loginModal')
+    .classList.add('show');
+
+
+  setTimeout(
+    () =>
+      document
+        .getElementById('email')
+        .focus(),
+    100
+  );
+
+}
+
+
+function closeLogin(){
+
+  document
+    .getElementById('loginModal')
+    .classList.remove('show');
+
+
+  document
+    .getElementById('loginError')
+    .textContent = '';
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+  showPublic();
+
+  toast('تم تسجيل الخروج');
+
+}
+
+
+/* =========================
+   SHOW ADMIN
+========================= */
+
+async function showAdmin(){
+
+  const {
+    data:{user}
+  } = await sb.auth.getUser();
+
+
+  if(!user){
+
+    openLogin();
+
+    return;
+
+  }
+
+
+  document
+    .getElementById('public')
+    .classList.add('hide');
+
+
+  document
+    .getElementById('admin')
+    .classList.add('show');
+
+
+  setupCats();
+
+  resetForm();
+
+  await loadAdmin();
+
+}
+
+
+/* =========================
+   SHOW PUBLIC
+========================= */
+
+async function showPublic(){
+
+  document
+    .getElementById('admin')
+    .classList.remove('show');
+
+
+  document
+    .getElementById('public')
+    .classList.remove('hide');
+
+
+  await loadPublic();
+
+}
+
+
+/* =========================
+   LOAD ADMIN
+========================= */
+
+async function loadAdmin(){
+
+  const {
+    data,
+    error
+  } = await sb
+    .from('products')
+    .select('*')
+    .order(
+      'created_at',
+      {ascending:false}
+    );
+
+
+  if(error){
+
+    toast('حصل خطأ في تحميل الأصناف');
+
+    return;
+
+  }
+
+
+  products = data || [];
+
+  renderAdmin();
+
+}
+
+
+/* =========================
+   RENDER ADMIN
+========================= */
+
+function renderAdmin(){
+
+  document.getElementById('adminItems').innerHTML =
+    products.length
+
+      ? products.map(x => `
+
+          <div class="item">
+
+            <div class="itemMain">
+
+              ${
+                x.image_url
+
+                  ? `
+                    <img
+                      class="thumb"
+                      src="${esc(x.image_url)}"
+                    >
+                  `
+
+                  : '<div class="thumb"></div>'
+              }
+
+
+              <div class="itemText">
+
+                <b>
+                  ${esc(titleCase(x.name))}
+                </b>
+
+                <div class="small">
+
+                  ${esc(x.category)}
+                  •
+                  ${Number(x.price).toLocaleString('en-US')} جنيه
+                  •
+                  ${x.available ? 'متاح' : 'غير متاح'}
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="actions">
+
+              <button
+                class="status ${x.available ? '' : 'off'}"
+                onclick="toggleAvailability('${x.id}',${!x.available})"
+              >
+                ${x.available ? 'إخفاء' : 'إظهار'}
+              </button>
+
+
+              <button
+                class="btn dark"
+                onclick="editProduct('${x.id}')"
+              >
+                تعديل
+              </button>
+
+
+              <button
+                class="btn danger"
+                onclick="deleteProduct('${x.id}')"
+              >
+                حذف
+              </button>
+
+            </div>
+
+          </div>
+
+        `).join('')
+
+      : `
+        <div class="small">
+          لا توجد أصناف.
+          اضغط إضافة الأصناف التجريبية أو أضف صنفًا جديدًا.
+        </div>
+      `;
+
+}
+
+
+/* =========================
+   RESET FORM
+========================= */
+
+function resetForm(){
+
+  document.getElementById('pid').value = '';
+
+  document.getElementById('pname').value = '';
+
+  document.getElementById('pdesc').value = '';
+
+  document.getElementById('pprice').value = '';
+
+  document.getElementById('pcat').value =
+    cats[0].db;
+
+  document.getElementById('pimage').value = '';
+
+  document.getElementById('preview')
+    .style.display = 'none';
+
+  document.getElementById('formTitle')
+    .textContent = 'إضافة صنف';
+
+  document.getElementById('saveBtn')
+    .textContent = 'حفظ الصنف';
+
+  document.getElementById('cancelBtn')
+    .style.display = 'none';
+
+}
+
+
+/* =========================
+   EDIT PRODUCT
+========================= */
+
+function editProduct(id){
+
+  const x =
+    products.find(
+      p => String(p.id) === String(id)
+    );
+
+
+  if(!x) return;
+
+
+  document.getElementById('pid').value =
+    x.id;
+
+  document.getElementById('pname').value =
+    x.name;
+
+  document.getElementById('pdesc').value =
+    x.description || '';
+
+  document.getElementById('pprice').value =
+    x.price;
+
+  document.getElementById('pcat').value =
+    x.category;
+
+  document.getElementById('pimage').value =
+    '';
+
+
+  if(x.image_url){
+
+    document.getElementById('preview').src =
+      x.image_url;
+
+    document.getElementById('preview')
+      .style.display = 'block';
+
+  }else{
+
+    document.getElementById('preview')
+      .style.display = 'none';
+
+  }
+
+
+  document.getElementById('formTitle')
+    .textContent = 'تعديل الصنف';
+
+  document.getElementById('saveBtn')
+    .textContent = 'حفظ التعديل';
+
+  document.getElementById('cancelBtn')
+    .style.display = 'inline-block';
+
+
+  scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+}
+
+
+/* =========================
+   UPLOAD IMAGE
+========================= */
+
+async function uploadImage(file){
+
+  if(!file) return null;
+
+
+  const ext =
+    (file.name.split('.').pop() || 'jpg')
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g,'');
+
+
+  const path =
+    `${Date.now()}-${crypto.randomUUID()}.${ext || 'jpg'}`;
+
+
+  const {
+    error
+  } =
+    await sb.storage
+      .from('product-images')
+      .upload(
+        path,
+        file,
+        {
+          upsert:false,
+          contentType:
+            file.type || 'image/jpeg'
+        }
+      );
+
+
+  if(error)
+    throw error;
+
+
+  const {
+    data
+  } =
+    sb.storage
+      .from('product-images')
+      .getPublicUrl(path);
+
+
+  return data.publicUrl;
+
+}
+
+
+/* =========================
+   SAVE PRODUCT
+========================= */
+
+async function saveProduct(){
+
+  const name =
+    document.getElementById('pname')
+      .value
+      .trim();
+
+
+  if(!name){
+
+    toast('اكتب اسم الصنف');
+
+    return;
+
+  }
+
+
+  const btn =
+    document.getElementById('saveBtn');
+
+
+  btn.disabled = true;
+
+  btn.textContent =
+    'جاري الحفظ...';
+
+
+  try{
+
+    const id =
+      document.getElementById('pid').value;
+
+
+    const file =
+      document.getElementById('pimage')
+        .files[0];
+
+
+    let image_url = null;
+
+
+    if(file){
+
+      image_url =
+        await uploadImage(file);
+
+    }
+
+
+    const payload = {
+
+      name,
+
+      description:
+        document.getElementById('pdesc')
+          .value
+          .trim(),
+
+      price:
+        Number(
+          document.getElementById('pprice')
+            .value || 0
+        ),
+
+      category:
+        document.getElementById('pcat')
+          .value
+
+    };
+
+
+    if(image_url){
+
+      payload.image_url =
+        image_url;
+
+    }
+
+
+    if(id){
+
+      const {
+        error
+      } =
+        await sb
+          .from('products')
+          .update(payload)
+          .eq('id',id);
+
+
+      if(error)
+        throw error;
+
+
+      toast('تم تعديل الصنف');
+
+    }else{
+
+      payload.available = true;
+
+
+      const {
+        error
+      } =
+        await sb
+          .from('products')
+          .insert(payload);
+
+
+      if(error)
+        throw error;
+
+
+      toast('تمت إضافة الصنف');
+
+    }
+
+
+    resetForm();
+
+    await loadAdmin();
+
+
+  }catch(e){
+
+    console.error(e);
+
+    toast('حصل خطأ أثناء الحفظ');
+
+
+  }finally{
+
+    btn.disabled = false;
+
+    btn.textContent =
+      document.getElementById('pid').value
+        ? 'حفظ التعديل'
+        : 'حفظ الصنف';
+
+  }
+
+}
+
+
+/* =========================
+   AVAILABILITY
+========================= */
+
+async function toggleAvailability(id,value){
+
+  const {
+    error
+  } =
+    await sb
+      .from('products')
+      .update({
+        available:value
+      })
+      .eq('id',id);
+
+
+  if(error){
+
+    toast('تعذر تغيير الحالة');
+
+    return;
+
+  }
+
+
+  await loadAdmin();
+
+  toast(
+    value
+      ? 'تم إظهار الصنف'
+      : 'تم إخفاء الصنف'
+  );
+
+}
+
+
+/* =========================
+   DELETE PRODUCT
+========================= */
+
+async function deleteProduct(id){
+
+  const x =
+    products.find(
+      p => String(p.id) === String(id)
+    );
+
+
+  if(!x) return;
+
+
+  if(
+    !confirm(
+      `حذف "${x.name}" نهائيًا؟`
+    )
+  )
+    return;
+
+
+  const {
+    error
+  } =
+    await sb
+      .from('products')
+      .delete()
+      .eq('id',id);
+
+
+  if(error){
+
+    toast('تعذر حذف الصنف');
+
+    return;
+
+  }
+
+
+  await loadAdmin();
+
+  toast('تم حذف الصنف');
+
+}
+
+
+/* =========================
+   DEMO PRODUCTS
+========================= */
+
+async function seedDemo(){
+
+  if(
+    !confirm(
+      'إضافة الأصناف التجريبية الستة إلى قاعدة البيانات؟'
+    )
+  )
+    return;
+
+
+  const {
+    count
+  } =
+    await sb
+      .from('products')
+      .select(
+        'id',
+        {
+          count:'exact',
+          head:true
+        }
+      );
+
+
+  if(count > 0){
+
+    toast(
+      'قاعدة البيانات فيها أصناف بالفعل'
+    );
+
+    return;
+
+  }
+
+
+  const rows =
+    demo.map(d => ({
+
+      name:d[0],
+
+      description:d[1],
+
+      price:d[2],
+
+      category:d[3],
+
+      available:true
+
+    }));
+
+
+  const {
+    error
+  } =
+    await sb
+      .from('products')
+      .insert(rows);
+
+
+  if(error){
+
+    toast(
+      'تعذر إضافة الأصناف التجريبية'
+    );
+
+    return;
+
+  }
+
+
+  await loadAdmin();
+
+  toast(
+    'تمت إضافة الأصناف التجريبية'
+  );
+
+}
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+document
+  .getElementById('pimage')
+  .addEventListener(
+    'change',
+    e => {
+
+      const f =
+        e.target.files[0];
+
+      if(!f) return;
+
+
+      const r =
+        new FileReader();
+
+
+      r.onload = () => {
+
+        document.getElementById('preview')
+          .src = r.result;
+
+        document.getElementById('preview')
+          .style.display = 'block';
+
+      };
+
+
+      r.readAsDataURL(f);
+
+    }
+  );
+
+
+/* =========================
+   KEYBOARD SHORTCUTS
+========================= */
+
+document.addEventListener(
+  'keydown',
+  e => {
+
+    if(e.key === 'Escape')
+      closeLogin();
+
+
+    if(
+      e.ctrlKey &&
+      e.shiftKey &&
+      e.key.toLowerCase() === 'a'
+    ){
+
+      e.preventDefault();
+
+      openLogin();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+sb.auth.onAuthStateChange(
+  (event,session) => {
+
+    if(event === 'SIGNED_OUT')
+      showPublic();
+
+  }
+);
+
+
+/* =========================
+   START
+========================= */
+
+setupCats();
+
+loadPublic();
+
+
+/* =========================
+   ADMIN URL
+========================= */
+
+const params =
+  new URLSearchParams(
+    location.search
+  );
+
+
+if(
+  params.get('admin') === '1'
+)
+  openLogin();
+
 </script>
-</body></html>
+
+</body>
+</html>
