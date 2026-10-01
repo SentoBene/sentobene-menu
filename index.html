@@ -76,10 +76,6 @@ a{
   margin:0 auto;
 }
 
-.tag{
-  min-height:4px;
-}
-
 
 /* =========================
    SOCIAL
@@ -97,14 +93,19 @@ a{
 .social a{
   width:32px;
   height:32px;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   color:var(--gold2);
   text-decoration:none;
+
   border:1px solid #3a352d;
   border-radius:50%;
+
   background:#111413;
+
   transition:.2s ease;
 }
 
@@ -117,6 +118,7 @@ a{
 .social svg{
   width:17px;
   height:17px;
+
   fill:none;
   stroke:currentColor;
   stroke-width:1.8;
@@ -135,12 +137,11 @@ a{
   font-weight:700;
   color:var(--gold2);
   letter-spacing:.3px;
-  text-transform:capitalize;
 }
 
 
 /* =========================
-   MAIN
+   PUBLIC
 ========================= */
 
 .public{
@@ -148,26 +149,6 @@ a{
   margin:0 auto;
   padding:0 14px 30px;
   direction:ltr;
-}
-
-.hero{
-  text-align:center;
-  padding:5px 0 8px;
-  direction:ltr;
-}
-
-.hero h1{
-  margin:0;
-  font-family:"Times New Roman",Times,serif;
-  font-size:30px;
-  font-weight:700;
-  text-transform:capitalize;
-}
-
-.hero p{
-  margin:6px 0 0;
-  color:var(--muted);
-  font-size:14px;
 }
 
 
@@ -179,8 +160,10 @@ a{
   display:flex;
   flex-wrap:nowrap;
   align-items:center;
+
   gap:8px;
   width:100%;
+
   overflow-x:auto;
   overflow-y:hidden;
 
@@ -191,6 +174,7 @@ a{
 
   direction:ltr;
   white-space:nowrap;
+
   scroll-behavior:smooth;
 }
 
@@ -200,6 +184,7 @@ a{
 
 .cats button{
   flex:0 0 auto;
+
   direction:ltr;
   white-space:nowrap;
 
@@ -241,6 +226,7 @@ a{
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:10px;
 
   margin:5px 0 14px;
@@ -265,6 +251,7 @@ a{
 .sectionTitle span{
   font-size:11px;
   color:var(--muted);
+
   font-family:"Times New Roman",Times,serif;
 }
 
@@ -275,36 +262,47 @@ a{
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
   gap:14px;
+
   direction:ltr;
 }
 
 .card{
   overflow:hidden;
+
   background:var(--card);
+
   border:1px solid var(--line);
   border-radius:14px;
-  box-shadow:0 8px 25px rgba(0,0,0,.16);
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.16);
 
   direction:ltr;
 }
 
 .photo{
   width:100%;
+
   aspect-ratio:1.55;
 
-  background:radial-gradient(
-    circle at 50% 40%,
-    #30281c,
-    #171a18 70%
-  );
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #30281c,
+      #171a18 70%
+    );
 
   display:flex;
   align-items:center;
   justify-content:center;
 
   color:#8e806a;
+
   text-align:center;
 
   padding:12px;
@@ -313,19 +311,25 @@ a{
 .photo img{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   border-radius:8px;
+
   display:block;
 }
 
 .info{
   padding:12px 13px 13px;
+
   direction:ltr;
+
   text-align:left;
 }
 
 .name{
   font-family:"Times New Roman",Times,serif;
+
   font-weight:700;
   font-size:17px;
   line-height:1.3;
@@ -337,16 +341,20 @@ a{
 
 .desc{
   font-family:"Times New Roman",Times,serif;
+
   font-size:12px;
   color:var(--muted);
+
   line-height:1.55;
 
   margin:5px 0 10px;
+
   min-height:34px;
 }
 
 .bottom{
   display:flex;
+
   align-items:center;
   justify-content:flex-start;
 }
@@ -355,11 +363,13 @@ a{
   color:var(--gold2);
 
   font-family:"Times New Roman",Times,serif;
+
   font-weight:900;
   font-size:17px;
   line-height:1.2;
 
   white-space:nowrap;
+
   text-transform:none;
 }
 
@@ -370,8 +380,11 @@ a{
 
 .empty{
   padding:35px 15px;
+
   text-align:center;
+
   color:var(--muted);
+
   border:1px dashed var(--line);
   border-radius:14px;
 }
@@ -383,8 +396,11 @@ a{
 
 .footer{
   text-align:center;
+
   color:#777;
+
   font-size:11px;
+
   padding:25px 10px 35px;
 }
 
@@ -395,9 +411,13 @@ a{
 
 .admin{
   display:none;
+
   width:min(1100px,100%);
+
   margin:0 auto;
+
   padding:20px 14px 40px;
+
   direction:rtl;
 }
 
@@ -407,8 +427,10 @@ a{
 
 .adminHead{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   gap:10px;
 
   margin-bottom:20px;
@@ -416,22 +438,31 @@ a{
 
 .adminHead h2{
   margin:0;
+
   font-family:"Times New Roman",Times,serif;
+
   font-size:24px;
 }
 
 .adminActions{
   display:flex;
+
   gap:8px;
+
   flex-wrap:wrap;
 }
 
 .btn{
   border:1px solid var(--line);
+
   background:#151816;
+
   color:#eee;
+
   border-radius:9px;
+
   padding:9px 13px;
+
   font-weight:700;
 }
 
@@ -441,32 +472,44 @@ a{
 
 .btn.gold{
   background:var(--gold);
+
   border-color:var(--gold);
+
   color:#111;
 }
 
 .btn.danger{
   background:#351919;
+
   border-color:#5c2828;
+
   color:#f1caca;
 }
 
 .adminGrid{
   display:grid;
-  grid-template-columns:360px minmax(0,1fr);
+
+  grid-template-columns:
+    360px minmax(0,1fr);
+
   gap:18px;
 }
 
 .panel{
   background:var(--card);
+
   border:1px solid var(--line);
+
   border-radius:14px;
+
   padding:15px;
 }
 
 .panel h3{
   margin:0 0 14px;
+
   font-size:18px;
+
   font-family:"Times New Roman",Times,serif;
 }
 
@@ -476,9 +519,13 @@ a{
 
 .formGroup label{
   display:block;
+
   margin-bottom:5px;
+
   color:#ddd;
+
   font-size:13px;
+
   font-weight:700;
 }
 
@@ -486,11 +533,17 @@ a{
 .formGroup textarea,
 .formGroup select{
   width:100%;
+
   border:1px solid #3a352d;
+
   background:#0c0f0e;
+
   color:#fff;
+
   border-radius:9px;
+
   padding:10px 11px;
+
   outline:none;
 }
 
@@ -502,36 +555,49 @@ a{
 
 .formGroup textarea{
   min-height:90px;
+
   resize:vertical;
 }
 
 .formRow{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:10px;
 }
 
 .formButtons{
   display:flex;
+
   gap:8px;
+
   flex-wrap:wrap;
+
   margin-top:14px;
 }
 
 .adminList{
   display:grid;
+
   gap:10px;
 }
 
 .adminItem{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   gap:12px;
 
   padding:10px;
+
   border:1px solid var(--line);
+
   border-radius:11px;
+
   background:#0c0f0e;
 }
 
@@ -541,35 +607,51 @@ a{
 
 .adminItemName{
   font-family:"Times New Roman",Times,serif;
+
   font-weight:700;
+
   font-size:16px;
+
   text-transform:capitalize;
 
   overflow:hidden;
+
   text-overflow:ellipsis;
+
   white-space:nowrap;
 }
 
 .adminItemMeta{
   color:var(--muted);
+
   font-size:11px;
+
   margin-top:3px;
 }
 
 .adminItemActions{
   display:flex;
+
   gap:6px;
+
   flex-wrap:wrap;
+
   justify-content:flex-end;
 }
 
 .smallBtn{
   border:1px solid #3a352d;
+
   background:#151816;
+
   color:#ddd;
+
   border-radius:7px;
+
   padding:6px 9px;
+
   font-size:11px;
+
   font-weight:700;
 }
 
@@ -579,7 +661,9 @@ a{
 
 .smallBtn.active{
   background:var(--gold);
+
   border-color:var(--gold);
+
   color:#111;
 }
 
@@ -590,13 +674,16 @@ a{
 
 .modal{
   position:fixed;
+
   inset:0;
 
   display:none;
+
   align-items:center;
   justify-content:center;
 
   background:rgba(0,0,0,.78);
+
   padding:20px;
 
   z-index:9999;
@@ -610,16 +697,20 @@ a{
   width:min(400px,100%);
 
   background:#111413;
+
   border:1px solid var(--line);
+
   border-radius:15px;
 
   padding:20px;
 
-  box-shadow:0 20px 70px rgba(0,0,0,.5);
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.5);
 }
 
 .modalBox h2{
   margin:0 0 16px;
+
   text-align:center;
 
   font-family:"Times New Roman",Times,serif;
@@ -627,7 +718,9 @@ a{
 
 .modalButtons{
   display:flex;
+
   gap:8px;
+
   margin-top:12px;
 }
 
@@ -637,8 +730,11 @@ a{
 
 .loginError{
   color:#ef8d8d;
+
   font-size:12px;
+
   min-height:18px;
+
   margin-top:7px;
 }
 
@@ -649,7 +745,9 @@ a{
 
 .loading{
   text-align:center;
+
   color:var(--muted);
+
   padding:30px 10px;
 }
 
@@ -666,17 +764,20 @@ a{
 
   .logo{
     width:min(190px,70vw);
+
     max-height:110px;
   }
 
   .public{
     padding-left:10px;
+
     padding-right:10px;
   }
 
-  /* صنفين جنب بعض على الموبايل */
   .grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
     gap:10px;
   }
 
@@ -702,6 +803,7 @@ a{
 
   .adminHead{
     align-items:flex-start;
+
     flex-direction:column;
   }
 
@@ -719,6 +821,7 @@ a{
 
   .cats button{
     font-size:14px;
+
     padding:8px 13px;
   }
 
@@ -744,6 +847,7 @@ body.adminMode .footer{
 </style>
 </head>
 
+
 <body>
 
 
@@ -751,9 +855,20 @@ body.adminMode .footer{
      PUBLIC MENU
 ========================= -->
 
-<div class="public" id="public">
+<div
+  class="public"
+  id="public"
+>
+
+
+  <!-- =========================
+       HEADER
+  ========================= -->
 
   <header class="header">
+
+
+    <!-- LOGO -->
 
     <img
       class="logo"
@@ -761,12 +876,13 @@ body.adminMode .footer{
       alt="SentoBene"
     >
 
-    <div class="tag"></div>
 
-
-    <!-- SOCIAL LINKS -->
+    <!-- =========================
+         SOCIAL LINKS
+    ========================= -->
 
     <div class="social">
+
 
       <!-- INSTAGRAM -->
 
@@ -807,7 +923,7 @@ body.adminMode .footer{
       </a>
 
 
-      <!-- NAME -->
+      <!-- SENTO BENE -->
 
       <span class="socialName">
         SentoBene
@@ -834,25 +950,16 @@ body.adminMode .footer{
 
       </a>
 
+
     </div>
+
 
   </header>
 
 
-  <section class="hero">
-
-    <h1>
-      SentoBene
-    </h1>
-
-    <p>
-      Good Food • Good Mood
-    </p>
-
-  </section>
-
-
-  <!-- CATEGORY BAR -->
+  <!-- =========================
+       CATEGORY BAR
+  ========================= -->
 
   <div
     id="cats"
@@ -860,7 +967,9 @@ body.adminMode .footer{
   ></div>
 
 
-  <!-- SECTION TITLE -->
+  <!-- =========================
+       SECTION TITLE
+  ========================= -->
 
   <section class="sectionTitle">
 
@@ -875,7 +984,9 @@ body.adminMode .footer{
   </section>
 
 
-  <!-- PRODUCTS -->
+  <!-- =========================
+       PRODUCTS
+  ========================= -->
 
   <main
     id="products"
@@ -889,9 +1000,14 @@ body.adminMode .footer{
   </main>
 
 
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
   <footer class="footer">
     SentoBene®
   </footer>
+
 
 </div>
 
@@ -906,11 +1022,13 @@ body.adminMode .footer{
   class="admin"
 >
 
+
   <div class="adminHead">
 
     <h2>
       SentoBene Admin
     </h2>
+
 
     <div class="adminActions">
 
@@ -920,6 +1038,7 @@ body.adminMode .footer{
       >
         عرض المينيو
       </button>
+
 
       <button
         class="btn danger"
@@ -943,6 +1062,7 @@ body.adminMode .footer{
       <h3>
         إضافة / تعديل صنف
       </h3>
+
 
       <input
         type="hidden"
@@ -981,6 +1101,7 @@ body.adminMode .footer{
 
       <div class="formRow">
 
+
         <div class="formGroup">
 
           <label>
@@ -1007,6 +1128,7 @@ body.adminMode .footer{
           >
 
         </div>
+
 
       </div>
 
@@ -1035,6 +1157,7 @@ body.adminMode .footer{
           حفظ الصنف
         </button>
 
+
         <button
           class="btn"
           onclick="clearForm()"
@@ -1043,6 +1166,7 @@ body.adminMode .footer{
         </button>
 
       </div>
+
 
     </div>
 
@@ -1054,6 +1178,7 @@ body.adminMode .footer{
       <h3>
         الأصناف
       </h3>
+
 
       <div
         id="adminList"
@@ -1067,6 +1192,7 @@ body.adminMode .footer{
       </div>
 
     </div>
+
 
   </div>
 
@@ -1082,6 +1208,7 @@ body.adminMode .footer{
   id="loginModal"
   class="modal"
 >
+
 
   <div class="modalBox">
 
@@ -1137,6 +1264,7 @@ body.adminMode .footer{
         دخول
       </button>
 
+
       <button
         class="btn"
         onclick="closeLogin()"
@@ -1146,6 +1274,7 @@ body.adminMode .footer{
 
     </div>
 
+
   </div>
 
 </div>
@@ -1153,6 +1282,7 @@ body.adminMode .footer{
 
 
 <script>
+
 
 /* =========================================
    SUPABASE
@@ -1162,22 +1292,7 @@ const SUPABASE_URL =
   'https://xzyobcexywacsjlatntx.supabase.co';
 
 const SUPABASE_ANON_KEY =
-const SUPABASE_URL =
-  'https://xzyobcexywacsjlatntx.supabase.co';
-
-const SUPABASE_ANON_KEY =
   'sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
-
-const sb =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
-/*
-  مهم:
-  لو عندك ANON KEY حقيقي في نسختك الحالية،
-  خليه مكان السطر اللي فوق.
-*/
 
 const sb =
   window.supabase.createClient(
@@ -1275,17 +1390,11 @@ function esc(value){
 }
 
 
-/*
-  English text:
-  First Letter Capital
-  باقي الحروف Small
-*/
-
 function titleCase(text){
 
   return String(text || '')
     .toLowerCase()
-    .replace(/\b\w/g, char =>
+    .replace(/\b\w/g,char =>
       char.toUpperCase()
     );
 
@@ -1340,6 +1449,7 @@ async function loadPublic(){
     </div>
   `;
 
+
   const {
     data,
     error
@@ -1350,6 +1460,7 @@ async function loadPublic(){
     .order('created_at',{
       ascending:false
     });
+
 
   if(error){
 
@@ -1363,6 +1474,7 @@ async function loadPublic(){
 
     return;
   }
+
 
   products = data || [];
 
@@ -1431,6 +1543,7 @@ function renderPublic(){
 
       <div class="card">
 
+
         <div class="photo">
 
           ${
@@ -1452,6 +1565,7 @@ function renderPublic(){
 
         <div class="info">
 
+
           <div class="name">
             ${esc(titleCase(x.name))}
           </div>
@@ -1469,6 +1583,7 @@ function renderPublic(){
             </div>
 
           </div>
+
 
         </div>
 
@@ -1513,6 +1628,7 @@ function openLogin(){
     'loginModal'
   ).classList.add('show');
 
+
   setTimeout(() => {
 
     document.getElementById(
@@ -1529,6 +1645,7 @@ function closeLogin(){
   document.getElementById(
     'loginModal'
   ).classList.remove('show');
+
 
   document.getElementById(
     'loginError'
@@ -1680,11 +1797,14 @@ async function loadAdmin(){
 
       <div class="adminItem">
 
+
         <div class="adminItemInfo">
+
 
           <div class="adminItemName">
             ${esc(titleCase(x.name))}
           </div>
+
 
           <div class="adminItemMeta">
             ${esc(x.category)}
@@ -1694,10 +1814,12 @@ async function loadAdmin(){
             ${x.available ? 'متاح' : 'مخفي'}
           </div>
 
+
         </div>
 
 
         <div class="adminItemActions">
+
 
           <button
             class="smallBtn ${x.available ? 'active' : ''}"
@@ -1722,7 +1844,9 @@ async function loadAdmin(){
             حذف
           </button>
 
+
         </div>
+
 
       </div>
 
@@ -2212,6 +2336,7 @@ async function deleteProduct(id){
 
 
   if(!confirmed){
+
     return;
   }
 
