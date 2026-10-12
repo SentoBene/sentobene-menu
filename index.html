@@ -73,22 +73,21 @@ a{
   max-height:130px;
   object-fit:contain;
   margin:0 auto;
-}
 /* =========================
-   SOCIAL (إصلاح الأيقونات العائمة جنب بعضها بدون لخبطة)
+   SOCIAL (الأيقونات العائمة بحجم أكبر وواضح)
 ========================= */
 .social{
-  display: flex !important; /* ضمان إنهم يفضلوا جنب بعض في سطر واحد */
+  display: flex !important; 
   justify-content: center;
   align-items: center;
-  gap: 16px;          
-  margin-top: 14px;   
+  gap: 20px;          /* زيادة المسافة بين الفقاعات */
+  margin-top: 18px;   
   direction: ltr;
 }
 
 .social a{
-  width: 46px;       
-  height: 46px;      
+  width: 58px;       /* تكبير قطر الفقاعة ليكون واضحاً وضخماً */
+  height: 58px;      /* تكبير قطر الفقاعة */
 
   display: flex !important;
   align-items: center;
@@ -97,7 +96,7 @@ a{
   text-decoration: none;
   border-radius: 50%; 
   
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35); 
   transition: all .2s ease;
 
   /* تشغيل حركة الزوم برفق وبشكل مستمر */
@@ -115,30 +114,30 @@ a{
   background: #1877F2; /* الفيسبوك */
   border: 1px solid #1877F2;
   color: #fff;
-  animation-delay: 0.4s; /* تأخير بسيط */
+  animation-delay: 0.4s; 
 }
 .social a:nth-child(3) { 
   background: #25D366; /* الواتساب */
   border: 1px solid #25D366;
   color: #fff;
-  animation-delay: 0.8s; /* تأخير إضافي */
+  animation-delay: 0.8s; 
 }
 
 /* تأثير عند اللمس أو مرور الماوس */
 .social a:hover{
-  animation-play-state: paused; /* إيقاف مؤقت للحركة عند الضغط */
+  animation-play-state: paused; 
   transform: scale(1.15) translateY(-4px) !important; 
-  box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45); 
   filter: brightness(1.1); 
 }
 
-/* تكبير حجم الـ SVG داخل الأيقونة */
+/* تكبير حجم الـ SVG الداخلي ليتناسب مع الحجم الجديد للفقاعة */
 .social svg{
-  width: 24px;        
-  height: 24px;       
+  width: 30px;        /* تكبير حجم الرسمة الداخلية لتملأ الفقاعة بشكل شيك */
+  height: 30px;       /* تكبير حجم الرسمة الداخلية */
   fill: none;
   stroke: currentColor;
-  stroke-width: 2;    
+  stroke-width: 2.2;  /* زيادة سماكة الخط لتكون الأيقونة واضحة جداً */
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -160,19 +159,17 @@ a{
 @keyframes bubbleFloat {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
   }
   50% {
-    transform: scale(1.08); /* زوم إن خفيف وانسيابي */
-    box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
+    transform: scale(1.1); /* زوم إن انسيابي ملحوظ */
+    box-shadow: 0 7px 18px rgba(0,0,0,0.45); 
   }
-} /* <--- القوس دا كان ناقص وهو اللي كان مبوظ الدنيا كلها */
+}
 
 /* =========================
    PUBLIC
 ========================= */
-
-.public{
   width:min(1100px,100%);
   margin:0 auto;
   padding:0 14px 30px;
