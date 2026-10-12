@@ -75,94 +75,99 @@ a{
   margin:0 auto;
 }
 /* =========================
-/* =========================
    SOCIAL (تعديل بابل الأيقونات العائمة بتأثير الزوم المتكرر)
 ========================= */
+/* =========================
+   SOCIAL (إصلاح الأيقونات العائمة جنب بعضها بدون لخبطة)
+========================= */
 .social{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:16px;          
-  margin-top:14px;   
-  direction:ltr;
+  display: flex !important; /* ضمان إنهم يفضلوا جنب بعض في سطر واحد */
+  justify-content: center;
+  align-items: center;
+  gap: 16px;          
+  margin-top: 14px;   
+  direction: ltr;
 }
+
 .social a{
   width: 46px;       
   height: 46px;      
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 
-  text-decoration:none;
-  border-radius:50%; 
+  text-decoration: none;
+  border-radius: 50%; 
   
   box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
   transition: all .2s ease;
 
-  /* تشغيل حركة الفقاعة العائمة (الزوم) بشكل مستمر */
+  /* تشغيل حركة الزوم برفق وبشكل مستمر */
   animation: bubbleFloat 3s ease-in-out infinite;
 }
-/* تلوين كل أيقونة بلون المنصة الأصلي وجعل حركتهم متتالية */
+
+/* تلوين المنصات بالترتيب الصحيح */
 .social a:nth-child(1) { 
-  background: #E4405F; /* الانستجرام (على الشمال) - وردي/موف */
+  background: #E4405F; /* الانستجرام */
   border: 1px solid #E4405F;
   color: #fff;
   animation-delay: 0s;
 }
 .social a:nth-child(2) { 
-  background: #1877F2; /* الفيسبوك (في النص) - أزرق */
+  background: #1877F2; /* الفيسبوك */
   border: 1px solid #1877F2;
   color: #fff;
-  animation-delay: 0.3s; /* تأخير بسيط للحركة */
+  animation-delay: 0.4s; /* تأخير بسيط */
 }
 .social a:nth-child(3) { 
-  background: #25D366; /* الواتساب (على اليمين) - أخضر */
+  background: #25D366; /* الواتساب */
   border: 1px solid #25D366;
   color: #fff;
-  animation-delay: 0.6s; /* تأخير إضافي للحركة */
+  animation-delay: 0.8s; /* تأخير إضافي */
 }
-/* تأثير حركة الـ Hover عند مرور الماوس أو اللمس (يوقف الأنميشن ويكبرها) */
+/* تأثير عند اللمس أو مرور الماوس */
 .social a:hover{
-  animation-play-state: paused; /* إيقاف الحركة المؤقت عند اللمس */
-  transform: translateY(-4px) scale(1.15) !important; 
+  animation-play-state: paused; /* إيقاف مؤقت للحركة عند الضغط */
+  transform: scale(1.15) translateY(-4px) !important; 
   box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
   filter: brightness(1.1); 
 }
 /* تكبير حجم الـ SVG داخل الأيقونة */
 .social svg{
-  width:24px;        
-  height:24px;       
-  fill:none;
-  stroke:currentColor;
-  stroke-width:2;    
-  stroke-linecap:round;
-  stroke-linejoin:round;
+  width: 24px;        
+  height: 24px;       
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;    
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .social a:last-child svg{
-  fill:currentColor;
-  stroke:none;
+  fill: currentColor;
+  stroke: none;
 }
 .socialName{
-  font-family:"Times New Roman",Times,serif;
-  font-size:16px;
-  font-weight:700;
-  color:var(--gold2);
-  letter-spacing:.3px;
+  font-family: "Times New Roman",Times,serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold2);
+  letter-spacing: .3px;
 }
-/* دالة الحركة المسؤولة عن تأثير الزوم إن والزوم أوت (النبض العائم) */
+/* الأنميشن الآمن اللي بيعمل زوم ويحافظ على محاذاة العناصر */
 @keyframes bubbleFloat {
   0%, 100% {
     transform: scale(1);
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   }
   50% {
-    transform: scale(1.08); /* زوم إن خفيف */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* زيادة الظل لإعطاء إيحاء بالارتفاع */
+    transform: scale(1.08); /* زوم إن خفيف وانسيابي */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
   }
 /* =========================
    PUBLIC
 ========================= */
+
 .public{
   width:min(1100px,100%);
   margin:0 auto;
