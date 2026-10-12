@@ -75,8 +75,6 @@ a{
   object-fit:contain;
   margin:0 auto;
 }
-
-
 /* =========================
    SOCIAL
 ========================= */
@@ -85,43 +83,58 @@ a{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:12px;
-  margin-top:9px;
+  gap:16px;          
+  margin-top:14px;   
   direction:ltr;
 }
 
 .social a{
-  width:32px;
-  height:32px;
+  width: 46px;       
+  height: 46px;      
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  color:var(--gold2);
   text-decoration:none;
-
-  border:1px solid #3a352d;
-  border-radius:50%;
-
-  background:#111413;
-
-  transition:.2s ease;
+  border-radius:50%; 
+  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+  transition: all .2s ease;
 }
 
+/* تلوين كل أيقونة بلون المنصة الأصلي لتبدو كـ بابل */
+.social a:nth-child(1) { 
+  background: #25D366; /* لون الواتساب الأخضر */
+  border: 1px solid #25D366;
+  color: #fff;
+}
+.social a:nth-child(2) { 
+  background: #E4405F; /* لون الانستجرام الوردي */
+  border: 1px solid #E4405F;
+  color: #fff;
+}
+.social a:nth-child(3) { 
+  background: #1877F2; /* لون الفيسبوك الأزرق */
+  border: 1px solid #1877F2;
+  color: #fff;
+}
+
+/* تأثير حركة الـ Hover عند مرور الماوس أو اللمس */
 .social a:hover{
-  background:var(--gold);
-  color:#111;
-  border-color:var(--gold);
+  transform: translateY(-4px) scale(1.1); 
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
+  filter: brightness(1.1); 
 }
 
+/* تكبير حجم الـ SVG داخل الأيقونة */
 .social svg{
-  width:17px;
-  height:17px;
+  width:24px;        
+  height:24px;       
 
   fill:none;
   stroke:currentColor;
-  stroke-width:1.8;
+  stroke-width:2;    
   stroke-linecap:round;
   stroke-linejoin:round;
 }
@@ -138,7 +151,6 @@ a{
   color:var(--gold2);
   letter-spacing:.3px;
 }
-
 
 /* =========================
    PUBLIC
