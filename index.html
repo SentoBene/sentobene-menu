@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -78,7 +77,6 @@ a{
 /* =========================
    SOCIAL
 ========================= */
-
 .social{
   display:flex;
   justify-content:center;
@@ -87,7 +85,6 @@ a{
   margin-top:14px;   
   direction:ltr;
 }
-
 .social a{
   width: 46px;       
   height: 46px;      
@@ -102,48 +99,42 @@ a{
   box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
   transition: all .2s ease;
 }
-
-/* تلوين كل أيقونة بلون المنصة الأصلي لتبدو كـ بابل */
+/* تلوين كل أيقونة بلون المنصة الأصلي لتبدو كـ بابل (ترتيب الموبايل الصحيح) */
 .social a:nth-child(1) { 
-  background: #25D366; /* لون الواتساب الأخضر */
-  border: 1px solid #25D366;
-  color: #fff;
-}
-.social a:nth-child(2) { 
-  background: #E4405F; /* لون الانستجرام الوردي */
+  background: #E4405F; /* الانستجرام (على الشمال) - وردي/موف */
   border: 1px solid #E4405F;
   color: #fff;
 }
-.social a:nth-child(3) { 
-  background: #1877F2; /* لون الفيسبوك الأزرق */
+.social a:nth-child(2) { 
+  background: #1877F2; /* الفيسبوك (في النص) - أزرق */
   border: 1px solid #1877F2;
   color: #fff;
 }
-
+.social a:nth-child(3) { 
+  background: #25D366; /* الواتساب (على اليمين) - أخضر */
+  border: 1px solid #25D366;
+  color: #fff;
+}
 /* تأثير حركة الـ Hover عند مرور الماوس أو اللمس */
 .social a:hover{
   transform: translateY(-4px) scale(1.1); 
   box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
   filter: brightness(1.1); 
 }
-
 /* تكبير حجم الـ SVG داخل الأيقونة */
 .social svg{
   width:24px;        
   height:24px;       
-
   fill:none;
   stroke:currentColor;
   stroke-width:2;    
   stroke-linecap:round;
   stroke-linejoin:round;
 }
-
 .social a:last-child svg{
   fill:currentColor;
   stroke:none;
 }
-
 .socialName{
   font-family:"Times New Roman",Times,serif;
   font-size:16px;
@@ -151,7 +142,6 @@ a{
   color:var(--gold2);
   letter-spacing:.3px;
 }
-
 /* =========================
    PUBLIC
 ========================= */
