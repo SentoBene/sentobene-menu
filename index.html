@@ -75,9 +75,6 @@ a{
   margin:0 auto;
 }
 /* =========================
-   SOCIAL (تعديل بابل الأيقونات العائمة بتأثير الزوم المتكرر)
-========================= */
-/* =========================
    SOCIAL (إصلاح الأيقونات العائمة جنب بعضها بدون لخبطة)
 ========================= */
 .social{
@@ -126,6 +123,7 @@ a{
   color: #fff;
   animation-delay: 0.8s; /* تأخير إضافي */
 }
+
 /* تأثير عند اللمس أو مرور الماوس */
 .social a:hover{
   animation-play-state: paused; /* إيقاف مؤقت للحركة عند الضغط */
@@ -133,6 +131,7 @@ a{
   box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
   filter: brightness(1.1); 
 }
+
 /* تكبير حجم الـ SVG داخل الأيقونة */
 .social svg{
   width: 24px;        
@@ -143,10 +142,12 @@ a{
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
 .social a:last-child svg{
   fill: currentColor;
   stroke: none;
 }
+
 .socialName{
   font-family: "Times New Roman",Times,serif;
   font-size: 16px;
@@ -154,6 +155,7 @@ a{
   color: var(--gold2);
   letter-spacing: .3px;
 }
+
 /* الأنميشن الآمن اللي بيعمل زوم ويحافظ على محاذاة العناصر */
 @keyframes bubbleFloat {
   0%, 100% {
@@ -164,6 +166,8 @@ a{
     transform: scale(1.08); /* زوم إن خفيف وانسيابي */
     box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
   }
+} /* <--- القوس دا كان ناقص وهو اللي كان مبوظ الدنيا كلها */
+
 /* =========================
    PUBLIC
 ========================= */
