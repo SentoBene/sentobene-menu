@@ -893,11 +893,51 @@ body.adminMode .public{
 
 body.adminMode .admin{
   display:block;
-}
+} /* <--- القوس دا كان ممسوح وتم إصلاحه هنا */
 
 body.adminMode .footer{
   display:none;
 }
+
+/* =========================
+   إصلاح نهائي لبابل السوشيال ميديا الدائرية والمحاذاة
+========================= */
+.header .social{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+  width: 100% !important;
+}
+
+.header .socialIcons{
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 16px !important; /* مسافة شياكة بين البابلز */
+  width: 100% !important;
+}
+
+.header .socialIcons a{
+  display: flex !important;
+  width: 40px !important;     /* عرض ثابت ومضمون للدائرة */
+  height: 40px !important;    /* ارتفاع ثابت ومضمون للدائرة */
+  flex: 0 0 40px !important;  /* حماية كاملة ضد التمطيط أو الضغط الجانبي نهائياً */
+  
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  border-radius: 50% !important; /* دائرية حقيقية 100% */
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3) !important;
+  transition: all .2s ease !important;
+  
+  /* تشغيل أنميشن الزوم العائم المستمر */
+  animation: bubbleFloat 3s ease-in-out infinite !important;
+}
+
 /* تلوين المنصات بالترتيب الصحيح */
 .header .socialIcons a:nth-child(1) { 
   background: #E4405F !important; /* الانستجرام */
@@ -926,34 +966,44 @@ body.adminMode .footer{
   filter: brightness(1.1) !important; 
 }
 
-/* تصغير الأيقونة الداخلية لتتناسب مع حجم البابل الجديد */
+/* ضبط السنترة وحجم الأيقونات الداخلية (SVG) بالملي */
 .header .socialIcons svg{
-  width: 19px !important;        
-  height: 19px !important;       
+  width: 20px !important;        
+  height: 20px !important;       
+  min-width: 20px !important;
+  min-height: 20px !important;
   fill: none !important;
   stroke: currentColor !important;
   stroke-width: 2 !important;    
   stroke-linecap: round !important;
   stroke-linejoin: round !important;
+  display: block !important;
+  margin: 0 auto !important; /* سنترة الأيقونة في نص الدائرة بالظبط */
+}
+
+.header .socialIcons a:last-child svg{
+  fill: currentColor !important;
+  stroke: none !important;
 }
 
 .socialName{
   font-family: "Times New Roman",Times,serif;
   font-size: 16px;
   font-weight: 700;
-  color: var(--gold2) !important; /* إرجاع وثبات اللون الذهبي للكلمة */
+  color: var(--gold2) !important; /* ثبات اللون الذهبي الأصلي للكلمة */
   letter-spacing: .3px;
+  display: block !important;
 }
 
-/* حركة الزوم الانسيابية الهادئة */
+/* حركة الزوم الانسيابية الهادئة والمحافظة على الأبعاد */
 @keyframes bubbleFloat {
   0%, 100% {
     transform: scale(1);
     box-shadow: 0 3px 8px rgba(0,0,0,0.3);
   }
   50% {
-    transform: scale(1.06); /* زوم خفيف جداً وغير مزعج */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.35); 
+    transform: scale(1.06); 
+    box-shadow: 0 5px 12px rgba(0,0,0,0.4); 
   }
 }
 </style>
