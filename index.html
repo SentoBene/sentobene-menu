@@ -182,26 +182,30 @@ a{
 /* =========================
    CATEGORIES
 ========================= */
-
 .cats{
-  display:flex;
-  flex-wrap:nowrap;
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
   align-items:center;
+  justify-content:flex-start;
 
   gap:8px;
   width:100%;
+  max-width:100%;
+  min-width:0;
+  box-sizing:border-box;
 
-  overflow-x:auto;
-  overflow-y:hidden;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
 
   padding:15px 2px 14px;
 
   scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
 
   direction:ltr;
   white-space:nowrap;
-
   scroll-behavior:smooth;
 }
 
@@ -210,7 +214,11 @@ a{
 }
 
 .cats button{
-  flex:0 0 auto;
+  display:inline-flex;
+  flex:0 0 auto !important;
+  flex-shrink:0 !important;
+  align-items:center;
+  justify-content:center;
 
   direction:ltr;
   white-space:nowrap;
@@ -243,8 +251,6 @@ a{
   color:#111;
   font-weight:800;
 }
-
-
 /* =========================
    SECTION TITLE
 ========================= */
@@ -810,13 +816,10 @@ a{
   .header{
     padding-top:15px;
   }
-
-  .logo{
-    width:min(190px,70vw);
-
-    max-height:110px;
+ .logo{
+  width:min(190px,70vw);
+  max-height:110px;
   }
-
   .public{
     padding-left:10px;
 
