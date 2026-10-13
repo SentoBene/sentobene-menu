@@ -67,12 +67,18 @@ a{
   text-align:center;
 }
 
-.logo{
-  display:block;
-  width:min(220px,72vw);
-  max-height:130px;
-  object-fit:contain;
-  margin:0 auto;
+.logo {
+  display: block;
+  width: min(250px, 80vw); /* تكبير بسيط ومتناسق للحجم */
+  max-height: 130px;
+  object-fit: contain;
+  margin: 0 auto;
+  
+  /* السطرين دول هيشيلوا الخلفية المربعة ويخلو الخط أبيض مدمج مع الصفحة */
+  background: transparent !important;
+  filter: brightness(0) invert(1);
+}
+
 /* =========================
    SOCIAL (إعادة الضبط وحركة عائمة انسيابية بدون تشويه)
 ========================= */
