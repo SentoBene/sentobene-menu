@@ -182,8 +182,7 @@ a{
 /* =========================
    CATEGORIES
 ========================= */
-.cats{
-  display:flex !important;
+#cats.cats{  display:flex !important;
   flex-direction:row !important;
   flex-wrap:nowrap !important;
   align-items:center;
@@ -209,11 +208,11 @@ a{
   scroll-behavior:smooth;
 }
 
-.cats::-webkit-scrollbar{
+#cats.cats::-webkit-scrollbar{
   display:none;
 }
 
-.cats button{
+#cats.cats button{
   display:inline-flex;
   flex:0 0 auto !important;
   flex-shrink:0 !important;
@@ -241,11 +240,11 @@ a{
   transition:.2s ease;
 }
 
-.cats button:hover{
+#cats.cats button:hover{
   border-color:var(--gold);
 }
 
-.cats button.active{
+#cats.cats button.active{
   background:var(--gold);
   border-color:var(--gold);
   color:#111;
