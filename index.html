@@ -1664,7 +1664,7 @@ function renderPublic(){
   }
 
 
-  // التعديل هنا: فحص وتكبير بوستر التشويق لقسم 25 / 10 فقط وحجب الأسعار
+  // التعديل الصحيح والمضمون 100%: تكبير بوستر قسم 25 / 10 وعودة باقي صور الأصناف طبيعية تماماً
   container.innerHTML =
     sectionProducts.map(x => {
 
@@ -1687,9 +1687,8 @@ function renderPublic(){
 
 
       /* =========================
-         SPECIAL MULTI-PRICE ITEMS
+         STANDARD PRODUCTS DISPLAY
       ========================= */
-      // باقي الكود الطبيعي لعرض الأصناف العادية كارتين بجانب بعض بأسعارها
       return `
         <div class="card">
           <div class="photo">
