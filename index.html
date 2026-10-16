@@ -6,7 +6,7 @@
 
 <title>SentoBene | Menu</title>
 
-<script src="https://jsdelivr.net"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -75,49 +75,56 @@ a{
   margin:0 auto;
 }
 /* =========================
-   SOCIAL
+   SOCIAL (إعادة الضبط وحركة عائمة انسيابية بدون تشويه)
 ========================= */
 .social{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 14px;
+  gap: 14px;          /* مسافة متزنة */
   margin-top: 9px;   
   direction: ltr;
 }
 
 .social a{
-  width: 36px;
+  width: 36px;        /* حجم متناسق وآمن مع تصميم الهيدر عندك */
   height: 36px;       
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   text-decoration: none;
   border-radius: 50%; 
+  
   box-shadow: 0 3px 8px rgba(0,0,0,0.3); 
   transition: all .2s ease;
+
+  /* أنميشن الزوم العائم برفق وبدون التأثير على بقية عناصر الموقع */
   animation: bubbleFloat 3s ease-in-out infinite;
 }
 
+/* توزيع الألوان الصحيحة بالترتيب */
 .social a:nth-child(1) { 
-  background: #E4405F; 
+  background: #E4405F; /* الانستجرام */
   border: 1px solid #E4405F;
   color: #fff;
   animation-delay: 0s;
 }
 .social a:nth-child(2) { 
-  background: #1877F2; 
+  background: #1877F2; /* الفيسبوك */
   border: 1px solid #1877F2;
   color: #fff;
   animation-delay: 0.4s; 
 }
 .social a:nth-child(3) { 
-  background: #25D366; 
+  background: #25D366; /* الواتساب */
   border: 1px solid #25D366;
   color: #fff;
   animation-delay: 0.8s; 
 }
 
+/* عند تمرير الماوس أو اللمس يثبت الأنميشن ويكبر بسيط */
 .social a:hover{
   animation-play-state: paused; 
   transform: scale(1.1) translateY(-2px); 
@@ -125,8 +132,9 @@ a{
   filter: brightness(1.1); 
 }
 
+/* ضبط الأيقونات الداخلية لتبتعد عن التشويه */
 .social svg{
-  width: 19px;
+  width: 19px;        /* حجم داخلي ممتاز ومناسب لقطر الـ 36px */
   height: 19px;       
   fill: none;
   stroke: currentColor;
@@ -148,13 +156,14 @@ a{
   letter-spacing: .3px;
 }
 
+/* حركة عائمة آمنة تعتمد على تغيير طفيف في الحجم والظل لتجنب تدمير التصميم */
 @keyframes bubbleFloat {
   0%, 100% {
     transform: scale(1);
     box-shadow: 0 3px 8px rgba(0,0,0,0.3);
   }
   50% {
-    transform: scale(1.08); 
+    transform: scale(1.08); /* زوم خفيف وناعم جداً */
     box-shadow: 0 5px 12px rgba(0,0,0,0.4); 
   }
 }
@@ -179,17 +188,22 @@ a{
   flex-wrap:nowrap !important;
   align-items:center;
   justify-content:flex-start;
+
   gap:8px;
   width:100%;
   max-width:100%;
   min-width:0;
   box-sizing:border-box;
+
   overflow-x:auto !important;
   overflow-y:hidden !important;
+
   padding:15px 2px 14px;
+
   scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
   overscroll-behavior-x:contain;
+
   direction:ltr;
   white-space:nowrap;
   scroll-behavior:smooth;
@@ -205,18 +219,24 @@ a{
   flex-shrink:0 !important;
   align-items:center;
   justify-content:center;
+
   direction:ltr;
   white-space:nowrap;
+
   border:1px solid #3a352d;
   background:#111413;
   color:#ddd;
+
   border-radius:999px;
   padding:9px 14px;
+
   font-family:"Times New Roman",Times,serif;
   font-weight:700;
   font-size:15px;
   line-height:1.2;
+
   text-transform:capitalize;
+
   cursor:pointer;
   transition:.2s ease;
 }
@@ -239,25 +259,32 @@ a{
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:10px;
+
   margin:5px 0 14px;
   padding-bottom:9px;
+
   border-bottom:1px solid var(--line);
+
   direction:ltr;
 }
 
 .sectionTitle h2{
   margin:0;
+
   font-family:"Times New Roman",Times,serif;
   font-weight:700;
   font-size:21px;
   line-height:1.2;
+
   text-transform:capitalize;
 }
 
 .sectionTitle span{
   font-size:11px;
   color:var(--muted);
+
   font-family:"Times New Roman",Times,serif;
 }
 
@@ -268,98 +295,133 @@ a{
 
 .grid{
   display:grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
   gap:14px;
+
   direction:ltr;
-}
-
-/* 🌟 الكود المضاف لجعل حاوية الجريد صف كامل لقسم 25/10 🌟 */
-.grid.full-width-layout {
-  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-}
-
-.grid.full-width-layout .card {
-  width: 100%;
-}
-
-.grid.full-width-layout .photo {
-  aspect-ratio: 1.9; 
 }
 
 .card{
   overflow:hidden;
+
   background:var(--card);
+
   border:1px solid var(--line);
   border-radius:14px;
-  box-shadow: 0 8px 25px rgba(0,0,0,.16);
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.16);
+
   direction:ltr;
+
   min-width:0;
 }
 
 .photo{
   width:100%;
+
   aspect-ratio:1.55;
-  background: radial-gradient(circle at 50% 40%, #30281c, #171a18 70%);
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #30281c,
+      #171a18 70%
+    );
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   color:#8e806a;
+
   text-align:center;
+
   padding:12px;
 }
 
 .photo img{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   border-radius:8px;
+
   display:block;
 }
 
 .info{
   padding:12px 13px 13px;
+
   direction:ltr;
+
   text-align:left;
+
   min-width:0;
 }
 
 .name{
   font-family:"Times New Roman",Times,serif;
+
   font-weight:700;
   font-size:17px;
   line-height:1.3;
+
   text-transform:capitalize;
+
   color:var(--text);
+
   overflow-wrap:anywhere;
 }
 
 .desc{
   font-family:"Times New Roman",Times,serif;
+
   font-size:12px;
   color:var(--muted);
+
   line-height:1.55;
+
   margin:5px 0 10px;
+
   min-height:34px;
+
   overflow-wrap:anywhere;
 }
 
 .bottom{
   display:flex;
+
   align-items:flex-start;
   justify-content:flex-start;
+
   min-width:0;
 }
 
 .price{
   color:var(--gold2);
+
   font-family:"Times New Roman",Times,serif;
+
   font-weight:900;
   font-size:17px;
   line-height:1.2;
+
   white-space:nowrap;
+
   text-transform:none;
+
   min-width:0;
 }
+
+
+/* =========================
+   MULTI PRICE
+========================= */
 
 .price.multiPrice{
   white-space:normal;
@@ -367,20 +429,37 @@ a{
   font-size:15px;
 }
 
+
+/* =========================
+   EMPTY
+========================= */
+
 .empty{
   padding:35px 15px;
+
   text-align:center;
+
   color:var(--muted);
+
   border:1px dashed var(--line);
   border-radius:14px;
 }
 
+
+/* =========================
+   FOOTER
+========================= */
+
 .footer{
   text-align:center;
+
   color:#777;
+
   font-size:11px;
+
   padding:25px 10px 35px;
 }
+
 
 /* =========================
    ADMIN
@@ -388,9 +467,13 @@ a{
 
 .admin{
   display:none;
+
   width:min(1100px,100%);
+
   margin:0 auto;
+
   padding:20px 14px 40px;
+
   direction:rtl;
 }
 
@@ -400,30 +483,42 @@ a{
 
 .adminHead{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   gap:10px;
+
   margin-bottom:20px;
 }
 
 .adminHead h2{
   margin:0;
+
   font-family:"Times New Roman",Times,serif;
+
   font-size:24px;
 }
 
 .adminActions{
   display:flex;
+
   gap:8px;
+
   flex-wrap:wrap;
 }
 
 .btn{
   border:1px solid var(--line);
+
   background:#151816;
+
   color:#eee;
+
   border-radius:9px;
+
   padding:9px 13px;
+
   font-weight:700;
 }
 
@@ -433,32 +528,44 @@ a{
 
 .btn.gold{
   background:var(--gold);
+
   border-color:var(--gold);
+
   color:#111;
 }
 
 .btn.danger{
   background:#351919;
+
   border-color:#5c2828;
+
   color:#f1caca;
 }
 
 .adminGrid{
   display:grid;
-  grid-template-columns: 360px minmax(0,1fr);
+
+  grid-template-columns:
+    360px minmax(0,1fr);
+
   gap:18px;
 }
 
 .panel{
   background:var(--card);
+
   border:1px solid var(--line);
+
   border-radius:14px;
+
   padding:15px;
 }
 
 .panel h3{
   margin:0 0 14px;
+
   font-size:18px;
+
   font-family:"Times New Roman",Times,serif;
 }
 
@@ -468,9 +575,13 @@ a{
 
 .formGroup label{
   display:block;
+
   margin-bottom:5px;
+
   color:#ddd;
+
   font-size:13px;
+
   font-weight:700;
 }
 
@@ -478,11 +589,17 @@ a{
 .formGroup textarea,
 .formGroup select{
   width:100%;
+
   border:1px solid #3a352d;
+
   background:#0c0f0e;
+
   color:#fff;
+
   border-radius:9px;
+
   padding:10px 11px;
+
   outline:none;
 }
 
@@ -494,35 +611,49 @@ a{
 
 .formGroup textarea{
   min-height:90px;
+
   resize:vertical;
 }
 
 .formRow{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:10px;
 }
 
 .formButtons{
   display:flex;
+
   gap:8px;
+
   flex-wrap:wrap;
+
   margin-top:14px;
 }
 
 .adminList{
   display:grid;
+
   gap:10px;
 }
 
 .adminItem{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   gap:12px;
+
   padding:10px;
+
   border:1px solid var(--line);
+
   border-radius:11px;
+
   background:#0c0f0e;
 }
 
@@ -532,34 +663,51 @@ a{
 
 .adminItemName{
   font-family:"Times New Roman",Times,serif;
+
   font-weight:700;
+
   font-size:16px;
+
   text-transform:capitalize;
+
   overflow:hidden;
+
   text-overflow:ellipsis;
+
   white-space:nowrap;
 }
 
 .adminItemMeta{
   color:var(--muted);
+
   font-size:11px;
+
   margin-top:3px;
 }
 
 .adminItemActions{
   display:flex;
+
   gap:6px;
+
   flex-wrap:wrap;
+
   justify-content:flex-end;
 }
 
 .smallBtn{
   border:1px solid #3a352d;
+
   background:#151816;
+
   color:#ddd;
+
   border-radius:7px;
+
   padding:6px 9px;
+
   font-size:11px;
+
   font-weight:700;
 }
 
@@ -569,21 +717,31 @@ a{
 
 .smallBtn.active{
   background:var(--gold);
+
   border-color:var(--gold);
+
   color:#111;
 }
+
+
 /* =========================
    LOGIN MODAL
 ========================= */
 
 .modal{
   position:fixed;
+
   inset:0;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   background:rgba(0,0,0,.78);
+
   padding:20px;
+
   z-index:9999;
 }
 
@@ -593,22 +751,32 @@ a{
 
 .modalBox{
   width:min(400px,100%);
+
   background:#111413;
+
   border:1px solid var(--line);
+
   border-radius:15px;
+
   padding:20px;
-  box-shadow: 0 20px 70px rgba(0,0,0,.5);
+
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.5);
 }
 
 .modalBox h2{
   margin:0 0 16px;
+
   text-align:center;
+
   font-family:"Times New Roman",Times,serif;
 }
 
 .modalButtons{
   display:flex;
+
   gap:8px;
+
   margin-top:12px;
 }
 
@@ -618,14 +786,24 @@ a{
 
 .loginError{
   color:#ef8d8d;
+
   font-size:12px;
+
   min-height:18px;
+
   margin-top:7px;
 }
 
+
+/* =========================
+   LOADING
+========================= */
+
 .loading{
   text-align:center;
+
   color:var(--muted);
+
   padding:30px 10px;
 }
 
@@ -634,6 +812,7 @@ a{
 ========================= */
 
 @media(max-width:700px){
+
   .header{
     padding-top:15px;
   }
@@ -643,63 +822,90 @@ a{
   }
   .public{
     padding-left:10px;
+
     padding-right:10px;
   }
+
   .grid{
-    grid-template-columns: repeat(2,minmax(0,1fr));
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
     gap:10px;
   }
-  .grid.full-width-layout {
-    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-  }
+
   .photo{
     aspect-ratio:1.25;
   }
-  .grid.full-width-layout .photo {
-    aspect-ratio: 1.5; 
-  }
+
   .info{
     padding:10px;
   }
+
   .name{
     font-size:16px;
   }
+
   .price{
     font-size:16px;
   }
+
   .price.multiPrice{
     font-size:14px;
   }
+
   .adminGrid{
     grid-template-columns:1fr;
   }
+
   .adminHead{
     align-items:flex-start;
+
     flex-direction:column;
   }
+
 }
 
 @media(max-width:430px){
+
   .name{
     font-size:15px;
   }
+
   .price{
     font-size:15px;
   }
+
   .price.multiPrice{
     font-size:13px;
     line-height:1.35;
   }
+
   .cats button{
     font-size:14px;
+
     padding:8px 13px;
   }
+
+}
+/* =========================
+   PUBLIC / ADMIN SWITCH
+========================= */
+
+body.adminMode .public{
+  display:none;
 }
 
-body.adminMode .public{ display:none; }
-body.adminMode .admin{ display:block; } 
-body.adminMode .footer{ display:none; }
+body.adminMode .admin{
+  display:block;
+} /* <--- القوس دا كان ممسوح وتم إصلاحه هنا */
 
+body.adminMode .footer{
+  display:none;
+}
+
+/* =========================
+   إصلاح نهائي لبابل السوشيال ميديا الدائرية والمحاذاة
+========================= */
 .header .social{
   display: flex !important;
   flex-direction: column !important;
@@ -715,28 +921,48 @@ body.adminMode .footer{ display:none; }
   flex-wrap: nowrap !important;
   justify-content: center !important;
   align-items: center !important;
-  gap: 16px !important; 
+  gap: 16px !important; /* مسافة شياكة بين البابلز */
   width: 100% !important;
 }
 
 .header .socialIcons a{
   display: flex !important;
-  width: 40px !important;     
-  height: 40px !important;    
-  flex: 0 0 40px !important;  
+  width: 40px !important;     /* عرض ثابت ومضمون للدائرة */
+  height: 40px !important;    /* ارتفاع ثابت ومضمون للدائرة */
+  flex: 0 0 40px !important;  /* حماية كاملة ضد التمطيط أو الضغط الجانبي نهائياً */
+  
   align-items: center !important;
   justify-content: center !important;
   text-decoration: none !important;
-  border-radius: 50% !important; 
+  border-radius: 50% !important; /* دائرية حقيقية 100% */
   box-shadow: 0 3px 8px rgba(0,0,0,0.3) !important;
   transition: all .2s ease !important;
+  
+  /* تشغيل أنميشن الزوم العائم المستمر */
   animation: bubbleFloat 3s ease-in-out infinite !important;
 }
 
-.header .socialIcons a:nth-child(1) { background: #E4405F !important; border: 1px solid #E4405F !important; color: #fff !important; animation-delay: 0s !important; }
-.header .socialIcons a:nth-child(2) { background: #1877F2 !important; border: 1px solid #1877F2 !important; color: #fff !important; animation-delay: 0.4s !important; }
-.header .socialIcons a:nth-child(3) { background: #25D366 !important; border: 1px solid #25D366 !important; color: #fff !important; animation-delay: 0.8s !important; }
+/* تلوين المنصات بالترتيب الصحيح */
+.header .socialIcons a:nth-child(1) { 
+  background: #E4405F !important; /* الانستجرام */
+  border: 1px solid #E4405F !important;
+  color: #fff !important;
+  animation-delay: 0s !important;
+}
+.header .socialIcons a:nth-child(2) { 
+  background: #1877F2 !important; /* الفيسبوك */
+  border: 1px solid #1877F2 !important;
+  color: #fff !important;
+  animation-delay: 0.4s !important; 
+}
+.header .socialIcons a:nth-child(3) { 
+  background: #25D366 !important; /* الواتساب */
+  border: 1px solid #25D366 !important;
+  color: #fff !important;
+  animation-delay: 0.8s !important; 
+}
 
+/* تأثير اللمس */
 .header .socialIcons a:hover{
   animation-play-state: paused !important; 
   transform: scale(1.1) translateY(-2px) !important; 
@@ -744,6 +970,7 @@ body.adminMode .footer{ display:none; }
   filter: brightness(1.1) !important; 
 }
 
+/* ضبط السنترة وحجم الأيقونات الداخلية (SVG) بالملي */
 .header .socialIcons svg{
   width: 20px !important;        
   height: 20px !important;       
@@ -755,325 +982,1753 @@ body.adminMode .footer{ display:none; }
   stroke-linecap: round !important;
   stroke-linejoin: round !important;
   display: block !important;
-  margin: 0 auto !important; 
+  margin: 0 auto !important; /* سنترة الأيقونة في نص الدائرة بالظبط */
 }
 
-.header .socialIcons a:last-child svg{ fill: currentColor !important; stroke: none !important; }
-.socialName{ font-family: "Times New Roman",Times,serif; font-size: 16px; font-weight: 700; color: var(--gold2) !important; letter-spacing: .3px; display: block !important; }
+.header .socialIcons a:last-child svg{
+  fill: currentColor !important;
+  stroke: none !important;
+}
+
+.socialName{
+  font-family: "Times New Roman",Times,serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold2) !important; /* ثبات اللون الذهبي الأصلي للكلمة */
+  letter-spacing: .3px;
+  display: block !important;
+}
+
+/* حركة الزوم الانسيابية الهادئة والمحافظة على الأبعاد */
+@keyframes bubbleFloat {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  }
+  50% {
+    transform: scale(1.06); 
+    box-shadow: 0 5px 12px rgba(0,0,0,0.4); 
+  }
+}
 </style>
 </head>
 <body>
 
-<div class="public" id="public">
+<!-- =========================
+     PUBLIC MENU
+========================= -->
+
+<div
+  class="public"
+  id="public"
+>
+
 <header class="header">
   <img class="logo" src="logo.webp" alt="SentoBene">
+
   <div class="social">
     <span class="socialName">SentoBene</span>
+
     <div class="socialIcons">
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z"/></svg></a>
-      <a href="https://wa.me" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7a11.9 11.9 0 0 0 5.7 1.5h.1c6.5 0 11.9-5.3 11.9-11.9a11.8 11.8 0 0 0-3.5-8.4ZM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.7-.3-.4a9.8 9.8 0 0 1-1.5-5.2c0-5.5 4.4-9.9 9.9-9.9a9.8 9.8 0 0 1 7 2.9 9.8 9.8 0 0 1 2.9 7c0 5.5-4.4 9.9-9.9 9.9Zm5.4-7.4c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.2l-.9 1.1c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/></svg></a>
+      <a href="https://www.instagram.com/sentobene.eg/"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1"/>
+        </svg>
+      </a>
+
+      <a href="https://www.facebook.com/SentoBene.EG"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z"/>
+        </svg>
+      </a>
+
+      <a href="https://wa.me/201206671717"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7a11.9 11.9 0 0 0 5.7 1.5h.1c6.5 0 11.9-5.3 11.9-11.9a11.8 11.8 0 0 0-3.5-8.4ZM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.7-.3-.4a9.8 9.8 0 0 1-1.5-5.2c0-5.5 4.4-9.9 9.9-9.9a9.8 9.8 0 0 1 7 2.9 9.8 9.8 0 0 1 2.9 7c0 5.5-4.4 9.9-9.9 9.9Zm5.4-7.4c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.2l-.9 1.1c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/>
+        </svg>
+      </a>
     </div>
   </div>
 </header>
-  <div id="cats" class="cats"></div>
+  <div
+    id="cats"
+    class="cats"
+  ></div>
 
   <section class="sectionTitle">
-    <h2 id="sectionName">Pasta</h2>
-    <span id="count">0 Items</span>
+
+    <h2 id="sectionName">
+      Pasta
+    </h2>
+
+    <span id="count">
+      0 Items
+    </span>
+
   </section>
 
-  <main id="products" class="grid">
-    <div class="loading">Loading...</div>
+
+  <main
+    id="products"
+    class="grid"
+  >
+
+    <div class="loading">
+      Loading...
+    </div>
+
   </main>
 
-  <footer class="footer">SentoBene®</footer>
+
+  <footer class="footer">
+    SentoBene®
+  </footer>
+
+
 </div>
 
-<section id="admin" class="admin">
+
+<!-- =========================
+     ADMIN
+========================= -->
+
+<section
+  id="admin"
+  class="admin"
+>
+
   <div class="adminHead">
-    <h2>SentoBene Admin</h2>
+
+    <h2>
+      SentoBene Admin
+    </h2>
+
     <div class="adminActions">
-      <button class="btn" onclick="showPublic()">عرض المينيو</button>
-      <button class="btn danger" onclick="logout()">تسجيل الخروج</button>
+
+      <button
+        class="btn"
+        onclick="showPublic()"
+      >
+        عرض المينيو
+      </button>
+
+      <button
+        class="btn danger"
+        onclick="logout()"
+      >
+        تسجيل الخروج
+      </button>
+
     </div>
+
   </div>
+
+
   <div class="adminGrid">
+
     <div class="panel">
-      <h3>إضافة / تعديل صنف</h3>
-      <input type="hidden" id="editId">
-      <div class="formGroup"><label>اسم الصنف</label><input id="name" type="text" placeholder="Chicken Alfredo Pasta"></div>
-      <div class="formGroup"><label>الوصف</label><textarea id="description" placeholder="وصف الصنف"></textarea></div>
+
+      <h3>
+        إضافة / تعديل صنف
+      </h3>
+
+
+      <input
+        type="hidden"
+        id="editId"
+      >
+
+
+      <div class="formGroup">
+
+        <label>
+          اسم الصنف
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          placeholder="Chicken Alfredo Pasta"
+        >
+
+      </div>
+
+
+      <div class="formGroup">
+
+        <label>
+          الوصف
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="وصف الصنف"
+        ></textarea>
+
+      </div>
+
+
       <div class="formRow">
-        <div class="formGroup"><label>القسم</label><select id="category"></select></div>
-        <div class="formGroup"><label>السعر بالجنيه</label><input id="price" type="number" min="0" step="0.01" placeholder="140"></div>
+
+        <div class="formGroup">
+
+          <label>
+            القسم
+          </label>
+
+          <select id="category"></select>
+
+        </div>
+
+
+        <div class="formGroup">
+
+          <label>
+            السعر بالجنيه
+          </label>
+
+          <input
+            id="price"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="140"
+          >
+
+        </div>
+
       </div>
-      <div class="formGroup"><label>صورة المنتج</label><input id="image" type="file" accept="image/*"></div>
+
+
+      <div class="formGroup">
+
+        <label>
+          صورة المنتج
+        </label>
+
+        <input
+          id="image"
+          type="file"
+          accept="image/*"
+        >
+
+      </div>
+
+
       <div class="formButtons">
-        <button class="btn gold" onclick="saveProduct()">حفظ الصنف</button>
-        <button class="btn" onclick="clearForm()">إلغاء</button>
+
+        <button
+          class="btn gold"
+          onclick="saveProduct()"
+        >
+          حفظ الصنف
+        </button>
+
+        <button
+          class="btn"
+          onclick="clearForm()"
+        >
+          إلغاء
+        </button>
+
       </div>
+
     </div>
+
+
     <div class="panel">
-      <h3>الأصناف</h3>
-      <div id="adminList" class="adminList"><div class="loading">Loading...</div></div>
+
+      <h3>
+        الأصناف
+      </h3>
+
+      <div
+        id="adminList"
+        class="adminList"
+      >
+
+        <div class="loading">
+          Loading...
+        </div>
+
+      </div>
+
     </div>
+
   </div>
+
 </section>
 
-<div id="loginModal" class="modal">
+
+<!-- =========================
+     LOGIN MODAL
+========================= -->
+
+<div
+  id="loginModal"
+  class="modal"
+>
+
   <div class="modalBox">
-    <h2>دخول إدارة SentoBene</h2>
-    <div class="formGroup"><label>البريد الإلكتروني</label><input id="loginEmail" type="email" autocomplete="username" placeholder="Email"></div>
-    <div class="formGroup"><label>كلمة المرور</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Password"></div>
-    <div id="loginError" class="loginError"></div>
-    <div class="modalButtons">
-      <button class="btn gold" onclick="login()">دخول</button>
-      <button class="btn" onclick="closeLogin()">إلغاء</button>
+
+    <h2>
+      دخول إدارة SentoBene
+    </h2>
+
+
+    <div class="formGroup">
+
+      <label>
+        البريد الإلكتروني
+      </label>
+
+      <input
+        id="loginEmail"
+        type="email"
+        autocomplete="username"
+        placeholder="Email"
+      >
+
     </div>
+
+
+    <div class="formGroup">
+
+      <label>
+        كلمة المرور
+      </label>
+
+      <input
+        id="loginPassword"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Password"
+      >
+
+    </div>
+
+
+    <div
+      id="loginError"
+      class="loginError"
+    ></div>
+
+
+    <div class="modalButtons">
+
+      <button
+        class="btn gold"
+        onclick="login()"
+      >
+        دخول
+      </button>
+
+      <button
+        class="btn"
+        onclick="closeLogin()"
+      >
+        إلغاء
+      </button>
+
+    </div>
+
   </div>
+
 </div>
+
+
 <script>
-const SUPABASE_URL = '';
-const SUPABASE_ANON_KEY = 'sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+
+/* =========================================
+   SUPABASE
+========================================= */
+
+const SUPABASE_URL =
+  'https://xzyobcexywacsjlatntx.supabase.co';
+
+const SUPABASE_ANON_KEY =
+  'sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
+
+const sb =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+
+
+/* =========================================
+   CATEGORIES
+========================================= */
 
 const cats = [
-  { db: '25 / 10', name: '25 / 10' },
-  { db: 'PASTA', name: 'Pasta' },
-  { db: 'SANDWICHES', name: 'Sandwiches' },
-  { db: 'PORIZZA', name: 'Purezza' },
-  { db: 'MAIN COURSE', name: 'Main Course' },
-  { db: 'SIDE ITEM', name: 'Side Items' },
-  { db: 'DESSERTS', name: 'Desserts' },
-  { db: 'SPECIAL MOCKTAILS', name: 'Special Mocktails' },
-  { db: 'HOT DRINKS', name: 'Hot Drinks' },
-  { db: 'FRESH JUICE', name: 'Fresh Juices' },
-  { db: 'MILK SHAKE', name: 'Milkshakes' },
-  { db: 'ICED DRINKS', name: 'Iced Drinks' }
+
+  {
+    db: '25 / 10',
+    name: '25 / 10'
+  },
+
+  {
+    db:'PASTA',
+    name:'Pasta'
+  },
+
+  {
+    db:'SANDWICHES',
+    name:'Sandwiches'
+  },
+
+  {
+    db:'PORIZZA',
+    name:'Purezza'
+  },
+
+  {
+    db:'MAIN COURSE',
+    name:'Main Course'
+  },
+
+  {
+    db:'SIDE ITEM',
+    name:'Side Items'
+  },
+
+  {
+    db:'DESSERTS',
+    name:'Desserts'
+  },
+
+  {
+    db:'SPECIAL MOCKTAILS',
+    name:'Special Mocktails'
+  },
+
+  {
+    db:'HOT DRINKS',
+    name:'Hot Drinks'
+  },
+
+  {
+    db:'FRESH JUICE',
+    name:'Fresh Juices'
+  },
+
+  {
+    db:'MILK SHAKE',
+    name:'Milkshakes'
+  },
+
+  {
+    db:'ICED DRINKS',
+    name:'Iced Drinks'
+  }
+
 ];
 
+/* =========================================
+   STATE
+========================================= */
+
 let products = [];
+
 let active = cats[0].db;
 
-function esc(value){ return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;'); }
-function titleCase(text){ return String(text || '').toLowerCase().replace(/\b\w/g, char => char.toUpperCase()); }
+
+/* =========================================
+   HELPERS
+========================================= */
+
+function esc(value){
+
+  return String(value ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+}
+
+
+function titleCase(text){
+
+  return String(text || '')
+    .toLowerCase()
+    .replace(/\b\w/g,char =>
+      char.toUpperCase()
+    );
+
+}
+
+
+/* =========================================
+   CATEGORY BAR
+========================================= */
 
 function setupCats(){
-  const container = document.getElementById('cats');
-  container.innerHTML = cats.map(c => `
-    <button class="${c.db === active ? 'active' : ''}" onclick="selectCategory('${c.db}')">${esc(titleCase(c.name))}</button>
-  `).join('');
+
+  const container =
+    document.getElementById('cats');
+
+  container.innerHTML =
+    cats.map(c => `
+
+      <button
+        class="${c.db === active ? 'active' : ''}"
+        onclick="selectCategory('${c.db}')"
+      >
+        ${esc(titleCase(c.name))}
+      </button>
+
+    `).join('');
+
 }
 
-function selectCategory(category){ active = category; renderPublic(); }
+
+function selectCategory(category){
+
+  active = category;
+
+  renderPublic();
+
+}
+
+
+/* =========================================
+   LOAD PUBLIC PRODUCTS
+========================================= */
 
 async function loadPublic(){
-  const container = document.getElementById('products');
-  container.innerHTML = `<div class="loading">Loading...</div>`;
-  const { data, error } = await sb.from('products').select('*').eq('available',true).order('created_at',{ ascending:false });
-  if(error){ console.error(error); container.innerHTML = `<div class="empty">حصل خطأ أثناء تحميل المينيو.</div>`; return; }
-  products = data || [];
-  renderPublic();
-}
 
-function renderPublic(){
-  setupCats();
-  let sectionProducts = products.filter(x => x.category === active);
+  const container =
+    document.getElementById('products');
 
-  if(active === 'HOT DRINKS'){
-    sectionProducts.sort((a,b) => {
-      const aName = String(a.name || '').trim().toLowerCase();
-      const bName = String(b.name || '').trim().toLowerCase();
-      const order = { 'espresso':0, 'turkish coffee':1 };
-      const aOrder = Object.prototype.hasOwnProperty.call(order, aName) ? order[aName] : 2;
-      const bOrder = Object.prototype.hasOwnProperty.call(order, bName) ? order[bName] : 2;
-      return aOrder !== bOrder ? aOrder - bOrder : 0;
+  container.innerHTML = `
+    <div class="loading">
+      Loading...
+    </div>
+  `;
+
+
+  const {
+    data,
+    error
+  } = await sb
+    .from('products')
+    .select('*')
+    .eq('available',true)
+    .order('created_at',{
+      ascending:false
     });
-  }
 
-  const currentCat = cats.find(c => c.db === active);
-  document.getElementById('sectionName').textContent = currentCat ? titleCase(currentCat.name) : titleCase(active);
-  document.getElementById('count').textContent = `${sectionProducts.length} ${sectionProducts.length === 1 ? 'Item' : 'Items'}`;
 
-  const container = document.getElementById('products');
+  if(error){
 
-  if (active === '25 / 10') {
-    container.classList.add('full-width-layout');
-  } else {
-    container.classList.remove('full-width-layout');
-  }
+    console.error(error);
 
-  if(!sectionProducts.length){
-    container.innerHTML = `<div class="empty">لا توجد أصناف متاحة في هذا القسم حالياً.</div>`;
+    container.innerHTML = `
+      <div class="empty">
+        حصل خطأ أثناء تحميل المينيو.
+      </div>
+    `;
+
     return;
   }
 
-  container.innerHTML = sectionProducts.map(x => {
-    const productName = String(x.name || '').trim().toLowerCase();
-    const isEspresso = productName === 'espresso';
-    const isTurkishCoffee = productName === 'turkish coffee';
-    const isMultiPrice = isEspresso || isTurkishCoffee;
-    const displayDescription = isMultiPrice ? '' : esc(x.description || '');
-    const displayPrice = isEspresso ? 'Single 56 EGP<br>Double 64 EGP' : isTurkishCoffee ? 'Single 52 EGP<br>Double 60 EGP' : `EGP ${Number(x.price).toLocaleString('en-US')}`;
 
-    return `
-      <div class="card">
-        <div class="photo">${x.image_url ? `<img src="\({esc(x.image_url)}" alt="\){esc(titleCase(x.name))}" loading="lazy">` : 'صورة المنتج'}</div>
-        <div class="info">
-          <div class="name">${esc(titleCase(x.name))}</div>
-          <div class="desc">${displayDescription}</div>
-          <div class="bottom"><div class="price ${isMultiPrice ? 'multiPrice' : ''}">${displayPrice}</div></div>
-        </div>
+  products = data || [];
+
+  renderPublic();
+
+}
+
+
+/* =========================================
+   RENDER PUBLIC
+========================================= */
+
+function renderPublic(){
+
+  setupCats();
+
+
+  let sectionProducts =
+    products.filter(
+      x => x.category === active
+    );
+
+
+  /* =========================================
+     HOT DRINKS SPECIAL ORDER
+     Espresso -> Turkish Coffee -> Rest
+  ========================================= */
+
+  if(active === 'HOT DRINKS'){
+
+    sectionProducts.sort((a,b) => {
+
+      const aName =
+        String(a.name || '')
+          .trim()
+          .toLowerCase();
+
+      const bName =
+        String(b.name || '')
+          .trim()
+          .toLowerCase();
+
+
+      const order = {
+        'espresso':0,
+        'turkish coffee':1
+      };
+
+
+      const aOrder =
+        Object.prototype.hasOwnProperty.call(
+          order,
+          aName
+        )
+          ? order[aName]
+          : 2;
+
+
+      const bOrder =
+        Object.prototype.hasOwnProperty.call(
+          order,
+          bName
+        )
+          ? order[bName]
+          : 2;
+
+
+      if(aOrder !== bOrder){
+
+        return aOrder - bOrder;
+
+      }
+
+
+      return 0;
+
+    });
+
+  }
+
+
+  const currentCat =
+    cats.find(
+      c => c.db === active
+    );
+
+
+  document.getElementById(
+    'sectionName'
+  ).textContent =
+    currentCat
+      ? titleCase(currentCat.name)
+      : titleCase(active);
+
+
+  document.getElementById(
+    'count'
+  ).textContent =
+    `${sectionProducts.length} ${
+      sectionProducts.length === 1
+        ? 'Item'
+        : 'Items'
+    }`;
+
+
+  const container =
+    document.getElementById('products');
+
+
+  if(!sectionProducts.length){
+
+    container.innerHTML = `
+      <div class="empty">
+        لا توجد أصناف متاحة في هذا القسم حاليًا.
       </div>
     `;
-  }).join('');
+
+    return;
+  }
+
+
+  container.innerHTML =
+    sectionProducts.map(x => {
+
+      const productName =
+        String(x.name || '')
+          .trim()
+          .toLowerCase();
+
+
+      /* =========================
+         SPECIAL MULTI-PRICE ITEMS
+      ========================= */
+
+      const isEspresso =
+        productName === 'espresso';
+
+
+      const isTurkishCoffee =
+        productName === 'turkish coffee';
+
+
+      const isMultiPrice =
+        isEspresso || isTurkishCoffee;
+
+
+      /* =========================
+         DESCRIPTION
+      ========================= */
+
+      const displayDescription =
+        isMultiPrice
+          ? ''
+          : esc(x.description || '');
+
+
+      /* =========================
+         PRICE
+      ========================= */
+
+      const displayPrice =
+        isEspresso
+          ? 'Single 56 EGP<br>Double 64 EGP'
+          : isTurkishCoffee
+            ? 'Single 52 EGP<br>Double 60 EGP'
+            : `EGP ${Number(x.price).toLocaleString('en-US')}`;
+
+
+      return `
+
+        <div class="card">
+
+          <div class="photo">
+
+            ${
+              x.image_url
+                ? `
+
+                  <img
+                    src="${esc(x.image_url)}"
+                    alt="${esc(titleCase(x.name))}"
+                    loading="lazy"
+                  >
+
+                `
+                : 'صورة المنتج'
+            }
+
+          </div>
+
+
+          <div class="info">
+
+            <div class="name">
+              ${esc(titleCase(x.name))}
+            </div>
+
+
+            <div class="desc">
+              ${displayDescription}
+            </div>
+
+
+            <div class="bottom">
+
+              <div class="price ${isMultiPrice ? 'multiPrice' : ''}">
+                ${displayPrice}
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join('');
+
 }
 
-function showPublic(){ document.body.classList.remove('adminMode'); }
-function showAdmin(){ document.body.classList.add('adminMode'); loadAdmin(); }
-function openLogin(){ document.getElementById('loginModal').classList.add('show'); setTimeout(() => { document.getElementById('loginEmail').focus(); },100); }
-function closeLogin(){ document.getElementById('loginModal').classList.remove('show'); document.getElementById('loginError').textContent = ''; }
+
+/* =========================================
+   ADMIN - SHOW / HIDE
+========================================= */
+
+function showPublic(){
+
+  document.body.classList.remove(
+    'adminMode'
+  );
+
+}
+
+
+function showAdmin(){
+
+  document.body.classList.add(
+    'adminMode'
+  );
+
+  loadAdmin();
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+function openLogin(){
+
+  document.getElementById(
+    'loginModal'
+  ).classList.add('show');
+
+
+  setTimeout(() => {
+
+    document.getElementById(
+      'loginEmail'
+    ).focus();
+
+  },100);
+
+}
+
+
+function closeLogin(){
+
+  document.getElementById(
+    'loginModal'
+  ).classList.remove('show');
+
+
+  document.getElementById(
+    'loginError'
+  ).textContent = '';
+
+}
+
+
 async function login(){
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value;
-  const errorBox = document.getElementById('loginError');
+
+  const email =
+    document.getElementById(
+      'loginEmail'
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      'loginPassword'
+    ).value;
+
+
+  const errorBox =
+    document.getElementById(
+      'loginError'
+    );
+
+
   errorBox.textContent = '';
-  if(!email || !password){ errorBox.textContent = 'اكتب البريد الإلكتروني وكلمة المرور.'; return; }
-  const { data, error } = await sb.auth.signInWithPassword({ email, password });
-  if(error){ console.error(error); errorBox.textContent = 'بيانات الدخول غير صحيحة.'; return; }
-  if(data?.user){ closeLogin(); showAdmin(); }
+
+
+  if(!email || !password){
+
+    errorBox.textContent =
+      'اكتب البريد الإلكتروني وكلمة المرور.';
+
+    return;
+  }
+
+
+  const {
+    data,
+    error
+  } = await sb.auth.signInWithPassword({
+
+    email,
+    password
+
+  });
+
+
+  if(error){
+
+    console.error(error);
+
+    errorBox.textContent =
+      'بيانات الدخول غير صحيحة.';
+
+    return;
+  }
+
+
+  if(data?.user){
+
+    closeLogin();
+
+    showAdmin();
+
+  }
+
 }
 
-async function logout(){ await sb.auth.signOut(); showPublic(); }
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+  showPublic();
+
+}
+
+
+/* =========================================
+   ADMIN LOAD
+========================================= */
 
 async function loadAdmin(){
-  const list = document.getElementById('adminList');
-  list.innerHTML = `<div class="loading">Loading...</div>`;
-  const { data, error } = await sb.from('products').select('*').order('created_at',{ ascending:false });
-  if(error){ console.error(error); list.innerHTML = `<div class="empty">حصل خطأ أثناء تحميل الأصناف.</div>`; return; }
-  const allProducts = data || [];
-  if(!allProducts.length){ list.innerHTML = `<div class="empty">لا توجد أصناف حتى الآن.</div>`; return; }
-  list.innerHTML = allProducts.map(x => `
-    <div class="adminItem">
-      <div class="adminItemInfo">
-        <div class="adminItemName">${esc(titleCase(x.name))}</div>
-        <div class="adminItemMeta">${esc(x.category)} — ${Number(x.price).toLocaleString('en-US')} EGP — ${x.available ? 'متاح' : 'مخفي'}</div>
-      </div>
-      <div class="adminItemActions">
-        <button class="smallBtn ${x.available ? 'active' : ''}" onclick="toggleAvailability(${x.id},${x.available})">${x.available ? 'إخفاء' : 'إظهار'}</button>
-        <button class="smallBtn" onclick="editProduct(${x.id})">تعديل</button>
-        <button class="smallBtn" onclick="deleteProduct(${x.id})">حذف</button>
-      </div>
+
+  const list =
+    document.getElementById(
+      'adminList'
+    );
+
+
+  list.innerHTML = `
+    <div class="loading">
+      Loading...
     </div>
-  `).join('');
+  `;
+
+
+  const {
+    data,
+    error
+  } = await sb
+    .from('products')
+    .select('*')
+    .order('created_at',{
+      ascending:false
+    });
+
+
+  if(error){
+
+    console.error(error);
+
+    list.innerHTML = `
+      <div class="empty">
+        حصل خطأ أثناء تحميل الأصناف.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  const allProducts =
+    data || [];
+
+
+  if(!allProducts.length){
+
+    list.innerHTML = `
+      <div class="empty">
+        لا توجد أصناف حتى الآن.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  list.innerHTML =
+    allProducts.map(x => `
+
+      <div class="adminItem">
+
+        <div class="adminItemInfo">
+
+          <div class="adminItemName">
+            ${esc(titleCase(x.name))}
+          </div>
+
+          <div class="adminItemMeta">
+            ${esc(x.category)}
+            —
+            ${Number(x.price).toLocaleString('en-US')} EGP
+            —
+            ${x.available ? 'متاح' : 'مخفي'}
+          </div>
+
+        </div>
+
+
+        <div class="adminItemActions">
+
+          <button
+            class="smallBtn ${x.available ? 'active' : ''}"
+            onclick="toggleAvailability(${x.id},${x.available})"
+          >
+            ${x.available ? 'إخفاء' : 'إظهار'}
+          </button>
+
+
+          <button
+            class="smallBtn"
+            onclick="editProduct(${x.id})"
+          >
+            تعديل
+          </button>
+
+
+          <button
+            class="smallBtn"
+            onclick="deleteProduct(${x.id})"
+          >
+            حذف
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join('');
+
 }
+
+
+/* =========================================
+   CATEGORY SELECT
+========================================= */
 
 function setupAdminCategorySelect(){
-  const select = document.getElementById('category');
-  select.innerHTML = cats.map(c => `<option value="${esc(c.db)}">${esc(titleCase(c.name))}</option>`).join('');
+
+  const select =
+    document.getElementById(
+      'category'
+    );
+
+
+  select.innerHTML =
+    cats.map(c => `
+
+      <option value="${esc(c.db)}">
+        ${esc(titleCase(c.name))}
+      </option>
+
+    `).join('');
+
 }
+
+
+/* =========================================
+   CLEAR FORM
+========================================= */
 
 function clearForm(){
-  document.getElementById('editId').value = '';
-  document.getElementById('name').value = '';
-  document.getElementById('description').value = '';
-  document.getElementById('price').value = '';
-  document.getElementById('image').value = '';
-  document.getElementById('category').value = cats[0].db;
+
+  document.getElementById(
+    'editId'
+  ).value = '';
+
+
+  document.getElementById(
+    'name'
+  ).value = '';
+
+
+  document.getElementById(
+    'description'
+  ).value = '';
+
+
+  document.getElementById(
+    'price'
+  ).value = '';
+
+
+  document.getElementById(
+    'image'
+  ).value = '';
+
+
+  document.getElementById(
+    'category'
+  ).value = cats[0].db;
+
 }
+
+
+/* =========================================
+   EDIT PRODUCT
+========================================= */
 
 async function editProduct(id){
-  const { data, error } = await sb.from('products').select('*').eq('id',id).single();
-  if(error){ alert('حصل خطأ أثناء تحميل الصنف.'); return; }
-  document.getElementById('editId').value = data.id;
-  document.getElementById('name').value = data.name || '';
-  document.getElementById('description').value = data.description || '';
-  document.getElementById('category').value = data.category;
-  document.getElementById('price').value = data.price;
-  document.getElementById('image').value = '';
-  window.scrollTo({ top:0, behavior:'smooth' });
+
+  const {
+    data,
+    error
+  } = await sb
+    .from('products')
+    .select('*')
+    .eq('id',id)
+    .single();
+
+
+  if(error){
+
+    alert(
+      'حصل خطأ أثناء تحميل الصنف.'
+    );
+
+    return;
+  }
+
+
+  document.getElementById(
+    'editId'
+  ).value = data.id;
+
+
+  document.getElementById(
+    'name'
+  ).value = data.name || '';
+
+
+  document.getElementById(
+    'description'
+  ).value = data.description || '';
+
+
+  document.getElementById(
+    'category'
+  ).value = data.category;
+
+
+  document.getElementById(
+    'price'
+  ).value = data.price;
+
+
+  document.getElementById(
+    'image'
+  ).value = '';
+
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
 }
 
-async function saveProduct(){
-  const editId = document.getElementById('editId').value;
-  const name = document.getElementById('name').value.trim();
-  const description = document.getElementById('description').value.trim();
-  const category = document.getElementById('category').value;
-  const price = Number(document.getElementById('price').value);
-  const imageFile = document.getElementById('image').files[0];
 
-  if(!name){ alert('اكتب اسم الصنف.'); return; }
-  if(!category){ alert('اختار القسم.'); return; }
-  if(Number.isNaN(price)){ alert('اكتب السعر.'); return; }
+/* =========================================
+   SAVE PRODUCT
+========================================= */
+
+async function saveProduct(){
+
+  const editId =
+    document.getElementById(
+      'editId'
+    ).value;
+
+
+  const name =
+    document.getElementById(
+      'name'
+    ).value.trim();
+
+
+  const description =
+    document.getElementById(
+      'description'
+    ).value.trim();
+
+
+  const category =
+    document.getElementById(
+      'category'
+    ).value;
+
+
+  const price =
+    Number(
+      document.getElementById(
+        'price'
+      ).value
+    );
+
+
+  const imageFile =
+    document.getElementById(
+      'image'
+    ).files[0];
+
+
+  if(!name){
+
+    alert(
+      'اكتب اسم الصنف.'
+    );
+
+    return;
+  }
+
+
+  if(!category){
+
+    alert(
+      'اختار القسم.'
+    );
+
+    return;
+  }
+
+
+  if(Number.isNaN(price)){
+
+    alert(
+      'اكتب السعر.'
+    );
+
+    return;
+  }
+
 
   let imageUrl = null;
 
+
+  /* =========================
+     EDIT EXISTING PRODUCT
+  ========================= */
+
   if(editId){
-    const { data:oldProduct, error:oldError } = await sb.from('products').select('*').eq('id',editId).single();
-    if(oldError){ alert('حصل خطأ أثناء تحميل الصنف.'); return; }
-    imageUrl = oldProduct.image_url || null;
 
-    if(imageFile){
-      const fileExt = imageFile.name.split('.').pop().toLowerCase();
-      const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
-      const { error:uploadError } = await sb.storage.from('product-images').upload(fileName, imageFile, { upsert:false });
-      if(uploadError){ console.error(uploadError); alert('حصل خطأ أثناء رفع الصورة.'); return; }
-      const { data:publicData } = sb.storage.from('product-images').getPublicUrl(fileName);
-      imageUrl = publicData.publicUrl;
+    const {
+      data:oldProduct,
+      error:oldError
+    } = await sb
+      .from('products')
+      .select('*')
+      .eq('id',editId)
+      .single();
+
+
+    if(oldError){
+
+      alert(
+        'حصل خطأ أثناء تحميل الصنف.'
+      );
+
+      return;
     }
 
-    const { error:updateError } = await sb.from('products').update({ name, description, category, price, image_url:imageUrl }).eq('id',editId);
-    if(updateError){ console.error(updateError); alert('حصل خطأ أثناء حفظ التعديل.'); return; }
-    alert('تم تعديل الصنف بنجاح.');
-  } else {
+
+    imageUrl =
+      oldProduct.image_url || null;
+
+
     if(imageFile){
-      const fileExt = imageFile.name.split('.').pop().toLowerCase();
-      const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
-      const { error:uploadError } = await sb.storage.from('product-images').upload(fileName, imageFile, { upsert:false });
-      if(uploadError){ console.error(uploadError); alert('حصل خطأ أثناء رفع الصورة.'); return; }
-      const { data:publicData } = sb.storage.from('product-images').getPublicUrl(fileName);
-      imageUrl = publicData.publicUrl;
+
+      const fileExt =
+        imageFile.name
+          .split('.')
+          .pop()
+          .toLowerCase();
+
+
+      const fileName =
+        `${Date.now()}-${Math.random()
+          .toString(36)
+          .slice(2)}.${fileExt}`;
+
+
+      const {
+        error:uploadError
+      } = await sb.storage
+        .from('product-images')
+        .upload(
+          fileName,
+          imageFile,
+          {
+            upsert:false
+          }
+        );
+
+
+      if(uploadError){
+
+        console.error(uploadError);
+
+        alert(
+          'حصل خطأ أثناء رفع الصورة.'
+        );
+
+        return;
+      }
+
+
+      const {
+        data:publicData
+      } = sb.storage
+        .from('product-images')
+        .getPublicUrl(fileName);
+
+
+      imageUrl =
+        publicData.publicUrl;
+
     }
 
-    const { error:insertError } = await sb.from('products').insert({ name, description, category, price, image_url:imageUrl, available:true });
-    if(insertError){ console.error(insertError); alert('حصل خطأ أثناء إضافة الصنف.'); return; }
-    alert('تم إضافة الصنف بنجاح.');
+
+    const {
+      error:updateError
+    } = await sb
+      .from('products')
+      .update({
+
+        name,
+        description,
+        category,
+        price,
+        image_url:imageUrl
+
+      })
+      .eq('id',editId);
+
+
+    if(updateError){
+
+      console.error(updateError);
+
+      alert(
+        'حصل خطأ أثناء حفظ التعديل.'
+      );
+
+      return;
+    }
+
+
+    alert(
+      'تم تعديل الصنف بنجاح.'
+    );
+
   }
-  clearForm(); await loadAdmin(); await loadPublic();
+
+
+  /* =========================
+     ADD NEW PRODUCT
+  ========================= */
+
+  else{
+
+    if(imageFile){
+
+      const fileExt =
+        imageFile.name
+          .split('.')
+          .pop()
+          .toLowerCase();
+
+
+      const fileName =
+        `${Date.now()}-${Math.random()
+          .toString(36)
+          .slice(2)}.${fileExt}`;
+
+
+      const {
+        error:uploadError
+      } = await sb.storage
+        .from('product-images')
+        .upload(
+          fileName,
+          imageFile,
+          {
+            upsert:false
+          }
+        );
+
+
+      if(uploadError){
+
+        console.error(uploadError);
+
+        alert(
+          'حصل خطأ أثناء رفع الصورة.'
+        );
+
+        return;
+      }
+
+
+      const {
+        data:publicData
+      } = sb.storage
+        .from('product-images')
+        .getPublicUrl(fileName);
+
+
+      imageUrl =
+        publicData.publicUrl;
+
+    }
+
+
+    const {
+      error:insertError
+    } = await sb
+      .from('products')
+      .insert({
+
+        name,
+        description,
+        category,
+        price,
+        image_url:imageUrl,
+        available:true
+
+      });
+
+
+    if(insertError){
+
+      console.error(insertError);
+
+      alert(
+        'حصل خطأ أثناء إضافة الصنف.'
+      );
+
+      return;
+    }
+
+
+    alert(
+      'تم إضافة الصنف بنجاح.'
+    );
+
+  }
+
+
+  clearForm();
+
+  await loadAdmin();
+
+  await loadPublic();
+
 }
 
-async function toggleAvailability(id, current){
-  const { error } = await sb.from('products').update({ available:!current }).eq('id',id);
-  if(error){ console.error(error); alert('حصل خطأ أثناء تغيير حالة الصنف.'); return; }
-  await loadAdmin(); await loadPublic();
+
+/* =========================================
+   TOGGLE AVAILABILITY
+========================================= */
+
+async function toggleAvailability(
+  id,
+  current
+){
+
+  const {
+    error
+  } = await sb
+    .from('products')
+    .update({
+
+      available:!current
+
+    })
+    .eq('id',id);
+
+
+  if(error){
+
+    console.error(error);
+
+    alert(
+      'حصل خطأ أثناء تغيير حالة الصنف.'
+    );
+
+    return;
+  }
+
+
+  await loadAdmin();
+
+  await loadPublic();
+
 }
+
+
+/* =========================================
+   DELETE PRODUCT
+========================================= */
 
 async function deleteProduct(id){
-  const confirmed = confirm('هل أنت متأكد من حذف هذا الصنف؟');
-  if(!confirmed){ return; }
-  const { error } = await sb.from('products').delete().eq('id',id);
-  if(error){ console.error(error); alert('حصل خطأ أثناء حذف الصنف.'); return; }
-  alert('تم حذف الصنف.');
-  await loadAdmin(); await loadPublic();
+
+  const confirmed =
+    confirm(
+      'هل أنت متأكد من حذف هذا الصنف؟'
+    );
+
+
+  if(!confirmed){
+
+    return;
+  }
+
+
+  const {
+    error
+  } = await sb
+    .from('products')
+    .delete()
+    .eq('id',id);
+
+
+  if(error){
+
+    console.error(error);
+
+    alert(
+      'حصل خطأ أثناء حذف الصنف.'
+    );
+
+    return;
+  }
+
+
+  alert(
+    'تم حذف الصنف.'
+  );
+
+
+  await loadAdmin();
+
+  await loadPublic();
+
 }
 
-function isAdminUrl(){ return new URLSearchParams(window.location.search).get('admin') === '1'; }
 
-sb.auth.onAuthStateChange(async (event,session) => {
-  if(event === 'SIGNED_OUT'){ showPublic(); return; }
-  if(event === 'SIGNED_IN' && session?.user && isAdminUrl()){ showAdmin(); }
-});
+/* =========================================
+   DEMO DATA
+========================================= */
+
+async function seedDemo(){
+
+  const demo = [
+
+    [
+      'Chicken Alfredo Pasta',
+      'مكرونة بالدجاج مع صوص الألفريدو والجبن',
+      140,
+      'PASTA'
+    ],
+
+    [
+      'Penne Arrabbiata',
+      'مكرونة بيني بصوص الطماطم الحار',
+      120,
+      'PASTA'
+    ],
+
+    [
+      'Spaghetti Bolognese',
+      'مكرونة سباجيتي بصلصة بولونيز',
+      130,
+      'PASTA'
+    ],
+
+    [
+      'Pesto Pasta',
+      'مكرونة بصوص البيستو',
+      125,
+      'PASTA'
+    ],
+
+    [
+      'Chicken Sandwich',
+      'ساندوتش دجاج بصوص خاص',
+      160,
+      'SANDWICHES'
+    ],
+
+    [
+      'Margherita Porizza',
+      'طماطم وموتزاريلا وريحان',
+      170,
+      'PORIZZA'
+    ]
+
+  ];
+
+
+  const rows =
+    demo.map(x => ({
+
+      name:x[0],
+      description:x[1],
+      price:x[2],
+      category:x[3],
+      available:true
+
+    }));
+
+
+  const {
+    error
+  } = await sb
+    .from('products')
+    .insert(rows);
+
+
+  if(error){
+
+    console.error(error);
+
+    alert(
+      'حصل خطأ أثناء إضافة الأصناف التجريبية.'
+    );
+
+    return;
+  }
+
+
+  alert(
+    'تمت إضافة الأصناف التجريبية.'
+  );
+
+
+  await loadAdmin();
+
+  await loadPublic();
+
+}
+
+
+/* =========================================
+   ADMIN URL CHECK
+========================================= */
+
+function isAdminUrl(){
+
+  return new URLSearchParams(
+    window.location.search
+  ).get('admin') === '1';
+
+}
+
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+sb.auth.onAuthStateChange(
+  async (event,session) => {
+
+    /*
+      مهم جدًا:
+      تسجيل الدخول المحفوظ لا يفتح الإدارة
+      على الرابط العادي.
+    */
+
+    if(event === 'SIGNED_OUT'){
+
+      showPublic();
+
+      return;
+
+    }
+
+
+    /*
+      الإدارة لا تُفتح تلقائيًا إلا إذا
+      كان المستخدم على رابط الإدارة.
+    */
+
+    if(
+      event === 'SIGNED_IN' &&
+      session?.user &&
+      isAdminUrl()
+    ){
+
+      showAdmin();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   INIT
+========================================= */
 
 setupAdminCategorySelect();
+
 showPublic();
+
 loadPublic();
 
-document.addEventListener('keydown', event => {
-  if(event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'a'){ event.preventDefault(); openLogin(); }
-});
 
-if(isAdminUrl()){ openLogin(); }
+/* =========================================
+   ADMIN SHORTCUT
+========================================= */
+
+document.addEventListener(
+  'keydown',
+  event => {
+
+    if(
+      event.ctrlKey &&
+      event.shiftKey &&
+      event.key.toLowerCase() === 'a'
+    ){
+
+      event.preventDefault();
+
+      openLogin();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   ADMIN URL
+========================================= */
+
+if(isAdminUrl()){
+
+  openLogin();
+
+}
+
 </script>
+
 </body>
 </html>
