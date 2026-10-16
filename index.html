@@ -1974,9 +1974,15 @@ async function loadAdmin(){
             ${esc(titleCase(x.name))}
           </div>
 
-        <div class="adminItemMeta">
-  esc(x.category){x.category !== '25 / 10' ? ` — ${Number(x.price).toLocaleString('en-US')} EGP` : ''} — \${x.available ? 'متاح' : 'مخفي'}
-</div>
+          <div class="adminItemMeta">
+            ${esc(x.category)}
+            —
+            ${Number(x.price).toLocaleString('en-US')} EGP
+            —
+            ${x.available ? 'متاح' : 'مخفي'}
+          </div>
+
+        </div>
 
 
         <div class="adminItemActions">
