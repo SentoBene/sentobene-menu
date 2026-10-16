@@ -1,161 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">/* =========================================
-   RENDER PUBLIC
-========================================= */
-
-function renderPublic(){
-
-  setupCats();
-
-
-  let sectionProducts =
-    products.filter(
-      x => x.category === active
-    );
-
-
-  /* =========================================
-     HOT DRINKS SPECIAL ORDER
-     Espresso -> Turkish Coffee -> Rest
-  ========================================= */
-
-  if(active === 'HOT DRINKS'){
-
-    sectionProducts.sort((a,b) => {
-
-      const aName =
-        String(a.name || '')
-          .trim()
-          .toLowerCase();
-
-      const bName =
-        String(b.name || '')
-          .trim()
-          .toLowerCase();
-
-
-      const order = {
-        'espresso':0,
-        'turkish coffee':1
-      };
-
-
-      const aOrder =
-        Object.prototype.hasOwnProperty.call(
-          order,
-          aName
-        )
-          ? order[aName]
-          : 2;
-
-
-      const bOrder =
-        Object.prototype.hasOwnProperty.call(
-          order,
-          bName
-        )
-          ? order[bName]
-          : 2;
-
-
-      if(aOrder !== bOrder){
-
-        return aOrder - bOrder;
-
-      }
-
-
-      return 0;
-
-    });
-
-  }
-
-
-  const currentCat =
-    cats.find(
-      c => c.db === active
-    );
-
-
-  document.getElementById(
-    'sectionName'
-  ).textContent =
-    currentCat
-      ? titleCase(currentCat.name)
-      : titleCase(active);
-
-
-  document.getElementById(
-    'count'
-  ).textContent =
-    `${sectionProducts.length} ${
-      sectionProducts.length === 1
-        ? 'Item'
-        : 'Items'
-    }`;
-
-
-  const container =
-    document.getElementById('products');
-
-
-  if(!sectionProducts.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        لا توجد أصناف متاحة في هذا القسم حاليًا.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  // الكود السليم والنظيف 100% لعرض البوستر وتصليح بقية الصور
-  container.innerHTML =
-    sectionProducts.map(x => {
-
-      const isSuspense = x.category === '25 / 10';
-
-      if (isSuspense) {
-        return `
-          <div class="card" style="grid-column: span 2; width: 100%; border: none; box-shadow: none; background: transparent; padding: 0; margin: 0;">
-            <div class="photo" style="aspect-ratio: auto; height: auto; padding: 0; background: transparent;">
-              <img src="${x.image_url}" style="border-radius: 14px; width: 100%; height: auto; object-fit: contain; display: block;">
-            </div>
-          </div>
-        `;
-      }
-
-      const productName =
-        String(x.name || '')
-          .trim()
-          .toLowerCase();
-
-
-          /* =========================
-         STANDARD PRODUCTS DISPLAY
-      ========================= */
-      return `
-        <div class="card">
-          <div class="photo">
-            ${x.image_url ? `<img src="\({x.image_url}" alt="\){esc(x.name)}">` : `<div style="padding:20px; color:#555;">No Image</div>`}
-          </div>
-          <div class="info">
-            <div class="name">${esc(titleCase(x.name))}</div>
-            <div class="desc">${esc(x.description || '')}</div>
-            <div class="bottom">
-              <div class="price">${esc(x.price)} EGP</div>
-            </div>
-          </div>
-        </div>
-      `;
-
-    }).join('');
-
-}
-
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -1527,9 +1371,9 @@ const sb =
 
 const cats = [
 
-   {
-    db: '25 / 10',
-    name: '25 / 10'
+  {
+    db: '25',
+    name: '25'
   },
 
   {
@@ -1820,21 +1664,8 @@ function renderPublic(){
   }
 
 
-  // الكود الأصلي السليم والمضمون 100% بدون أي علامات مائلة أو تعديلات تالفة
   container.innerHTML =
     sectionProducts.map(x => {
-
-      const isSuspense = x.category === '25 / 10';
-
-      if (isSuspense) {
-        return `
-          <div class="card" style="grid-column: span 2; width: 100%; border: none; box-shadow: none; background: transparent; padding: 0; margin: 0;">
-            <div class="photo" style="aspect-ratio: auto; height: auto; padding: 0; background: transparent;">
-              <img src="${x.image_url}" style="border-radius: 14px; width: 100%; height: auto; object-fit: contain; display: block;">
-            </div>
-          </div>
-        `;
-      }
 
       const productName =
         String(x.name || '')
@@ -1843,26 +1674,96 @@ function renderPublic(){
 
 
       /* =========================
-         STANDARD PRODUCTS DISPLAY
+         SPECIAL MULTI-PRICE ITEMS
       ========================= */
+
+      const isEspresso =
+        productName === 'espresso';
+
+
+      const isTurkishCoffee =
+        productName === 'turkish coffee';
+
+
+      const isMultiPrice =
+        isEspresso || isTurkishCoffee;
+
+
+      /* =========================
+         DESCRIPTION
+      ========================= */
+
+      const displayDescription =
+        isMultiPrice
+          ? ''
+          : esc(x.description || '');
+
+
+      /* =========================
+         PRICE
+      ========================= */
+
+      const displayPrice =
+        isEspresso
+          ? 'Single 56 EGP<br>Double 64 EGP'
+          : isTurkishCoffee
+            ? 'Single 52 EGP<br>Double 60 EGP'
+            : `EGP ${Number(x.price).toLocaleString('en-US')}`;
+
+
       return `
+
         <div class="card">
+
           <div class="photo">
-            ${x.image_url ? `<img src="\({x.image_url}" alt="\){esc(x.name)}">` : `<div style="padding:20px; color:#555;">No Image</div>`}
+
+            ${
+              x.image_url
+                ? `
+
+                  <img
+                    src="${esc(x.image_url)}"
+                    alt="${esc(titleCase(x.name))}"
+                    loading="lazy"
+                  >
+
+                `
+                : 'صورة المنتج'
+            }
+
           </div>
+
+
           <div class="info">
-            <div class="name">${esc(titleCase(x.name))}</div>
-            <div class="desc">${esc(x.description || '')}</div>
-            <div class="bottom">
-              <div class="price">${esc(x.price)} EGP</div>
+
+            <div class="name">
+              ${esc(titleCase(x.name))}
             </div>
+
+
+            <div class="desc">
+              ${displayDescription}
+            </div>
+
+
+            <div class="bottom">
+
+              <div class="price ${isMultiPrice ? 'multiPrice' : ''}">
+                ${displayPrice}
+              </div>
+
+            </div>
+
           </div>
+
         </div>
+
       `;
 
     }).join('');
 
 }
+
 
 /* =========================================
    ADMIN - SHOW / HIDE
