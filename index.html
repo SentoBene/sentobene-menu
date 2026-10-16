@@ -1664,8 +1664,21 @@ function renderPublic(){
   }
 
 
+  // التعديل هنا: فحص وتكبير بوستر التشويق لقسم 25 / 10 فقط وحجب الأسعار
   container.innerHTML =
     sectionProducts.map(x => {
+
+      const isSuspense = x.category === '25 / 10';
+
+      if (isSuspense) {
+        return `
+          <div class="card" style="grid-column: span 2; width: 100%; border: none; box-shadow: none; background: transparent; padding: 0; margin: 0;">
+            <div class="photo" style="aspect-ratio: auto; height: auto; padding: 0; background: transparent;">
+              <img src="${x.image_url}" style="border-radius: 14px; width: 100%; height: auto; object-fit: contain; display: block;">
+            </div>
+          </div>
+        `;
+      }
 
       const productName =
         String(x.name || '')
@@ -1676,94 +1689,25 @@ function renderPublic(){
       /* =========================
          SPECIAL MULTI-PRICE ITEMS
       ========================= */
-
-      const isEspresso =
-        productName === 'espresso';
-
-
-      const isTurkishCoffee =
-        productName === 'turkish coffee';
-
-
-      const isMultiPrice =
-        isEspresso || isTurkishCoffee;
-
-
-      /* =========================
-         DESCRIPTION
-      ========================= */
-
-      const displayDescription =
-        isMultiPrice
-          ? ''
-          : esc(x.description || '');
-
-
-      /* =========================
-         PRICE
-      ========================= */
-
-      const displayPrice =
-        isEspresso
-          ? 'Single 56 EGP<br>Double 64 EGP'
-          : isTurkishCoffee
-            ? 'Single 52 EGP<br>Double 60 EGP'
-            : `EGP ${Number(x.price).toLocaleString('en-US')}`;
-
-
+      // باقي الكود الطبيعي لعرض الأصناف العادية كارتين بجانب بعض بأسعارها
       return `
-
         <div class="card">
-
           <div class="photo">
-
-            ${
-              x.image_url
-                ? `
-
-                  <img
-                    src="${esc(x.image_url)}"
-                    alt="${esc(titleCase(x.name))}"
-                    loading="lazy"
-                  >
-
-                `
-                : 'صورة المنتج'
-            }
-
+            ${x.image_url ? `<img src="\({x.image_url}" alt="\){esc(x.name)}">` : `<div style="padding:20px; color:#555;">No Image</div>`}
           </div>
-
-
           <div class="info">
-
-            <div class="name">
-              ${esc(titleCase(x.name))}
-            </div>
-
-
-            <div class="desc">
-              ${displayDescription}
-            </div>
-
-
+            <div class="name">${esc(titleCase(x.name))}</div>
+            <div class="desc">${esc(x.description || '')}</div>
             <div class="bottom">
-
-              <div class="price ${isMultiPrice ? 'multiPrice' : ''}">
-                ${displayPrice}
-              </div>
-
+              <div class="price">${esc(x.price)} EGP</div>
             </div>
-
           </div>
-
         </div>
-
       `;
 
     }).join('');
 
 }
-
 
 /* =========================================
    ADMIN - SHOW / HIDE
