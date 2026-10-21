@@ -1702,14 +1702,14 @@ function renderPublic(){
       /* =========================
          PRICE
       ========================= */
+
       const displayPrice =
-        x.category === '25 / 10'
-          ? ''
-          : isEspresso
-            ? 'Single 56 EGP<br>Double 64 EGP'
-            : isTurkishCoffee
-              ? 'Single 52 EGP<br>Double 60 EGP'
-              : `EGP ${Number(x.price).toLocaleString('en-US')}`;
+        isEspresso
+          ? 'Single 56 EGP<br>Double 64 EGP'
+          : isTurkishCoffee
+            ? 'Single 52 EGP<br>Double 60 EGP'
+            : `EGP ${Number(x.price).toLocaleString('en-US')}`;
+
 
       return `
 
@@ -1974,14 +1974,15 @@ async function loadAdmin(){
             ${esc(titleCase(x.name))}
           </div>
 
-     <div class="adminItemMeta" style="${x.category === '25 / 10' ? 'display: none;' : ''}">
+          <div class="adminItemMeta">
             ${esc(x.category)}
             —
             ${Number(x.price).toLocaleString('en-US')} EGP
             —
             ${x.available ? 'متاح' : 'مخفي'}
-</div>
+          </div>
 
+        </div>
 
 
         <div class="adminItemActions">
