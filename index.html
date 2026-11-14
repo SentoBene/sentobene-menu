@@ -1707,10 +1707,8 @@ function renderPublic(){
          DESCRIPTION
       ========================= */
 
-      const displayDescription =
-        isMultiPrice
-          ? ''
-          : esc(x.description || '');
+const displayDescription = esc(x.description || '');
+      
 
 
       /* =========================
