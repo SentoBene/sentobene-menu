@@ -777,7 +777,8 @@ const FLAG_SVGS = {
   ar: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 900 600"><rect width="900" height="200" fill="#CE1126"/><rect y="200" width="900" height="200" fill="#FFF"/><rect y="400" width="900" height="200" fill="#000"/><circle cx="450" cy="300" r="45" fill="#C09300"/></svg>`,
   fr: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 3 2"><rect width="1" height="2" x="0" fill="#002395"/><rect width="1" height="2" x="1" fill="#FFF"/><rect width="1" height="2" x="2" fill="#ED2939"/></svg>`,
   de: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 5 3"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#D00"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>`,
-  zh: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 30 20"><rect width="30" height="20" fill="#DE2910"/><polygon points="5,2 6.2,5.8 3,3.5 7,3.5 3.8,5.8" fill="#FFDE00"/><circle cx="10" cy="2" r="0.8" fill="#FFDE00"/><circle cx="12" cy="4" r="0.8" fill="#FFDE00"/><circle cx="12" cy="7" r="0.8" fill="#FFDE00"/><circle cx="10" cy="9" r="0.8" fill="#FFDE00"/></svg>`
+  zh: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 30 20"><rect width="30" height="20" fill="#DE2910"/><polygon points="5,2 6.2,5.8 3,3.5 7,3.5 3.8,5.8" fill="#FFDE00"/><circle cx="10" cy="2" r="0.8" fill="#FFDE00"/><circle cx="12" cy="4" r="0.8" fill="#FFDE00"/><circle cx="12" cy="7" r="0.8" fill="#FFDE00"/><circle cx="10" cy="9" r="0.8" fill="#FFDE00"/></svg>`,
+  it: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 3 2"><rect width="1" height="2" x="0" fill="#009246"/><rect width="1" height="2" x="1" fill="#FFF"/><rect width="1" height="2" x="2" fill="#CE2B37"/></svg>`,
 };
 
 const SUPPORTED_LANGUAGES = [
@@ -785,7 +786,8 @@ const SUPPORTED_LANGUAGES = [
   { code: 'en', label: 'EN', dir: 'ltr' },
   { code: 'fr', label: 'FR', dir: 'ltr' },
   { code: 'de', label: 'DE', dir: 'ltr' },
-  { code: 'zh', label: '中文', dir: 'ltr' }
+  { code: 'zh', label: '中文', dir: 'ltr' },
+  { code: 'it', label: 'IT', dir: 'ltr' },
 ];
 
 const UI_TEXT = {
@@ -825,6 +827,15 @@ const UI_TEXT = {
     noImage: 'Produktbild',
     currency: 'EGP'
   },
+    it: {
+    connect: 'Seguici',
+    vat: '* Il 14% di IVA verrà aggiunto al conto *',
+    item: 'Articolo',
+    items: 'Articoli',
+    empty: 'Nessun articolo disponibile in questa categoria al momento.',
+    noImage: 'Immagine del prodotto',
+    currency: 'EGP'
+  },
   zh: {
     connect: '联系我们',
     vat: '* 账单将加收 14% 增值税 *',
@@ -837,18 +848,18 @@ const UI_TEXT = {
 };
 
 const cats = [
-  { db:'FRIDAY OFFER', en:'Friday Offer', ar:'عرض الجمعة', fr:'Offre du Vendredi', de:'Freitagsangebot', zh:'周五特惠' },
-  { db:'PASTA', en:'Pasta', ar:'باستا', fr:'Pâtes', de:'Pasta', zh:'意面' },
-  { db:'SANDWICHES', en:'Sandwiches', ar:'ساندوتشات', fr:'Sandwichs', de:'Sandwiches', zh:'三明治' },
-  { db:'PORIZZA', en:'Purezza', ar:'بوريتزا', fr:'Purezza', de:'Purezza', zh:'比萨' },
-  { db:'MAIN COURSE', en:'Main Course', ar:'الأطباق الرئيسية', fr:'Plats Principaux', de:'Hauptgerichte', zh:'主菜' },
-  { db:'SIDE ITEM', en:'Side Items', ar:'أصناف جانبية', fr:'Accompagnements', de:'Beilagen', zh:'配菜' },
-  { db:'DESSERTS', en:'Desserts', ar:'حلويات', fr:'Desserts', de:'Desserts', zh:'甜点' },
-  { db:'SPECIAL MOCKTAILS', en:'Special Mocktails', ar:'موكتيلات خاصة', fr:'Mocktails Spéciaux', de:'Spezielle Mocktails', zh:'特调无酒精鸡尾酒' },
-  { db:'HOT DRINKS', en:'Hot Drinks', ar:'مشروبات ساخنة', fr:'Boissons Chaudes', de:'Heiße Getränke', zh:'热饮' },
-  { db:'FRESH JUICE', en:'Fresh Juices', ar:'عصائر طازجة', fr:'Jus Frais', de:'Frische Säfte', zh:'鲜榨果汁' },
-  { db:'MILK SHAKE', en:'Milkshakes', ar:'ميلك شيك', fr:'Milkshakes', de:'Milchshakes', zh:'奶昔' },
-  { db:'ICED DRINKS', en:'Iced Drinks', ar:'مشروبات مثلجة', fr:'Boissons Glacées', de:'Eisgetränke', zh:'冰饮' }
+  { db:'FRIDAY OFFER', en:'Friday Offer', ar:'عرض الجمعة', it:'Offerta del Venerdì', fr:'Offre du Vendredi', de:'Freitagsangebot', zh:'周五特惠' },
+  { db:'PASTA', en:'Pasta', ar:'باستا', it:'Pasta', fr:'Pâtes', de:'Pasta', zh:'意面' },
+  { db:'SANDWICHES', en:'Sandwiches', ar:'ساندوتشات', it:'Panini', fr:'Sandwichs', de:'Sandwiches', zh:'三明治' },
+  { db:'PORIZZA', en:'Purezza', ar:'بوريتزا', it:'Purezza', fr:'Purezza', de:'Purezza', zh:'比萨' },
+  { db:'MAIN COURSE', en:'Main Course', ar:'الأطباق الرئيسية', it:'Secondi Piatti', fr:'Plats Principaux', de:'Hauptgerichte', zh:'主菜' },
+  { db:'SIDE ITEM', en:'Side Items', ar:'أصناف جانبية', it:'Contorni', fr:'Accompagnements', de:'Beilagen', zh:'配菜' },
+  { db:'DESSERTS', en:'Desserts', ar:'حلويات', it:'Dolci', fr:'Desserts', de:'Desserts', zh:'甜点' },
+  { db:'SPECIAL MOCKTAILS', en:'Special Mocktails', ar:'موكتيلات خاصة', it:'Mocktail Speciali', fr:'Mocktails Spéciaux', de:'Spezielle Mocktails', zh:'特调无酒精鸡尾酒' },
+  { db:'HOT DRINKS', en:'Hot Drinks', ar:'مشروبات ساخنة', it:'Bevande Calde', fr:'Boissons Chaudes', de:'Heiße Getränke', zh:'热饮' },
+  { db:'FRESH JUICE', en:'Fresh Juices', ar:'عصائر طازجة', it:'Succhi Freschi', fr:'Jus Frais', de:'Frische Säfte', zh:'鲜榨果汁' },
+  { db:'MILK SHAKE', en:'Milkshakes', ar:'ميلك شيك', it:'Frappè', fr:'Milkshakes', de:'Milchshakes', zh:'奶昔' },
+  { db:'ICED DRINKS', en:'Iced Drinks', ar:'مشروبات مثلجة', it:'Bevande Ghiacciate', fr:'Boissons Glacées', de:'Eisgetränke', zh:'冰饮' }
 ];
 let products = [];
 let activeLang = 'ar';
