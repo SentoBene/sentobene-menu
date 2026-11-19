@@ -55,17 +55,22 @@ a{
 }
 
 .header{
-  width:100%;
-  max-width:1100px;
-  margin:0 auto;
-  padding:20px 16px 8px;
-  text-align:center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: #111413;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px 8px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 .logo{
   display:block;
   width:min(225px,76vw);
-  max-height:135px;
+  max-height:85px;
   object-fit:contain;
   margin:0 auto;
 }
@@ -625,14 +630,12 @@ body.adminMode .footer{ display:none; }
       </a>
     </div>
   </div>
-</header>
-
 <div id="vatNotice" style="text-align: center; color: #D4AF37; font-size: 14px; margin: 18px 0; font-weight: bold; letter-spacing: 0.5px;">
     * يضاف قيمة 14% ضريبة القيمة المضافة إلى الفاتورة * 
 </div>
 
 <div id="cats" class="cats"></div>
-
+</header>
 <section class="sectionTitle">
   <h2 id="sectionName">Pasta</h2>
   <span id="count">0 Items</span>
