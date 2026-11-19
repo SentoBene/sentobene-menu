@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>SentoBene | طباعة QR الترابيزات</title>
+  <style>
+    body { font-family: Tahoma, Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; text-align: center; }
+    .no-print { background: #111413; color: #d7a33a; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+    .print-btn { background: #d7a33a; color: #000; border: none; padding: 12px 30px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+    .card { background: #fff; border: 2px solid #111413; border-radius: 12px; padding: 15px; page-break-inside: avoid; }
+    .brand { font-weight: bold; font-size: 18px; color: #111413; margin-bottom: 8px; }
+    .card img { width: 180px; height: 180px; display: block; margin: 0 auto 10px; }
+    .table-name { background: #111413; color: #d7a33a; font-size: 22px; font-weight: bold; padding: 6px; border-radius: 6px; }
+    .scan-txt { font-size: 12px; color: #555; margin-top: 6px; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print">
+    <h2 style="margin:0;">أكواد QR ترابيزات SentoBene (15 كود)</h2>
+    <button class="print-btn" onclick="window.print()">اضغط هنا للطباعة أو الحفظ PDF 🖨️</button>
+  </div>
+
+  <div id="qrGrid" class="grid"></div>
+
+  <script>
+    const baseUrl = "https://github.io";
+    const tables = ["A1", "Bar1", "Bar2", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"];
+    
+    const grid = document.getElementById("qrGrid");
+    grid.innerHTML = tables.map(t => {
+      const fullLink = encodeURIComponent(baseUrl + t);
+      const qrImgUrl = `https://qrserver.com{fullLink}`;
+      return `
+        <div class="card">
+          <div class="brand">SentoBene</div>
+          <img src="${qrImgUrl}" alt="QR ${t}">
+          <div class="table-name">Table: ${t}</div>
+          <div class="scan-txt">Scan to View Menu & Order</div>
+        </div>
+      `;
+    }).join('');
+  </script>
+
+</body>
+</html>
