@@ -1266,55 +1266,63 @@ if(isAdminUrl()){
   openLogin();
 }
 </script>
-  <!-- شريط الترابيزة وسلة الطلبات -->
+<!-- شريط الترابيزة وسلة الطلبات -->
 <div id="tableBanner" style="display:none; background:#d7a33a; color:#000; text-align:center; padding:6px; font-weight:bold; font-size:14px; position:fixed; top:0; left:0; right:0; z-index:2000;"></div>
 
 <button id="cartFloatBtn" onclick="openCart()" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#d7a33a; color:#000; border:none; padding:14px 28px; border-radius:999px; font-size:16px; font-weight:bold; box-shadow:0 4px 20px rgba(0,0,0,0.8); z-index:1500;">
-  🛒 عرض الطلب (<span id="cartCount">0</span>) - <span id="cartTotalFloat">0</span> ج.م
+  🛒 <span id="cartFloatLabel">عرض الطلب</span> (<span id="cartCount">0</span>) - <span id="cartTotalFloat">0</span> <span id="cartCurrencyFloat">ج.م</span>
 </button>
 
-<!-- نافذة مراجعة وإرسال الطلب -->
 <div id="cartModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center; padding:16px;">
   <div style="background:#111413; border:1px solid #d7a33a; border-radius:16px; width:100%; max-width:450px; max-height:85vh; overflow-y:auto; padding:20px; color:#f7f3eb;">
     <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #302b23; padding-bottom:10px; margin-bottom:15px;">
-      <h3 style="margin:0; color:#d7a33a;">🛒 طلب ترابيزة <span id="modalTableNum"></span></h3>
+      <h3 style="margin:0; color:#d7a33a;">🛒 <span id="modalTitleLabel">طلب ترابيزة</span> <span id="modalTableNum"></span></h3>
       <button onclick="closeCart()" style="background:none; border:none; color:#aaa49b; font-size:22px;">✕</button>
     </div>
     <div id="cartItemsList" style="margin-bottom:15px;"></div>
-    <textarea id="orderNotes" placeholder="ملاحظات للمطبخ (مثلاً: بدون بصل، سكر زيادة...)" style="width:100%; background:#090b0a; border:1px solid #302b23; color:#fff; border-radius:8px; padding:10px; margin-bottom:12px; min-height:60px;"></textarea>
-    <div style="font-size:18px; font-weight:bold; color:#d7a33a; margin-bottom:15px; text-align:center;">
-      الإجمالي (قبل الـ 14% ضريبة): <span id="cartTotalModal">0</span> ج.م
-    </div>
+    <textarea id="orderNotes" style="width:100%; background:#090b0a; border:1px solid #302b23; color:#fff; border-radius:8px; padding:10px; margin-bottom:12px; min-height:60px;"></textarea>
+    <div id="vatBreakdown" style="font-size:14px; color:#aaa49b; text-align:center; margin-bottom:4px;"></div>
+    <div id="finalTotalLabel" style="font-size:19px; font-weight:bold; color:#d7a33a; margin-bottom:15px; text-align:center;"></div>
     <div id="gpsStatus" style="color:#f0c15d; font-size:13px; text-align:center; margin-bottom:10px;"></div>
-    <button id="submitOrderBtn" onclick="submitOrderWithGPS()" style="width:100%; background:#2e7d32; color:#fff; border:none; padding:14px; border-radius:10px; font-size:17px; font-weight:bold;">
-      تأكيد وإرسال الطلب للكاشير ✅
-    </button>
+    <button id="submitOrderBtn" onclick="submitOrderWithGPS()" style="width:100%; background:#2e7d32; color:#fff; border:none; padding:14px; border-radius:10px; font-size:17px; font-weight:bold;"></button>
   </div>
 </div>
-
 <script>
-  // إعدادات المطعم وقفل الموقع الجغرافي
   const RESTAURANT_LAT = 31.198574;
   const RESTAURANT_LNG = 29.905067;
-  const MAX_DISTANCE_METERS = 30; // نطاق 30 متر داخل المطعم فقط
+  const MAX_DISTANCE_METERS = 30;
 
+  const ORDER_I18N = {
+    ar: { welcome: 'أهلاً بك في SentoBene | ترابيزة:', add: '+ أضف للطلب', viewCart: 'عرض الطلب', modalTitle: 'طلب ترابيزة', notesPlaceholder: 'ملاحظات للمطبخ (بدون بصل، سكر زيادة...)', sub: 'المجموع', vat: 'ضريبة 14%', total: 'الإجمالي النهائي', submit: 'تأكيد وإرسال الطلب ✅', gpsChecking: 'جاري التأكد من تواجدك داخل المطعم... 📍', gpsOut: 'عذراً، الطلب متاح داخل المطعم فقط.', gpsDenied: 'يرجى السماح بتحديد الموقع (GPS).', sending: 'جاري إرسال طلبك... ⏳', sent: '✅ تم إرسال طلبك بنجاح!', err: 'حدث خطأ، حاول مرة أخرى.', cur: 'ج.م' },
+    en: { welcome: 'Welcome to SentoBene | Table:', add: '+ Add to Order', viewCart: 'View Order', modalTitle: 'Table Order', notesPlaceholder: 'Kitchen notes (no onions, extra sugar...)', sub: 'Subtotal', vat: '14% VAT', total: 'Final Total', submit: 'Confirm & Send Order ✅', gpsChecking: 'Verifying you are inside the restaurant... 📍', gpsOut: 'Sorry, ordering is only available inside the restaurant.', gpsDenied: 'Please allow location (GPS) access.', sending: 'Sending your order... ⏳', sent: '✅ Order sent successfully!', err: 'Error sending order, please try again.', cur: 'EGP' },
+    fr: { welcome: 'Bienvenue chez SentoBene | Table:', add: '+ Ajouter', viewCart: 'Voir la commande', modalTitle: 'Commande Table', notesPlaceholder: 'Notes pour la cuisine...', sub: 'Sous-total', vat: 'TVA 14%', total: 'Total final', submit: 'Confirmer la commande ✅', gpsChecking: 'Vérification de votre position... 📍', gpsOut: 'Désolé, commande disponible uniquement sur place.', gpsDenied: 'Veuillez autoriser le GPS.', sending: 'Envoi en cours... ⏳', sent: '✅ Commande envoyée !', err: 'Erreur, réessayez.', cur: 'EGP' },
+    de: { welcome: 'Willkommen bei SentoBene | Tisch:', add: '+ Hinzufügen', viewCart: 'Bestellung ansehen', modalTitle: 'Tischbestellung', notesPlaceholder: 'Hinweise für die Küche...', sub: 'Zwischensumme', vat: '14% MwSt.', total: 'Gesamtsumme', submit: 'Bestellung senden ✅', gpsChecking: 'Standort wird überprüft... 📍', gpsOut: 'Bestellung nur im Restaurant möglich.', gpsDenied: 'Bitte GPS erlauben.', sending: 'Wird gesendet... ⏳', sent: '✅ Bestellung gesendet!', err: 'Fehler, bitte erneut versuchen.', cur: 'EGP' },
+    it: { welcome: 'Benvenuti da SentoBene | Tavolo:', add: '+ Aggiungi', viewCart: 'Vedi ordine', modalTitle: 'Ordine Tavolo', notesPlaceholder: 'Note per la cucina...', sub: 'Subtotale', vat: 'IVA 14%', total: 'Totale finale', submit: 'Conferma ordine ✅', gpsChecking: 'Verifica posizione... 📍', gpsOut: 'Ordini disponibili solo nel ristorante.', gpsDenied: 'Consenti accesso GPS.', sending: 'Invio ordine... ⏳', sent: '✅ Ordine inviato!', err: 'Errore, riprova.', cur: 'EGP' },
+    zh: { welcome: '欢迎来到 SentoBene | 桌号:', add: '+ 加入订单', viewCart: '查看订单', modalTitle: '餐桌订单', notesPlaceholder: '厨房备注...', sub: '小计', vat: '14% 税费', total: '总计', submit: '确认并发送订单 ✅', gpsChecking: '正在验证您的位置... 📍', gpsOut: '抱歉，仅限店内点餐。', gpsDenied: '请允许定位权限 (GPS)。', sending: '正在发送订单... ⏳', sent: '✅ 订单已成功发送！', err: '发送失败，请重试。', cur: 'EGP' }
+  };
+
+  function getT() { return ORDER_I18N[activeLang] || ORDER_I18N.en; }
   const urlParams = new URLSearchParams(window.location.search);
   const currentTable = urlParams.get('table');
   let cart = [];
 
-  if (currentTable) {
+  function updateBannerText() {
+    if (!currentTable) return;
     const banner = document.getElementById('tableBanner');
     banner.style.display = 'block';
-    banner.textContent = `أهلاً بك في SentoBene | ترابيزة رقم: ${currentTable}`;
+    banner.textContent = `${getT().welcome} ${currentTable}`;
     document.body.style.paddingTop = '32px';
   }
+  updateBannerText();
 
-  // تعديل عرض الكروت لإضافة زرار الطلب إذا كان العميل على ترابيزة
   const originalRenderPublic = renderPublic;
   renderPublic = function() {
     originalRenderPublic();
-    if (!currentTable) return; // لو فاتح من البيت مبيظهرش زراير طلب
+    updateBannerText();
+    updateCartUI();
+    if (!currentTable) return;
 
+    const t = getT();
     const cards = document.querySelectorAll('#products .card');
     let sectionProducts = products.filter(x => x.category === active);
     if(active === 'HOT DRINKS'){
@@ -1334,33 +1342,17 @@ if(isAdminUrl()){
       const itemNameAr = item.name_ar || item.name;
 
       if (baseName === 'espresso') {
-        bottomDiv.innerHTML += `
-          <div style="display:flex; gap:5px; margin-top:8px; width:100%;">
-            <button onclick="addToCart('${esc(itemNameAr)} (Single)', 68)" style="flex:1; background:#d7a33a; color:#000; border:none; padding:6px; border-radius:6px; font-weight:bold; font-size:12px;">+ Single</button>
-            <button onclick="addToCart('${esc(itemNameAr)} (Double)', 72)" style="flex:1; background:#d7a33a; color:#000; border:none; padding:6px; border-radius:6px; font-weight:bold; font-size:12px;">+ Double</button>
-          </div>`;
+        bottomDiv.innerHTML += `<div style="display:flex; gap:5px; margin-top:8px; width:100%;"><button onclick="addToCart('${esc(itemNameAr)} (Single)', 68)" style="flex:1; background:#d7a33a; color:#000; border:none; padding:6px; border-radius:6px; font-weight:bold; font-size:12px;">+ Single</button><button onclick="addToCart('${esc(itemNameAr)} (Double)', 72)" style="flex:1; background:#d7a33a; color:#000; border:none; padding:6px; border-radius:6px; font-weight:bold; font-size:12px;">+ Double</button></div>`;
       } else if (baseName === 'turkish coffee') {
-        bottomDiv.innerHTML += `
-          <div style="display:flex; gap:5px; margin-top:8px; width:100%;">
-            <button onclick="addToCart('${esc(itemNameAr)} (Single)', 63)" style="flex:1; background:#d7a33a; color:#000; border:none; padding:6px; border-radius:6px; font-weight:bold; font-size:12px;">+ Single</button>
-            <button onclick="addToCart('${esc(itemNameAr)} (Double)', 72)" style="flex:1; background:#d7a33a; color:#000; border:none; padding:6px; border-radius:6px; font-weight:bold; font-size:12px;">+ Double</button>
-          </div>`;
+        bottomDiv.innerHTML += `<div style="display:flex; gap:5px; margin-top:8px; width:100%;"><button onclick="addToCart('${esc(itemNameAr)} (Single)', 63)" style="flex:1; background:#d7a33a; color:#000; border:none; padding:6px; border-radius:6px; font-weight:bold; font-size:12px;">+ Single</button><button onclick="addToCart('${esc(itemNameAr)} (Double)', 72)" style="flex:1; background:#d7a33a; color:#000; border:none; padding:6px; border-radius:6px; font-weight:bold; font-size:12px;">+ Double</button></div>`;
       } else {
-        bottomDiv.innerHTML += `
-          <button onclick="addToCart('${esc(itemNameAr)}', ${Number(item.price)})" style="background:#d7a33a; color:#000; border:none; padding:7px 14px; border-radius:8px; font-weight:bold; font-size:13px; margin-top:6px;">
-            + أضف للطلب
-          </button>`;
+        bottomDiv.innerHTML += `<button onclick="addToCart('${esc(itemNameAr)}', ${Number(item.price)})" style="background:#d7a33a; color:#000; border:none; padding:7px 14px; border-radius:8px; font-weight:bold; font-size:13px; margin-top:6px;">${t.add}</button>`;
       }
     });
   };
-
   function addToCart(name, price) {
     const existing = cart.find(i => i.name === name);
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({ name, price, qty: 1 });
-    }
+    if (existing) { existing.qty += 1; } else { cart.push({ name, price, qty: 1 }); }
     updateCartUI();
   }
 
@@ -1372,114 +1364,75 @@ if(isAdminUrl()){
   }
 
   function updateCartUI() {
+    const t = getT();
     const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
-    const totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    const totalWithVat = Math.round(cart.reduce((sum, i) => sum + (i.price * i.qty), 0) * 1.14);
     const btn = document.getElementById('cartFloatBtn');
     if (totalQty > 0 && currentTable) {
       btn.style.display = 'block';
+      document.getElementById('cartFloatLabel').textContent = t.viewCart;
       document.getElementById('cartCount').textContent = totalQty;
-      document.getElementById('cartTotalFloat').textContent = totalPrice;
+      document.getElementById('cartTotalFloat').textContent = totalWithVat;
+      document.getElementById('cartCurrencyFloat').textContent = t.cur;
     } else {
       btn.style.display = 'none';
     }
   }
 
   function openCart() {
+    const t = getT();
+    document.getElementById('modalTitleLabel').textContent = t.modalTitle;
     document.getElementById('modalTableNum').textContent = currentTable;
+    document.getElementById('orderNotes').placeholder = t.notesPlaceholder;
+    document.getElementById('submitOrderBtn').textContent = t.submit;
     document.getElementById('gpsStatus').textContent = '';
     renderCartModal();
     document.getElementById('cartModal').style.display = 'flex';
   }
 
-  function closeCart() {
-    document.getElementById('cartModal').style.display = 'none';
-  }
+  function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
 
   function renderCartModal() {
+    const t = getT();
     const list = document.getElementById('cartItemsList');
-    if (!cart.length) {
-      closeCart();
-      return;
-    }
+    if (!cart.length) { closeCart(); return; }
     list.innerHTML = cart.map((item, idx) => `
       <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed #302b23;">
-        <div>
-          <div style="font-weight:bold;">${item.name}</div>
-          <div style="color:#aaa49b; font-size:13px;">${item.price * item.qty} ج.م</div>
-        </div>
+        <div><div style="font-weight:bold;">${item.name}</div><div style="color:#aaa49b; font-size:13px;">${item.price * item.qty} ${t.cur}</div></div>
         <div style="display:flex; align-items:center; gap:8px;">
           <button onclick="changeQty(${idx}, -1)" style="background:#302b23; color:#fff; border:none; width:28px; height:28px; border-radius:6px; font-weight:bold;">-</button>
           <span>${item.qty}</span>
           <button onclick="changeQty(${idx}, 1)" style="background:#d7a33a; color:#000; border:none; width:28px; height:28px; border-radius:6px; font-weight:bold;">+</button>
         </div>
-      </div>
-    `).join('');
-    const totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-    document.getElementById('cartTotalModal').textContent = totalPrice;
+      </div>`).join('');
+    const subTotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    const vatAmount = Math.round(subTotal * 0.14);
+    document.getElementById('vatBreakdown').textContent = `${t.sub}: ${subTotal} ${t.cur} + ${t.vat} (${vatAmount} ${t.cur})`;
+    document.getElementById('finalTotalLabel').textContent = `${t.total}: ${subTotal + vatAmount} ${t.cur}`;
   }
 
   function getDistanceMeters(lat1, lon1, lat2, lon2) {
-    const R = 6371e3;
-    const p1 = lat1 * Math.PI / 180;
-    const p2 = lat2 * Math.PI / 180;
-    const dp = (lat2 - lat1) * Math.PI / 180;
-    const dl = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dp/2) * Math.sin(dp/2) + Math.cos(p1) * Math.cos(p2) * Math.sin(dl/2) * Math.sin(dl/2);
+    const R = 6371e3, p1 = lat1 * Math.PI / 180, p2 = lat2 * Math.PI / 180;
+    const dp = (lat2 - lat1) * Math.PI / 180, dl = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dp/2)**2 + Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   }
 
   function submitOrderWithGPS() {
-    const statusEl = document.getElementById('gpsStatus');
-    const btn = document.getElementById('submitOrderBtn');
-
-    if (!navigator.geolocation) {
-      statusEl.textContent = 'متصفحك لا يدعم تحديد الموقع.';
-      return;
-    }
-
-    btn.disabled = true;
-    statusEl.textContent = 'جاري التأكد من تواجدك داخل المطعم... 📍';
-
-    navigator.geolocation.getCurrentPosition(
-      async (pos) => {
-        const dist = getDistanceMeters(pos.coords.latitude, pos.coords.longitude, RESTAURANT_LAT, RESTAURANT_LNG);
-        if (dist > MAX_DISTANCE_METERS) {
-          statusEl.textContent = 'عذراً، خدمة الطلب متاحة للعملاء المتواجدين داخل المطعم فقط.';
-          btn.disabled = false;
-          return;
-        }
-
-        statusEl.textContent = 'جاري إرسال طلبك للكاشير... ⏳';
-        const totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-        const notes = document.getElementById('orderNotes').value.trim();
-
-        const { error } = await sb.from('orders').insert([{
-          table_number: currentTable,
-          items: cart,
-          total_price: totalPrice,
-          notes: notes,
-          status: 'pending'
-        }]);
-
-        btn.disabled = false;
-        if (error) {
-          statusEl.textContent = 'حدث خطأ أثناء الإرسال، حاول مرة أخرى.';
-          console.error(error);
-          return;
-        }
-
-        cart = [];
-        document.getElementById('orderNotes').value = '';
-        updateCartUI();
-        closeCart();
-        alert('✅ تم إرسال طلبك بنجاح! جاري تحضير الأوردر.');
-      },
-      (err) => {
-        btn.disabled = false;
-        statusEl.textContent = 'يرجى السماح للمتصفح بتحديد الموقع (GPS) لتأكيد وجودك داخل المطعم.';
-      },
-      { enableHighAccuracy: true, timeout: 10000 }
-    );
+    const t = getT(), statusEl = document.getElementById('gpsStatus'), btn = document.getElementById('submitOrderBtn');
+    if (!navigator.geolocation) { statusEl.textContent = t.gpsDenied; return; }
+    btn.disabled = true; statusEl.textContent = t.gpsChecking;
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      if (getDistanceMeters(pos.coords.latitude, pos.coords.longitude, RESTAURANT_LAT, RESTAURANT_LNG) > MAX_DISTANCE_METERS) {
+        statusEl.textContent = t.gpsOut; btn.disabled = false; return;
+      }
+      statusEl.textContent = t.sending;
+      const totalPrice = Math.round(cart.reduce((sum, i) => sum + (i.price * i.qty), 0) * 1.14);
+      const { error } = await sb.from('orders').insert([{ table_number: currentTable, items: cart, total_price: totalPrice, notes: document.getElementById('orderNotes').value.trim(), status: 'pending' }]);
+      btn.disabled = false;
+      if (error) { statusEl.textContent = t.err; return; }
+      cart = []; document.getElementById('orderNotes').value = ''; updateCartUI(); closeCart(); alert(t.sent);
+    }, () => { btn.disabled = false; statusEl.textContent = t.gpsDenied; }, { enableHighAccuracy: true, timeout: 10000 });
   }
 </script>
 </body>
