@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SentoBene | شاشة طلبات الكاشير</title>
+  <script src="https://jsdelivr.net"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #090b0a;
+      color: #f7f3eb;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111413;
+      padding: 15px 25px;
+      border-radius: 12px;
+      border: 1px solid #302b23;
+      margin-bottom: 25px;
+    }
+    .top-bar h1 {
+      margin: 0;
+      color: #d7a33a;
+      font-size: 24px;
+    }
+    .sound-btn {
+      background: #d7a33a;
+      color: #111;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .sound-btn.active {
+      background: #2e7d32;
+      color: #fff;
+    }
+    .orders-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .order-card {
+      background: #111413;
+      border: 2px solid #d7a33a;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #302b23;
+      padding-bottom: 12px;
+      margin-bottom: 15px;
+    }
+    .table-badge {
+      background: #d7a33a;
+      color: #111;
+      font-size: 22px;
+      font-weight: bold;
+      padding: 6px 16px;
+      border-radius: 8px;
+    }
+    .order-time {
+      color: #aaa49b;
+      font-size: 14px;
+    }
+    .items-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 15px 0;
+    }
+    .items-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed #302b23;
+      font-size: 17px;
+    }
+    .item-qty {
+      color: #f0c15d;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+    .order-notes {
+      background: #1d1a14;
+      color: #f0c15d;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+    .order-total {
+      font-size: 18px;
+      font-weight: bold;
+      color: #d7a33a;
+      text-align: left;
+      margin-bottom: 15px;
+    }
+    .done-btn {
+      width: 100%;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .done-btn:hover {
+      background: #1b5e20;
+    }
+    .empty-msg {
+      text-align: center;
+      color: #aaa49b;
+      font-size: 20px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <h1>🔔 طلبات الترابيزات المباشرة - SentoBene</h1>
+    <button id="soundBtn" class="sound-btn" onclick="enableSound()">اضغط هنا لتفعيل صوت الجرس 🔊</button>
+  </div>
+
+  <div id="ordersContainer" class="orders-grid"></div>
+  <div id="emptyMsg" class="empty-msg">لا توجد طلبات جديدة حالياً... في انتظار طلبات الترابيزات</div>
+
+  <script>
+    const SUPABASE_URL = 'https://xzyobcexywacsjlatntx.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let soundEnabled = false;
+    let audioCtx = null;
+
+    function enableSound() {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      soundEnabled = true;
+      const btn = document.getElementById('soundBtn');
+      btn.textContent = 'الصوت مُفعّل ويعمل ✅';
+      btn.classList.add('active');
+      playBell();
+    }
+
+    function playBell() {
+      if (!soundEnabled || !audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(1100, audioCtx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.8);
+      } catch (e) { console.log(e); }
+    }
+
+    async function loadOrders() {
+      const { data, error } = await sb
+        .from('orders')
+        .select('*')
+        .eq('status', 'pending')
+        .order('created_at', { ascending: true });
+
+      const container = document.getElementById('ordersContainer');
+      const emptyMsg = document.getElementById('emptyMsg');
+
+      if (!data || data.length === 0) {
+        container.innerHTML = '';
+        emptyMsg.style.display = 'block';
+        return;
+      }
+
+      emptyMsg.style.display = 'none';
+      container.innerHTML = data.map(order => {
+        const time = new Date(order.created_at).toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+        const itemsHtml = order.items.map(item => `
+          <li>
+            <span><span class="item-qty">${item.qty}x</span> ${item.name}</span>
+            <span>${item.price * item.qty} ج.م</span>
+          </li>
+        `).join('');
+
+        return `
+          <div class="order-card">
+            <div class="order-header">
+              <span class="table-badge">ترابيزة ${order.table_number}</span>
+              <span class="order-time">⏰ ${time}</span>
+            </div>
+            <ul class="items-list">${itemsHtml}</ul>
+            ${order.notes ? `<div class="order-notes">📝 ملاحظات: ${order.notes}</div>` : ''}
+            <div class="order-total">الإجمالي (قبل الضريبة): ${order.total_price} ج.م</div>
+            <button class="done-btn" onclick="completeOrder(${order.id})">تم الإدخال على تنمية ✅</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function completeOrder(id) {
+      await sb.from('orders').update({ status: 'completed' }).eq('id', id);
+      loadOrders();
+    }
+
+    sb.channel('orders-channel')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'orders' }, payload => {
+        playBell();
+        loadOrders();
+      })
+      .subscribe();
+
+    loadOrders();
+  </script>
+</body>
+</html>
