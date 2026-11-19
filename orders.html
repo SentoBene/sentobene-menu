@@ -155,6 +155,7 @@
   <script>
     var soundEnabled = false;
     var audioCtx = null;
+    var bellTimer = null;
 
     function enableSound() {
       soundEnabled = true;
@@ -164,7 +165,7 @@
       playBell();
     }
 
-    function playBell() {
+    function playSingleRing() {
       try {
         var AudioContextClass = window.AudioContext || window.webkitAudioContext;
         if (!audioCtx && AudioContextClass) {
@@ -174,21 +175,48 @@
           if (audioCtx.state === 'suspended') {
             audioCtx.resume();
           }
-          var osc = audioCtx.createOscillator();
-          var gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-          osc.frequency.setValueAtTime(1100, audioCtx.currentTime + 0.15);
-          gain.gain.setValueAtTime(0.6, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start();
-          osc.stop(audioCtx.currentTime + 0.8);
+          var now = audioCtx.currentTime;
+          
+          var osc1 = audioCtx.createOscillator();
+          var gain1 = audioCtx.createGain();
+          osc1.type = 'square';
+          osc1.frequency.setValueAtTime(980, now);
+          gain1.gain.setValueAtTime(1.0, now);
+          gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+          osc1.connect(gain1);
+          gain1.connect(audioCtx.destination);
+          osc1.start(now);
+          osc1.stop(now + 0.35);
+
+          var osc2 = audioCtx.createOscillator();
+          var gain2 = audioCtx.createGain();
+          osc2.type = 'square';
+          osc2.frequency.setValueAtTime(1320, now + 0.25);
+          gain2.gain.setValueAtTime(1.0, now + 0.25);
+          gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
+          osc2.connect(gain2);
+          gain2.connect(audioCtx.destination);
+          osc2.start(now + 0.25);
+          osc2.stop(now + 0.7);
         }
-      } catch (e) {
-        alert('تم تفعيل التنبيهات');
+      } catch (e) {}
+    }
+
+    function playBell() {
+      if (bellTimer) {
+        clearInterval(bellTimer);
       }
+      var count = 0;
+      playSingleRing();
+      bellTimer = setInterval(function() {
+        count++;
+        if (count >= 6) {
+          clearInterval(bellTimer);
+          bellTimer = null;
+        } else {
+          playSingleRing();
+        }
+      }, 1600);
     }
 
     var SUPABASE_URL = 'https://supabase.co';
@@ -251,6 +279,10 @@
     }
 
     function completeOrder(id) {
+      if (bellTimer) {
+        clearInterval(bellTimer);
+        bellTimer = null;
+      }
       if (!sb) return;
       sb.from('orders').update({ status: 'completed' }).eq('id', id).then(function() {
         loadOrders();
