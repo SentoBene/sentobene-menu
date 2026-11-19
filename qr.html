@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>SentoBene | طباعة QR الترابيزات</title>
-  <script src="https://cloudflare.com"></script>
+  <script src="https://jsdelivr.net"></script>
   <style>
     body { font-family: Tahoma, Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; text-align: center; }
     .no-print { background: #111413; color: #d7a33a; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
@@ -11,7 +11,7 @@
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
     .card { background: #fff; border: 2px solid #111413; border-radius: 12px; padding: 15px; page-break-inside: avoid; }
     .brand { font-weight: bold; font-size: 18px; color: #111413; margin-bottom: 10px; }
-    .qr-box { display: flex; justify-content: center; align-items: center; margin: 0 auto 12px; min-height: 170px; }
+    .card img { width: 170px; height: 170px; display: block; margin: 0 auto 12px; }
     .table-name { background: #111413; color: #d7a33a; font-size: 22px; font-weight: bold; padding: 6px; border-radius: 6px; }
     .scan-txt { font-size: 12px; color: #555; margin-top: 6px; }
     @media print {
@@ -34,25 +34,22 @@
     const tables = ["A1", "Bar1", "Bar2", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"];
     
     const grid = document.getElementById("qrGrid");
-    tables.forEach((t, index) => {
+    tables.forEach(t => {
+      const qr = new QRious({
+        value: baseUrl + t,
+        size: 250,
+        level: 'H'
+      });
+
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
         <div class="brand">SentoBene</div>
-        <div id="qr-${index}" class="qr-box"></div>
+        <img src="${qr.toDataURL()}" alt="QR ${t}">
         <div class="table-name">Table: ${t}</div>
         <div class="scan-txt">Scan to View Menu & Order</div>
       `;
       grid.appendChild(card);
-
-      new QRCode(document.getElementById(`qr-${index}`), {
-        text: baseUrl + t,
-        width: 170,
-        height: 170,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-      });
     });
   </script>
 
