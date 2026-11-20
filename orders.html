@@ -160,11 +160,18 @@
     function enableSound() {
       soundEnabled = true;
       var btn = document.getElementById('soundBtn');
-      btn.innerHTML = 'الصوت مُفعّل ويعمل ✅';
+      btn.innerHTML = 'الصوت مُفعّل ويعمل 🔊';
       btn.className = 'sound-btn active';
+
+      // طلب إذن الإشعارات عشان تشتغل والمتصفح تحت
+      if ("Notification" in window && Notification.permission !== "granted") {
+        Notification.requestPermission();
+      }
+
       playBell();
     }
 
+    // نغمة جرس مطعم / كاشير واضحة (Ding - Dong - Ding)
     function playSingleRing() {
       try {
         var AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -176,36 +183,43 @@
             audioCtx.resume();
           }
           var now = audioCtx.currentTime;
-          
-          var osc1 = audioCtx.createOscillator();
-          var gain1 = audioCtx.createGain();
-          osc1.type = 'square';
-          osc1.frequency.setValueAtTime(980, now);
-          gain1.gain.setValueAtTime(1.0, now);
-          gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
-          osc1.connect(gain1);
-          gain1.connect(audioCtx.destination);
-          osc1.start(now);
-          osc1.stop(now + 0.35);
+          var notes = [
+            { freq: 880, time: 0, dur: 0.4 },     // نغمة أولى
+            { freq: 1108.73, time: 0.2, dur: 0.4 }, // نغمة تانية
+            { freq: 1318.51, time: 0.4, dur: 0.7 }  // نغمة تالتة عالية
+          ];
 
-          var osc2 = audioCtx.createOscillator();
-          var gain2 = audioCtx.createGain();
-          osc2.type = 'square';
-          osc2.frequency.setValueAtTime(1320, now + 0.25);
-          gain2.gain.setValueAtTime(1.0, now + 0.25);
-          gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
-          osc2.connect(gain2);
-          gain2.connect(audioCtx.destination);
-          osc2.start(now + 0.25);
-          osc2.stop(now + 0.7);
+          notes.forEach(function(n) {
+            var osc = audioCtx.createOscillator();
+            var gain = audioCtx.createGain();
+            osc.type = 'sine'; // صوت ناعم ورنان زي الجرس الحقيقي
+            osc.frequency.setValueAtTime(n.freq, now + n.time);
+            
+            gain.gain.setValueAtTime(0.01, now + n.time);
+            gain.gain.linearRampToValueAtTime(0.8, now + n.time + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + n.time + n.dur);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now + n.time);
+            osc.stop(now + n.time + n.dur);
+          });
         }
       } catch (e) {}
     }
 
-    function playBell() {
-      if (bellTimer) {
-        clearInterval(bellTimer);
+    function showDesktopAlert(tableNum) {
+      if ("Notification" in window && Notification.permission === "granted") {
+        new Notification("🔔 طلب جديد - SentoBene", {
+          body: "ترابيزة رقم " + tableNum + " أرسلت طلباً جديداً!",
+          requireInteraction: true
+        });
       }
+    }
+
+    function playBell(tableNum) {
+      if (tableNum) showDesktopAlert(tableNum);
+      if (bellTimer) clearInterval(bellTimer);
       var count = 0;
       playSingleRing();
       bellTimer = setInterval(function() {
@@ -216,10 +230,10 @@
         } else {
           playSingleRing();
         }
-      }, 1600);
+      }, 1800);
     }
 
-    var SUPABASE_URL = 'https://xzyobcexywacsjlatntx.supabase.co';
+    var SUPABASE_URL = 'https://supabase.co';
     var SUPABASE_ANON_KEY = 'sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
     var sb = null;
     var lastOrderCount = 0;
@@ -247,7 +261,8 @@
           }
 
           if (data.length > lastOrderCount && soundEnabled) {
-            playBell();
+            var newestOrder = data[data.length - 1];
+            playBell(newestOrder.table_number);
           }
           lastOrderCount = data.length;
 
@@ -266,7 +281,7 @@
             html += '<div class="order-card">' +
               '<div class="order-header">' +
                 '<span class="table-badge">ترابيزة ' + order.table_number + '</span>' +
-                '<span class="order-time">⏰ ' + time + '</span>' +
+                '<span class="order-time">🕒 ' + time + '</span>' +
               '</div>' +
               '<ul class="items-list">' + itemsHtml + '</ul>' +
               (order.notes ? '<div class="order-notes">📝 ملاحظات: ' + order.notes + '</div>' : '') +
@@ -292,6 +307,13 @@
     if (sb) {
       loadOrders();
       setInterval(loadOrders, 4000);
+
+      // الاستماع الفوري حتى لو المتصفح في الخلفية
+      sb.channel('orders-realtime')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'orders' }, function(payload) {
+          loadOrders();
+        })
+        .subscribe();
     }
   </script>
 </body>
