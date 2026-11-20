@@ -212,16 +212,16 @@
           if (audioCtx.state === 'suspended') audioCtx.resume();
           var now = audioCtx.currentTime;
           var notes = [
-            { freq: 1046.50, time: 0, dur: 0.15 },    // C6
-            { freq: 1318.51, time: 0.12, dur: 0.15 }, // E6
-            { freq: 1567.98, time: 0.24, dur: 0.15 }, // G6
-            { freq: 2093.00, time: 0.36, dur: 0.65 }  // C7 رنة عالية مميزة
+            { freq: 1046.50, time: 0, dur: 0.15 },
+            { freq: 1318.51, time: 0.12, dur: 0.15 },
+            { freq: 1567.98, time: 0.24, dur: 0.15 },
+            { freq: 2093.00, time: 0.36, dur: 0.65 }
           ];
 
           notes.forEach(function(n) {
             var osc = audioCtx.createOscillator();
             var gain = audioCtx.createGain();
-            osc.type = 'triangle'; // صوت معدني رنان زي الكاشير
+            osc.type = 'triangle';
             osc.frequency.setValueAtTime(n.freq, now + n.time);
             
             gain.gain.setValueAtTime(0.01, now + n.time);
@@ -297,7 +297,6 @@
 
           if (data.length > lastOrderCount && soundEnabled) {
             var newestOrder = data[data.length - 1];
-            // التأكد هل الطلب الجديد ده طلب شيك ولا أوردر عادي
             var isBillRequest = (newestOrder.total_price === 0);
             playBell(newestOrder.table_number, isBillRequest);
           }
@@ -312,10 +311,9 @@
             var itemsHtml = '';
             for (var j = 0; j < order.items.length; j++) {
               var item = order.items[j];
-              itemsHtml += '<li><span><span class="item-qty">' + item.qty + 'x</span> ' + item.name + '</span><span>' + (item.price * item.qty) + ' ج.م</span></li>';
+              itemsHtml += '<li><span><span class="item-qty">' + item.qty + 'x</span> ' + item.name + '</span><span>' + (item.price > 0 ? (item.price * item.qty) + ' ج.م' : '') + '</span></li>';
             }
 
-            // تمييز كارت طلب الشيك بلون مختلف شوية عشان يبان بالعين فوراً
             var isBill = (order.total_price === 0);
             var cardBorder = isBill ? 'border: 2px solid #2e7d32; background: #0f1c11;' : '';
 
