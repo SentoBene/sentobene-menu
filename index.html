@@ -1267,16 +1267,19 @@ if(isAdminUrl()){
 }
 </script>
 <!-- شريط الترابيزة وسلة الطلبات -->
-<div id="tableBanner" style="display:none; background:#d7a33a; color:#000; text-align:center; padding:6px; font-weight:bold; font-size:14px; position:fixed; top:0; left:0; right:0; z-index:2000;"></div>
+<div id="tableBanner" style="display:none; background:#d7a33a; color:#000; text-align:center; padding:6px 10px; font-weight:bold; font-size:14px; position:fixed; top:0; left:0; right:0; z-index:2000; justify-content:center; align-items:center; gap:12px;">
+  <span id="tableBannerText"></span>
+  <button id="requestBillBtn" onclick="requestBillWithGPS()" style="background:#090b0a; color:#d7a33a; border:1px solid #090b0a; padding:4px 12px; border-radius:999px; font-size:13px; font-weight:bold; cursor:pointer; white-space:nowrap;"></button>
+</div>
 
 <button id="cartFloatBtn" onclick="openCart()" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#d7a33a; color:#000; border:none; padding:14px 28px; border-radius:999px; font-size:16px; font-weight:bold; box-shadow:0 4px 20px rgba(0,0,0,0.8); z-index:1500;">
-  🛒 <span id="cartFloatLabel">عرض الطلب</span> (<span id="cartCount">0</span>) - <span id="cartTotalFloat">0</span> <span id="cartCurrencyFloat">ج.م</span>
+   <span id="cartFloatLabel">عرض الطلب</span> (<span id="cartCount">0</span>) - <span id="cartTotalFloat">0</span> <span id="cartCurrencyFloat">ج.م</span>
 </button>
 
 <div id="cartModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center; padding:16px;">
   <div style="background:#111413; border:1px solid #d7a33a; border-radius:16px; width:100%; max-width:450px; max-height:85vh; overflow-y:auto; padding:20px; color:#f7f3eb;">
     <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #302b23; padding-bottom:10px; margin-bottom:15px;">
-      <h3 style="margin:0; color:#d7a33a;">🛒 <span id="modalTitleLabel">طلب ترابيزة</span> <span id="modalTableNum"></span></h3>
+      <h3 style="margin:0; color:#d7a33a;"> <span id="modalTitleLabel">طلب ترابيزة</span> <span id="modalTableNum"></span></h3>
       <button onclick="closeCart()" style="background:none; border:none; color:#aaa49b; font-size:22px;">✕</button>
     </div>
     <div id="cartItemsList" style="margin-bottom:15px;"></div>
@@ -1287,18 +1290,19 @@ if(isAdminUrl()){
     <button id="submitOrderBtn" onclick="submitOrderWithGPS()" style="width:100%; background:#2e7d32; color:#fff; border:none; padding:14px; border-radius:10px; font-size:17px; font-weight:bold;"></button>
   </div>
 </div>
+
 <script>
   const RESTAURANT_LAT = 31.198574;
   const RESTAURANT_LNG = 29.905067;
   const MAX_DISTANCE_METERS = 50;
 
   const ORDER_I18N = {
-    ar: { welcome: 'أهلاً بك في SentoBene | ترابيزة:', add: '+ أضف للطلب', viewCart: 'عرض الطلب', modalTitle: 'طلب ترابيزة', notesPlaceholder: 'ملاحظات للمطبخ (بدون بصل، سكر زيادة...)', sub: 'المجموع', vat: 'ضريبة 14%', total: 'الإجمالي النهائي', submit: 'تأكيد وإرسال الطلب ✅', gpsChecking: 'جاري التأكد من تواجدك داخل المطعم... 📍', gpsOut: 'عذراً، الطلب متاح داخل المطعم فقط.', gpsDenied: 'يرجى السماح بتحديد الموقع (GPS).', sending: 'جاري إرسال طلبك... ⏳', sent: '✅ تم إرسال طلبك بنجاح!', err: 'حدث خطأ، حاول مرة أخرى.', cur: 'ج.م' },
-    en: { welcome: 'Welcome to SentoBene | Table:', add: '+ Add to Order', viewCart: 'View Order', modalTitle: 'Table Order', notesPlaceholder: 'Kitchen notes (no onions, extra sugar...)', sub: 'Subtotal', vat: '14% VAT', total: 'Final Total', submit: 'Confirm & Send Order ✅', gpsChecking: 'Verifying you are inside the restaurant... 📍', gpsOut: 'Sorry, ordering is only available inside the restaurant.', gpsDenied: 'Please allow location (GPS) access.', sending: 'Sending your order... ⏳', sent: '✅ Order sent successfully!', err: 'Error sending order, please try again.', cur: 'EGP' },
-    fr: { welcome: 'Bienvenue chez SentoBene | Table:', add: '+ Ajouter', viewCart: 'Voir la commande', modalTitle: 'Commande Table', notesPlaceholder: 'Notes pour la cuisine...', sub: 'Sous-total', vat: 'TVA 14%', total: 'Total final', submit: 'Confirmer la commande ✅', gpsChecking: 'Vérification de votre position... 📍', gpsOut: 'Désolé, commande disponible uniquement sur place.', gpsDenied: 'Veuillez autoriser le GPS.', sending: 'Envoi en cours... ⏳', sent: '✅ Commande envoyée !', err: 'Erreur, réessayez.', cur: 'EGP' },
-    de: { welcome: 'Willkommen bei SentoBene | Tisch:', add: '+ Hinzufügen', viewCart: 'Bestellung ansehen', modalTitle: 'Tischbestellung', notesPlaceholder: 'Hinweise für die Küche...', sub: 'Zwischensumme', vat: '14% MwSt.', total: 'Gesamtsumme', submit: 'Bestellung senden ✅', gpsChecking: 'Standort wird überprüft... 📍', gpsOut: 'Bestellung nur im Restaurant möglich.', gpsDenied: 'Bitte GPS erlauben.', sending: 'Wird gesendet... ⏳', sent: '✅ Bestellung gesendet!', err: 'Fehler, bitte erneut versuchen.', cur: 'EGP' },
-    it: { welcome: 'Benvenuti da SentoBene | Tavolo:', add: '+ Aggiungi', viewCart: 'Vedi ordine', modalTitle: 'Ordine Tavolo', notesPlaceholder: 'Note per la cucina...', sub: 'Subtotale', vat: 'IVA 14%', total: 'Totale finale', submit: 'Conferma ordine ✅', gpsChecking: 'Verifica posizione... 📍', gpsOut: 'Ordini disponibili solo nel ristorante.', gpsDenied: 'Consenti accesso GPS.', sending: 'Invio ordine... ⏳', sent: '✅ Ordine inviato!', err: 'Errore, riprova.', cur: 'EGP' },
-    zh: { welcome: '欢迎来到 SentoBene | 桌号:', add: '+ 加入订单', viewCart: '查看订单', modalTitle: '餐桌订单', notesPlaceholder: '厨房备注...', sub: '小计', vat: '14% 税费', total: '总计', submit: '确认并发送订单 ✅', gpsChecking: '正在验证您的位置... 📍', gpsOut: '抱歉，仅限店内点餐。', gpsDenied: '请允许定位权限 (GPS)。', sending: '正在发送订单... ⏳', sent: '✅ 订单已成功发送！', err: '发送失败，请重试。', cur: 'EGP' }
+    ar: { welcome: 'أهلاً بك في SentoBene | ترابيزة:', add: '+ أضف للطلب', viewCart: 'عرض الطلب', modalTitle: 'طلب ترابيزة', notesPlaceholder: 'ملاحظات للمطبخ (بدون بصل، سكر زيادة...)', sub: 'المجموع', vat: 'ضريبة 14%', total: 'الإجمالي النهائي', submit: 'تأكيد وإرسال الطلب ', gpsChecking: 'جاري التأكد من تواجدك داخل المطعم... ', gpsOut: 'عذراً، الخدمة متاحة داخل المطعم فقط.', gpsDenied: 'يرجى السماح بتحديد الموقع (GPS).', sending: 'جاري الإرسال... ', sent: ' تم إرسال طلبك بنجاح!', err: 'حدث خطأ، حاول مرة أخرى.', cur: 'ج.م', askBill: '🧾 اطلب الشيك', billConfirm: 'هل تريد طلب الشيك الآن؟', billSent: 'تم إرسال طلب الشيك للكاشير، في الطريق إليك!' },
+    en: { welcome: 'Welcome to SentoBene | Table:', add: '+ Add to Order', viewCart: 'View Order', modalTitle: 'Table Order', notesPlaceholder: 'Kitchen notes (no onions, extra sugar...)', sub: 'Subtotal', vat: '14% VAT', total: 'Final Total', submit: 'Confirm & Send Order ', gpsChecking: 'Verifying you are inside the restaurant... ', gpsOut: 'Sorry, service is only available inside the restaurant.', gpsDenied: 'Please allow location (GPS) access.', sending: 'Sending... ', sent: ' Order sent successfully!', err: 'Error sending request, please try again.', cur: 'EGP', askBill: '🧾 Request Bill', billConfirm: 'Would you like to request the bill now?', billSent: 'Bill request sent! The cashier is on the way.' },
+    fr: { welcome: 'Bienvenue chez SentoBene | Table:', add: '+ Ajouter', viewCart: 'Voir la commande', modalTitle: 'Commande Table', notesPlaceholder: 'Notes pour la cuisine...', sub: 'Sous-total', vat: 'TVA 14%', total: 'Total final', submit: 'Confirmer la commande ', gpsChecking: 'Vérification de votre position... ', gpsOut: 'Désolé, disponible uniquement sur place.', gpsDenied: 'Veuillez autoriser le GPS.', sending: 'Envoi en cours... ', sent: ' Commande envoyée !', err: 'Erreur, réessayez.', cur: 'EGP', askBill: '🧾 L\'addition', billConfirm: 'Demander l\'addition maintenant ?', billSent: 'Demande d\'addition envoyée !' },
+    de: { welcome: 'Willkommen bei SentoBene | Tisch:', add: '+ Hinzufügen', viewCart: 'Bestellung ansehen', modalTitle: 'Tischbestellung', notesPlaceholder: 'Hinweise für die Küche...', sub: 'Zwischensumme', vat: '14% MwSt.', total: 'Gesamtsumme', submit: 'Bestellung senden ', gpsChecking: 'Standort wird überprüft... ', gpsOut: 'Nur im Restaurant möglich.', gpsDenied: 'Bitte GPS erlauben.', sending: 'Wird gesendet... ', sent: ' Bestellung gesendet!', err: 'Fehler, bitte erneut versuchen.', cur: 'EGP', askBill: '🧾 Rechnung', billConfirm: 'Möchten Sie jetzt die Rechnung anfordern?', billSent: 'Rechnung wurde angefordert!' },
+    it: { welcome: 'Benvenuti da SentoBene | Tavolo:', add: '+ Aggiungi', viewCart: 'Vedi ordine', modalTitle: 'Ordine Tavolo', notesPlaceholder: 'Note per la cucina...', sub: 'Subtotale', vat: 'IVA 14%', total: 'Totale finale', submit: 'Conferma ordine ', gpsChecking: 'Verifica posizione... ', gpsOut: 'Disponibile solo nel ristorante.', gpsDenied: 'Consenti accesso GPS.', sending: 'Invio... ', sent: ' Ordine inviato!', err: 'Errore, riprova.', cur: 'EGP', askBill: '🧾 Chiedi il conto', billConfirm: 'Vuoi chiedere il conto ora?', billSent: 'Richiesta del conto inviata!' },
+    zh: { welcome: '欢迎来到 SentoBene | 桌号:', add: '+ 加入订单', viewCart: '查看订单', modalTitle: '餐桌订单', notesPlaceholder: '厨房备注...', sub: '小计', vat: '14% 税费', total: '总计', submit: '确认并发送订单 ', gpsChecking: '正在验证您的位置... ', gpsOut: '抱歉，仅限店内使用。', gpsDenied: '请允许定位权限 (GPS)。', sending: '正在发送... ', sent: ' 订单已成功发送！', err: '发送失败，请重试。', cur: 'EGP', askBill: '🧾 结账', billConfirm: '您现在要结账吗？', billSent: '结账请求已发送！' }
   };
 
   function getT() { return ORDER_I18N[activeLang] || ORDER_I18N.en; }
@@ -1308,13 +1312,17 @@ if(isAdminUrl()){
 
   function updateBannerText() {
     if (!currentTable) return;
+    const t = getT();
     const banner = document.getElementById('tableBanner');
-    banner.style.display = 'block';
-    banner.textContent = `${getT().welcome} ${currentTable}`;
-    document.body.style.paddingTop = '32px';
+    banner.style.display = 'flex';
+    document.getElementById('tableBannerText').textContent = `${t.welcome} ${currentTable}`;
+    const billBtn = document.getElementById('requestBillBtn');
+    if (billBtn && !billBtn.disabled) {
+      billBtn.textContent = t.askBill;
+    }
+    document.body.style.paddingTop = '42px';
   }
   updateBannerText();
-
   const originalRenderPublic = renderPublic;
   renderPublic = function() {
     originalRenderPublic();
@@ -1350,6 +1358,7 @@ if(isAdminUrl()){
       }
     });
   };
+
   function addToCart(name, price) {
     const existing = cart.find(i => i.name === name);
     if (existing) { existing.qty += 1; } else { cart.push({ name, price, qty: 1 }); }
@@ -1378,7 +1387,6 @@ if(isAdminUrl()){
       btn.style.display = 'none';
     }
   }
-
   function openCart() {
     const t = getT();
     document.getElementById('modalTitleLabel').textContent = t.modalTitle;
@@ -1433,6 +1441,51 @@ if(isAdminUrl()){
       if (error) { statusEl.textContent = t.err; return; }
       cart = []; document.getElementById('orderNotes').value = ''; updateCartUI(); closeCart(); alert(t.sent);
     }, () => { btn.disabled = false; statusEl.textContent = t.gpsDenied; }, { enableHighAccuracy: true, timeout: 10000 });
+  }
+
+  function requestBillWithGPS() {
+    const t = getT();
+    const btn = document.getElementById('requestBillBtn');
+    if (!confirm(t.billConfirm)) return;
+    if (!navigator.geolocation) { alert(t.gpsDenied); return; }
+
+    btn.disabled = true;
+    btn.textContent = '⏳...';
+
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      if (getDistanceMeters(pos.coords.latitude, pos.coords.longitude, RESTAURANT_LAT, RESTAURANT_LNG) > MAX_DISTANCE_METERS) {
+        alert(t.gpsOut);
+        btn.disabled = false;
+        btn.textContent = t.askBill;
+        return;
+      }
+
+      const { error } = await sb.from('orders').insert([{
+        table_number: currentTable,
+        items: [{ name: '🚨 طلب الشيك / الفاتورة 🚨', price: 0, qty: 1 }],
+        total_price: 0,
+        notes: 'الزبون يطلب الحساب',
+        status: 'pending'
+      }]);
+
+      if (error) {
+        alert(t.err);
+        btn.disabled = false;
+        btn.textContent = t.askBill;
+        return;
+      }
+
+      btn.textContent = '✅';
+      alert(t.billSent);
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = t.askBill;
+      }, 60000);
+    }, () => {
+      alert(t.gpsDenied);
+      btn.disabled = false;
+      btn.textContent = t.askBill;
+    }, { enableHighAccuracy: true, timeout: 10000 });
   }
 </script>
 </body>
