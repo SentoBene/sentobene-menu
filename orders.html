@@ -163,36 +163,31 @@
       btn.innerHTML = 'الصوت مُفعّل ويعمل 🔊';
       btn.className = 'sound-btn active';
 
-      // طلب إذن الإشعارات عشان تشتغل والمتصفح تحت
       if ("Notification" in window && Notification.permission !== "granted") {
         Notification.requestPermission();
       }
 
-      playBell();
+      playBell(null, false);
     }
 
-    // نغمة جرس مطعم / كاشير واضحة (Ding - Dong - Ding)
-    function playSingleRing() {
+    // 1. نغمة الأوردر الجديد (جرس مطعم: Ding - Dong - Ding)
+    function playOrderRing() {
       try {
         var AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        if (!audioCtx && AudioContextClass) {
-          audioCtx = new AudioContextClass();
-        }
+        if (!audioCtx && AudioContextClass) audioCtx = new AudioContextClass();
         if (audioCtx) {
-          if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-          }
+          if (audioCtx.state === 'suspended') audioCtx.resume();
           var now = audioCtx.currentTime;
           var notes = [
-            { freq: 880, time: 0, dur: 0.4 },     // نغمة أولى
-            { freq: 1108.73, time: 0.2, dur: 0.4 }, // نغمة تانية
-            { freq: 1318.51, time: 0.4, dur: 0.7 }  // نغمة تالتة عالية
+            { freq: 880, time: 0, dur: 0.4 },
+            { freq: 1108.73, time: 0.2, dur: 0.4 },
+            { freq: 1318.51, time: 0.4, dur: 0.7 }
           ];
 
           notes.forEach(function(n) {
             var osc = audioCtx.createOscillator();
             var gain = audioCtx.createGain();
-            osc.type = 'sine'; // صوت ناعم ورنان زي الجرس الحقيقي
+            osc.type = 'sine';
             osc.frequency.setValueAtTime(n.freq, now + n.time);
             
             gain.gain.setValueAtTime(0.01, now + n.time);
@@ -208,27 +203,67 @@
       } catch (e) {}
     }
 
-    function showDesktopAlert(tableNum) {
+    // 2. نغمة طلب الشيك (نغمة كاشير مميزة: Cha-Ching سريعة)
+    function playBillRing() {
+      try {
+        var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!audioCtx && AudioContextClass) audioCtx = new AudioContextClass();
+        if (audioCtx) {
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          var now = audioCtx.currentTime;
+          var notes = [
+            { freq: 1046.50, time: 0, dur: 0.15 },    // C6
+            { freq: 1318.51, time: 0.12, dur: 0.15 }, // E6
+            { freq: 1567.98, time: 0.24, dur: 0.15 }, // G6
+            { freq: 2093.00, time: 0.36, dur: 0.65 }  // C7 رنة عالية مميزة
+          ];
+
+          notes.forEach(function(n) {
+            var osc = audioCtx.createOscillator();
+            var gain = audioCtx.createGain();
+            osc.type = 'triangle'; // صوت معدني رنان زي الكاشير
+            osc.frequency.setValueAtTime(n.freq, now + n.time);
+            
+            gain.gain.setValueAtTime(0.01, now + n.time);
+            gain.gain.linearRampToValueAtTime(0.9, now + n.time + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + n.time + n.dur);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now + n.time);
+            osc.stop(now + n.time + n.dur);
+          });
+        }
+      } catch (e) {}
+    }
+
+    function showDesktopAlert(tableNum, isBill) {
       if ("Notification" in window && Notification.permission === "granted") {
-        new Notification("🔔 طلب جديد - SentoBene", {
-          body: "ترابيزة رقم " + tableNum + " أرسلت طلباً جديداً!",
+        var title = isBill ? "🧾 طلب الشيك - SentoBene" : "🔔 أوردر جديد - SentoBene";
+        var body = isBill
+          ? "ترابيزة رقم " + tableNum + " تطلب الحساب الآن!"
+          : "ترابيزة رقم " + tableNum + " أرسلت طلباً جديداً!";
+        new Notification(title, {
+          body: body,
           requireInteraction: true
         });
       }
     }
 
-    function playBell(tableNum) {
-      if (tableNum) showDesktopAlert(tableNum);
+    function playBell(tableNum, isBill) {
+      if (tableNum) showDesktopAlert(tableNum, isBill);
       if (bellTimer) clearInterval(bellTimer);
       var count = 0;
-      playSingleRing();
+      var ringFunc = isBill ? playBillRing : playOrderRing;
+      
+      ringFunc();
       bellTimer = setInterval(function() {
         count++;
         if (count >= 6) {
           clearInterval(bellTimer);
           bellTimer = null;
         } else {
-          playSingleRing();
+          ringFunc();
         }
       }, 1800);
     }
@@ -262,7 +297,9 @@
 
           if (data.length > lastOrderCount && soundEnabled) {
             var newestOrder = data[data.length - 1];
-            playBell(newestOrder.table_number);
+            // التأكد هل الطلب الجديد ده طلب شيك ولا أوردر عادي
+            var isBillRequest = (newestOrder.total_price === 0);
+            playBell(newestOrder.table_number, isBillRequest);
           }
           lastOrderCount = data.length;
 
@@ -278,15 +315,19 @@
               itemsHtml += '<li><span><span class="item-qty">' + item.qty + 'x</span> ' + item.name + '</span><span>' + (item.price * item.qty) + ' ج.م</span></li>';
             }
 
-            html += '<div class="order-card">' +
+            // تمييز كارت طلب الشيك بلون مختلف شوية عشان يبان بالعين فوراً
+            var isBill = (order.total_price === 0);
+            var cardBorder = isBill ? 'border: 2px solid #2e7d32; background: #0f1c11;' : '';
+
+            html += '<div class="order-card" style="' + cardBorder + '">' +
               '<div class="order-header">' +
                 '<span class="table-badge">ترابيزة ' + order.table_number + '</span>' +
                 '<span class="order-time">🕒 ' + time + '</span>' +
               '</div>' +
               '<ul class="items-list">' + itemsHtml + '</ul>' +
               (order.notes ? '<div class="order-notes">📝 ملاحظات: ' + order.notes + '</div>' : '') +
-              '<div class="order-total">الإجمالي (قبل الضريبة): ' + order.total_price + ' ج.م</div>' +
-              '<button class="done-btn" onclick="completeOrder(' + order.id + ')">تم الإدخال على تنمية ✅</button>' +
+              (!isBill ? '<div class="order-total">الإجمالي (قبل الضريبة): ' + order.total_price + ' ج.م</div>' : '') +
+              '<button class="done-btn" onclick="completeOrder(' + order.id + ')">' + (isBill ? 'تم تسليم الشيك ✅' : 'تم الإدخال على تنمية ✅') + '</button>' +
             '</div>';
           }
           container.innerHTML = html;
@@ -308,7 +349,6 @@
       loadOrders();
       setInterval(loadOrders, 4000);
 
-      // الاستماع الفوري حتى لو المتصفح في الخلفية
       sb.channel('orders-realtime')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'orders' }, function(payload) {
           loadOrders();
