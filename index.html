@@ -771,7 +771,6 @@ const SUPABASE_ANON_KEY = 'sb_publishable_Ww0JsdHQ9pjMFVfq9nD1zg_S51NeW6n';
 const sb = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
-);
 const FLAG_SVGS = {
   en: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 60 30"><clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><g clip-path="url(#s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>`,
   ar: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 900 600"><rect width="900" height="200" fill="#CE1126"/><rect y="200" width="900" height="200" fill="#FFF"/><rect y="400" width="900" height="200" fill="#000"/><circle cx="450" cy="300" r="45" fill="#C09300"/></svg>`,
@@ -779,7 +778,10 @@ const FLAG_SVGS = {
   de: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 5 3"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#D00"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>`,
   it: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 3 2"><rect width="1" height="2" x="0" fill="#009246"/><rect width="1" height="2" x="1" fill="#FFF"/><rect width="1" height="2" x="2" fill="#CE2B37"/></svg>`,
   zh: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 30 20"><rect width="30" height="20" fill="#DE2910"/><polygon points="5,2 6.2,5.8 3,3.5 7,3.5 3.8,5.8" fill="#FFDE00"/><circle cx="10" cy="2" r="0.8" fill="#FFDE00"/><circle cx="12" cy="4" r="0.8" fill="#FFDE00"/><circle cx="12" cy="7" r="0.8" fill="#FFDE00"/><circle cx="10" cy="9" r="0.8" fill="#FFDE00"/></svg>`,
+  ru: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 9 6"><rect fill="#fff" width="9" height="3"/><rect fill="#d52b1e" y="3" width="9" height="3"/><rect fill="#0039a6" y="2" width="9" height="2"/></svg>`,
+  ja: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 900 600"><rect fill="#fff" width="900" height="600"/><circle fill="#bc002d" cx="450" cy="300" r="180"/></svg>`,
 };
+
 const SUPPORTED_LANGUAGES = [
   { code: 'ar', label: 'عربي', dir: 'rtl' },
   { code: 'en', label: 'EN', dir: 'ltr' },
@@ -787,6 +789,8 @@ const SUPPORTED_LANGUAGES = [
   { code: 'de', label: 'DE', dir: 'ltr' },
   { code: 'it', label: 'IT', dir: 'ltr' },
   { code: 'zh', label: '中文', dir: 'ltr' },
+  { code: 'ru', label: 'RU', dir: 'ltr' },
+  { code: 'ja', label: '日本語', dir: 'ltr' },
 ];
 
 const UI_TEXT = {
@@ -799,7 +803,7 @@ const UI_TEXT = {
     noImage: 'صورة المنتج',
     currency: 'ج.م'
   },
-   en: {
+  en: {
     connect: 'Connect With Us',
     vat: '* 14% VAT will be added to the check *',
     item: 'Item',
@@ -826,7 +830,7 @@ const UI_TEXT = {
     noImage: 'Produktbild',
     currency: 'EGP'
   },
-    it: {
+  it: {
     connect: 'Seguici',
     vat: '* Il 14% di IVA verrà aggiunto al conto *',
     item: 'Articolo',
@@ -843,22 +847,39 @@ const UI_TEXT = {
     empty: '此分类目前暂无商品。',
     noImage: '产品图片',
     currency: 'EGP'
+  },
+  ru: {
+    connect: 'Связаться с нами',
+    vat: '* К счету будет добавлен НДС 14% *',
+    item: 'Блюдо',
+    items: 'Блюда',
+    empty: 'В этой категории пока нет доступных позиций.',
+    noImage: 'Фото продукта',
+    currency: 'EGP'
+  },
+  ja: {
+    connect: 'お問い合わせ',
+    vat: '* お会計に14%の付加価値税(VAT)が加算されます *',
+    item: '品',
+    items: '品',
+    empty: '現在、このカテゴリーに利用可能なメニューはありません。',
+    noImage: '商品画像',
+    currency: 'EGP'
   }
 };
-
 const cats = [
-  { db:'FRIDAY OFFER', en:'Friday Offer', ar:'عرض الجمعة', it:'Offerta del Venerdì', fr:'Offre du Vendredi', de:'Freitagsangebot', zh:'周五特惠' },
-  { db:'PASTA', en:'Pasta', ar:'باستا', it:'Pasta', fr:'Pâtes', de:'Pasta', zh:'意面' },
-  { db:'SANDWICHES', en:'Sandwiches', ar:'ساندوتشات', it:'Panini', fr:'Sandwichs', de:'Sandwiches', zh:'三明治' },
-  { db:'PORIZZA', en:'Purezza', ar:'بوريتزا', it:'Purezza', fr:'Purezza', de:'Purezza', zh:'比萨' },
-  { db:'MAIN COURSE', en:'Main Course', ar:'الأطباق الرئيسية', it:'Secondi Piatti', fr:'Plats Principaux', de:'Hauptgerichte', zh:'主菜' },
-  { db:'SIDE ITEM', en:'Side Items', ar:'أصناف جانبية', it:'Contorni', fr:'Accompagnements', de:'Beilagen', zh:'配菜' },
-  { db:'DESSERTS', en:'Desserts', ar:'حلويات', it:'Dolci', fr:'Desserts', de:'Desserts', zh:'甜点' },
-  { db:'SPECIAL MOCKTAILS', en:'Special Mocktails', ar:'موكتيلات خاصة', it:'Mocktail Speciali', fr:'Mocktails Spéciaux', de:'Spezielle Mocktails', zh:'特调无酒精鸡尾酒' },
-  { db:'HOT DRINKS', en:'Hot Drinks', ar:'مشروبات ساخنة', it:'Bevande Calde', fr:'Boissons Chaudes', de:'Heiße Getränke', zh:'热饮' },
-  { db:'FRESH JUICE', en:'Fresh Juices', ar:'عصائر طازجة', it:'Succhi Freschi', fr:'Jus Frais', de:'Frische Säfte', zh:'鲜榨果汁' },
-  { db:'MILK SHAKE', en:'Milkshakes', ar:'ميلك شيك', it:'Frappè', fr:'Milkshakes', de:'Milchshakes', zh:'奶昔' },
-  { db:'ICED DRINKS', en:'Iced Drinks', ar:'مشروبات مثلجة', it:'Bevande Ghiacciate', fr:'Boissons Glacées', de:'Eisgetränke', zh:'冰饮' }
+  { db:'FRIDAY OFFER', en:'Friday Offer', ar:'عرض الجمعة', it:'Offerta del Venerdì', fr:'Offre du Vendredi', de:'Freitagsangebot', zh:'周五特惠', ru:'Пятничное предложение', ja:'金曜限定オファー' },
+  { db:'PASTA', en:'Pasta', ar:'باستا', it:'Pasta', fr:'Pâtes', de:'Pasta', zh:'意面', ru:'Паста', ja:'パスタ' },
+  { db:'SANDWICHES', en:'Sandwiches', ar:'ساندوتشات', it:'Panini', fr:'Sandwichs', de:'Sandwiches', zh:'三明治', ru:'Сэндвичи', ja:'サンドイッチ' },
+  { db:'PORIZZA', en:'Purezza', ar:'بوريتزا', it:'Purezza', fr:'Purezza', de:'Purezza', zh:'比萨', ru:'Пурецца', ja:'プレッツァ' },
+  { db:'MAIN COURSE', en:'Main Course', ar:'الأطباق الرئيسية', it:'Secondi Piatti', fr:'Plats Principaux', de:'Hauptgerichte', zh:'主菜', ru:'Основные блюда', ja:'メインディッシュ' },
+  { db:'SIDE ITEM', en:'Side Items', ar:'أصناف جانبية', it:'Contorni', fr:'Accompagnements', de:'Beilagen', zh:'配菜', ru:'Гарниры', ja:'サイドメニュー' },
+  { db:'DESSERTS', en:'Desserts', ar:'حلويات', it:'Dolci', fr:'Desserts', de:'Desserts', zh:'甜点', ru:'Десерты', ja:'デザート' },
+  { db:'SPECIAL MOCKTAILS', en:'Special Mocktails', ar:'موكتيلات خاصة', it:'Mocktail Speciali', fr:'Mocktails Spéciaux', de:'Spezielle Mocktails', zh:'特调无酒精鸡尾酒', ru:'Фирменные моктейли', ja:'スペシャルモクテル' },
+  { db:'HOT DRINKS', en:'Hot Drinks', ar:'مشروبات ساخنة', it:'Bevande Calde', fr:'Boissons Chaudes', de:'Heiße Getränke', zh:'热饮', ru:'Горячие напитки', ja:'ホットドリンク' },
+  { db:'FRESH JUICE', en:'Fresh Juices', ar:'عصائر طازجة', it:'Succhi Freschi', fr:'Jus Frais', de:'Frische Säfte', zh:'鲜榨果汁', ru:'Свежевыжатые соки', ja:'フレッシュジュース' },
+  { db:'MILK SHAKE', en:'Milkshakes', ar:'ميلك شيك', it:'Frappè', fr:'Milkshakes', de:'Milchshakes', zh:'奶昔', ru:'Молочные коктейли', ja:'ミルクシェイク' },
+  { db:'ICED DRINKS', en:'Iced Drinks', ar:'مشروبات مثلجة', it:'Bevande Ghiacciate', fr:'Boissons Glacées', de:'Eisgetränke', zh:'冰饮', ru:'Холодные напитки', ja:'アイスドリンク' }
 ];
 let products = [];
 let activeLang = 'ar';
