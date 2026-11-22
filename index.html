@@ -689,7 +689,6 @@ body.adminMode .footer{ display:none; }
       </div>
 
       <div class="langSectionDivider">الترجمات (اختياري)</div>
-
       <div class="formGroup">
         <label>الاسم بالعربية (name_ar)</label>
         <input id="name_ar" type="text" placeholder="مكرونة تشيكن ألفريدو">
@@ -724,6 +723,42 @@ body.adminMode .footer{ display:none; }
       <div class="formGroup">
         <label>الوصف بالصينية (description_zh)</label>
         <textarea id="description_zh" placeholder="中文描述"></textarea>
+      </div>
+
+      <div class="formGroup">
+        <label>الاسم بالإيطالية (name_it)</label>
+        <input id="name_it" type="text" placeholder="Nome in italiano">
+      </div>
+      <div class="formGroup">
+        <label>الوصف بالإيطالية (description_it)</label>
+        <textarea id="description_it" placeholder="Descrizione in italiano"></textarea>
+      </div>
+
+      <div class="formGroup">
+        <label>الاسم بالروسية (name_ru)</label>
+        <input id="name_ru" type="text" placeholder="Название на русском">
+      </div>
+      <div class="formGroup">
+        <label>الوصف بالروسية (description_ru)</label>
+        <textarea id="description_ru" placeholder="Описание на русском"></textarea>
+      </div>
+
+      <div class="formGroup">
+        <label>الاسم باليابانية (name_ja)</label>
+        <input id="name_ja" type="text" placeholder="日本語の名前">
+      </div>
+      <div class="formGroup">
+        <label>الوصف باليابانية (description_ja)</label>
+        <textarea id="description_ja" placeholder="日本語の説明"></textarea>
+      </div>
+
+      <div class="formGroup">
+        <label>الاسم بالإسبانية (name_es)</label>
+        <input id="name_es" type="text" placeholder="Nombre en español">
+      </div>
+      <div class="formGroup">
+        <label>الوصف بالإسبانية (description_es)</label>
+        <textarea id="description_es" placeholder="Descripción en español"></textarea>
       </div>
 
       <div class="formButtons">
@@ -779,8 +814,9 @@ const FLAG_SVGS = {
   fr: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 3 2"><rect width="1" height="2" x="0" fill="#002395"/><rect width="1" height="2" x="1" fill="#FFF"/><rect width="1" height="2" x="2" fill="#ED2939"/></svg>`,
   de: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 5 3"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#D00"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>`,
   it: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 3 2"><rect width="1" height="2" x="0" fill="#009246"/><rect width="1" height="2" x="1" fill="#FFF"/><rect width="1" height="2" x="2" fill="#CE2B37"/></svg>`,
-  zh: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 30 20"><rect width="30" height="20" fill="#DE2910"/><polygon points="5,2 6.2,5.8 3,3.5 7,3.5 3.8,5.8" fill="#FFDE00"/><circle cx="10" cy="2" r="0.8" fill="#FFDE00"/><circle cx="12" cy="4" r="0.8" fill="#FFDE00"/><circle cx="12" cy="7" r="0.8" fill="#FFDE00"/><circle cx="10" cy="9" r="0.8" fill="#FFDE00"/></svg>`,
+  es: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 750 500"><rect width="750" height="500" fill="#AA151B"/><rect y="125" width="750" height="250" fill="#F1BF00"/></svg>`,
   ru: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 9 6"><rect fill="#fff" width="9" height="3"/><rect fill="#d52b1e" y="3" width="9" height="3"/><rect fill="#0039a6" y="2" width="9" height="2"/></svg>`,
+  zh: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 30 20"><rect width="30" height="20" fill="#DE2910"/><polygon points="5,2 6.2,5.8 3,3.5 7,3.5 3.8,5.8" fill="#FFDE00"/><circle cx="10" cy="2" r="0.8" fill="#FFDE00"/><circle cx="12" cy="4" r="0.8" fill="#FFDE00"/><circle cx="12" cy="7" r="0.8" fill="#FFDE00"/><circle cx="10" cy="9" r="0.8" fill="#FFDE00"/></svg>`,
   ja: `<svg style="width:100%;height:100%;display:block;" viewBox="0 0 900 600"><rect fill="#fff" width="900" height="600"/><circle fill="#bc002d" cx="450" cy="300" r="180"/></svg>`,
 };
 
@@ -790,8 +826,9 @@ const SUPPORTED_LANGUAGES = [
   { code: 'fr', label: 'FR', dir: 'ltr' },
   { code: 'de', label: 'DE', dir: 'ltr' },
   { code: 'it', label: 'IT', dir: 'ltr' },
-  { code: 'zh', label: '中文', dir: 'ltr' },
+  { code: 'es', label: 'ES', dir: 'ltr' },
   { code: 'ru', label: 'RU', dir: 'ltr' },
+  { code: 'zh', label: '中文', dir: 'ltr' },
   { code: 'ja', label: '日本語', dir: 'ltr' },
 ];
 
@@ -841,6 +878,24 @@ const UI_TEXT = {
     noImage: 'Immagine del prodotto',
     currency: 'EGP'
   },
+    es: {
+    connect: 'Contáctanos',
+    vat: '* Se añadirá un 14% de IVA a la cuenta *',
+    item: 'Artículo',
+    items: 'Artículos',
+    empty: 'No hay artículos disponibles en esta categoría actualmente.',
+    noImage: 'Imagen del producto',
+    currency: 'EGP'
+  },
+    ru: {
+    connect: 'Связаться с нами',
+    vat: '* К счету будет добавлен НДС 14% *',
+    item: 'Блюдо',
+    items: 'Блюда',
+    empty: 'В этой категории пока нет доступных позиций.',
+    noImage: 'Фото продукта',
+    currency: 'EGP'
+  },
   zh: {
     connect: '联系我们',
     vat: '* 账单将加收 14% 增值税 *',
@@ -848,15 +903,6 @@ const UI_TEXT = {
     items: '项',
     empty: '此分类目前暂无商品。',
     noImage: '产品图片',
-    currency: 'EGP'
-  },
-  ru: {
-    connect: 'Связаться с нами',
-    vat: '* К счету будет добавлен НДС 14% *',
-    item: 'Блюдо',
-    items: 'Блюда',
-    empty: 'В этой категории пока нет доступных позиций.',
-    noImage: 'Фото продукта',
     currency: 'EGP'
   },
   ja: {
@@ -870,18 +916,18 @@ const UI_TEXT = {
   }
 };
 const cats = [
-  { db:'FRIDAY OFFER', en:'Friday Offer', ar:'عرض الجمعة', it:'Offerta del Venerdì', fr:'Offre du Vendredi', de:'Freitagsangebot', zh:'周五特惠', ru:'Пятничное предложение', ja:'金曜限定オファー' },
-  { db:'PASTA', en:'Pasta', ar:'باستا', it:'Pasta', fr:'Pâtes', de:'Pasta', zh:'意面', ru:'Паста', ja:'パスタ' },
-  { db:'SANDWICHES', en:'Sandwiches', ar:'ساندوتشات', it:'Panini', fr:'Sandwichs', de:'Sandwiches', zh:'三明治', ru:'Сэндвичи', ja:'サンドイッチ' },
-  { db:'PORIZZA', en:'Purezza', ar:'بوريتزا', it:'Purezza', fr:'Purezza', de:'Purezza', zh:'比萨', ru:'Пурецца', ja:'プレッツァ' },
-  { db:'MAIN COURSE', en:'Main Course', ar:'الأطباق الرئيسية', it:'Secondi Piatti', fr:'Plats Principaux', de:'Hauptgerichte', zh:'主菜', ru:'Основные блюда', ja:'メインディッシュ' },
-  { db:'SIDE ITEM', en:'Side Items', ar:'أصناف جانبية', it:'Contorni', fr:'Accompagnements', de:'Beilagen', zh:'配菜', ru:'Гарниры', ja:'サイドメニュー' },
-  { db:'DESSERTS', en:'Desserts', ar:'حلويات', it:'Dolci', fr:'Desserts', de:'Desserts', zh:'甜点', ru:'Десерты', ja:'デザート' },
-  { db:'SPECIAL MOCKTAILS', en:'Special Mocktails', ar:'موكتيلات خاصة', it:'Mocktail Speciali', fr:'Mocktails Spéciaux', de:'Spezielle Mocktails', zh:'特调无酒精鸡尾酒', ru:'Фирменные моктейли', ja:'スペシャルモクテル' },
-  { db:'HOT DRINKS', en:'Hot Drinks', ar:'مشروبات ساخنة', it:'Bevande Calde', fr:'Boissons Chaudes', de:'Heiße Getränke', zh:'热饮', ru:'Горячие напитки', ja:'ホットドリンク' },
-  { db:'FRESH JUICE', en:'Fresh Juices', ar:'عصائر طازجة', it:'Succhi Freschi', fr:'Jus Frais', de:'Frische Säfte', zh:'鲜榨果汁', ru:'Свежевыжатые соки', ja:'フレッシュジュース' },
-  { db:'MILK SHAKE', en:'Milkshakes', ar:'ميلك شيك', it:'Frappè', fr:'Milkshakes', de:'Milchshakes', zh:'奶昔', ru:'Молочные коктейли', ja:'ミルクシェイク' },
-  { db:'ICED DRINKS', en:'Iced Drinks', ar:'مشروبات مثلجة', it:'Bevande Ghiacciate', fr:'Boissons Glacées', de:'Eisgetränke', zh:'冰饮', ru:'Холодные напитки', ja:'アイスドリンク' }
+  { db:'FRIDAY OFFER', en:'Friday Offer', ar:'عرض الجمعة', it:'Offerta del Venerdì', fr:'Offre du Vendredi', de:'Freitagsangebot', zh:'周五特惠', ru:'Пятничное предложение', ja:'金曜限定オファー', es:'Oferta del Viernes' },
+  { db:'PASTA', en:'Pasta', ar:'باستا', it:'Pasta', fr:'Pâtes', de:'Pasta', zh:'意面', ru:'Паста', ja:'パスタ', es:'Pasta' },
+  { db:'SANDWICHES', en:'Sandwiches', ar:'ساندوتشات', it:'Panini', fr:'Sandwichs', de:'Sandwiches', zh:'三明治', ru:'Сэндвичи', ja:'サンドイッチ', es:'Sándwiches' },
+  { db:'PORIZZA', en:'Purezza', ar:'بوريتزا', it:'Purezza', fr:'Purezza', de:'Purezza', zh:'比萨', ru:'Пурецца', ja:'プレッツァ', es:'Purezza' },
+  { db:'MAIN COURSE', en:'Main Course', ar:'الأطباق الرئيسية', it:'Secondi Piatti', fr:'Plats Principaux', de:'Hauptgerichte', zh:'主菜', ru:'Основные блюда', ja:'メインディッシュ', es:'Platos Principales' },
+  { db:'SIDE ITEM', en:'Side Items', ar:'أصناف جانبية', it:'Contorni', fr:'Accompagnements', de:'Beilagen', zh:'配菜', ru:'Гарниры', ja:'サイドメニュー', es:'Guarniciones' },
+  { db:'DESSERTS', en:'Desserts', ar:'حلويات', it:'Dolci', fr:'Desserts', de:'Desserts', zh:'甜点', ru:'Десерты', ja:'デザート', es:'Postres' },
+  { db:'SPECIAL MOCKTAILS', en:'Special Mocktails', ar:'موكتيلات خاصة', it:'Mocktail Speciali', fr:'Mocktails Spéciaux', de:'Spezielle Mocktails', zh:'特调无酒精鸡尾酒', ru:'Фирменные моктейли', ja:'スペシャルモクテル', es:'Cócteles sin Alcohol' },
+  { db:'HOT DRINKS', en:'Hot Drinks', ar:'مشروبات ساخنة', it:'Bevande Calde', fr:'Boissons Chaudes', de:'Heiße Getränke', zh:'热饮', ru:'Горячие напитки', ja:'ホットドリンク', es:'Bebidas Calientes' },
+  { db:'FRESH JUICE', en:'Fresh Juices', ar:'عصائر طازجة', it:'Succhi Freschi', fr:'Jus Frais', de:'Frische Säfte', zh:'鲜榨果汁', ru:'Свежевыжатые соки', ja:'フレッシュジュース', es:'Jugos Frescos' },
+  { db:'MILK SHAKE', en:'Milkshakes', ar:'ميلك شيك', it:'Frappè', fr:'Milkshakes', de:'Milchshakes', zh:'奶昔', ru:'Молочные коктейли', ja:'ミルクシェイク', es:'Malteadas' },
+  { db:'ICED DRINKS', en:'Iced Drinks', ar:'مشروبات مثلجة', it:'Bevande Ghiacciate', fr:'Boissons Glacées', de:'Eisgetränke', zh:'冰饮', ru:'Холодные напитки', ja:'アイスドリンク', es:'Bebidas Heladas' }
 ];
 let products = [];
 let activeLang = 'ar';
@@ -1321,9 +1367,11 @@ if(isAdminUrl()){
     fr: { welcome: 'Bienvenue chez SentoBene | Table:', add: '+ Ajouter', viewCart: 'Voir la commande', modalTitle: 'Commande Table', notesPlaceholder: 'Notes pour la cuisine...', sub: 'Sous-total', vat: 'TVA 14%', total: 'Total final', submit: 'Confirmer la commande ✅', gpsChecking: 'Vérification de votre position... 📍', gpsOut: 'Désolé, commande disponible uniquement sur place.', gpsDenied: 'Veuillez autoriser le GPS.', sending: 'Envoi en cours... ⏳', sent: '✅ Commande envoyée !', err: 'Erreur, réessayez.', cur: 'EGP' },
     de: { welcome: 'Willkommen bei SentoBene | Tisch:', add: '+ Hinzufügen', viewCart: 'Bestellung ansehen', modalTitle: 'Tischbestellung', notesPlaceholder: 'Hinweise für die Küche...', sub: 'Zwischensumme', vat: '14% MwSt.', total: 'Gesamtsumme', submit: 'Bestellung senden ✅', gpsChecking: 'Standort wird überprüft... 📍', gpsOut: 'Bestellung nur im Restaurant möglich.', gpsDenied: 'Bitte GPS erlauben.', sending: 'Wird gesendet... ⏳', sent: '✅ Bestellung gesendet!', err: 'Fehler, bitte erneut versuchen.', cur: 'EGP' },
     it: { welcome: 'Benvenuti da SentoBene | Tavolo:', add: '+ Aggiungi', viewCart: 'Vedi ordine', modalTitle: 'Ordine Tavolo', notesPlaceholder: 'Note per la cucina...', sub: 'Subtotale', vat: 'IVA 14%', total: 'Totale finale', submit: 'Conferma ordine ✅', gpsChecking: 'Verifica posizione... 📍', gpsOut: 'Ordini disponibili solo nel ristorante.', gpsDenied: 'Consenti accesso GPS.', sending: 'Invio ordine... ⏳', sent: '✅ Ordine inviato!', err: 'Errore, riprova.', cur: 'EGP' },
-    zh: { welcome: '欢迎来到 SentoBene | 桌号:', add: '+ 加入订单', viewCart: '查看订单', modalTitle: '餐桌订单', notesPlaceholder: '厨房备注...', sub: '小计', vat: '14% 税费', total: '总计', submit: '确认并发送订单 ✅', gpsChecking: '正在验证您的位置... 📍', gpsOut: '抱歉，仅限店内点餐。', gpsDenied: '请允许定位权限 (GPS)。', sending: '正在发送订单... ⏳', sent: '✅ 订单已成功发送！', err: '发送失败，请重试。', cur: 'EGP' }
+    es: { welcome: 'Bienvenido a SentoBene | Mesa:', add: '+ Añadir', viewCart: 'Ver pedido', modalTitle: 'Pedido de Mesa', notesPlaceholder: 'Notas para la cocina...', sub: 'Subtotal', vat: 'IVA 14%', total: 'Total final', submit: 'Confirmar pedido ✅', gpsChecking: 'Verificando ubicación... 📍', gpsOut: 'Pedidos disponibles solo dentro del restaurante.', gpsDenied: 'Por favor permita el acceso al GPS.', sending: 'Enviando pedido... ⏳', sent: '✅ ¡Pedido enviado con éxito!', err: 'Error al enviar, intente de nuevo.', cur: 'EGP' },
+    ru: { welcome: 'Добро пожаловать в SentoBene | Стол:', add: '+ Добавить', viewCart: 'Мой заказ', modalTitle: 'Заказ на стол', notesPlaceholder: 'Комментарий для кухни...', sub: 'Подытог', vat: 'НДС 14%', total: 'Итого', submit: 'Подтвердить заказ ✅', gpsChecking: 'Проверка местоположения... 📍', gpsOut: 'Заказ доступен только внутри ресторана.', gpsDenied: 'Разрешите доступ к GPS.', sending: 'Отправка заказа... ⏳', sent: '✅ Заказ успешно отправлен!', err: 'Ошибка отправки, попробуйте еще раз.', cur: 'EGP' },
+    zh: { welcome: '欢迎来到 SentoBene | 桌号:', add: '+ 加入订单', viewCart: '查看订单', modalTitle: '餐桌订单', notesPlaceholder: '厨房备注...', sub: '小计', vat: '14% 税费', total: '总计', submit: '确认并发送订单 ✅', gpsChecking: '正在验证您的位置... 📍', gpsOut: '抱歉，仅限店内点餐。', gpsDenied: '请允许定位权限 (GPS)。', sending: '正在发送订单... ⏳', sent: '✅ 订单已成功发送！', err: '发送失败，请重试。', cur: 'EGP' },
+    ja: { welcome: 'SentoBeneへようこそ | テーブル:', add: '+ 注文に追加', viewCart: '注文を見る', modalTitle: 'テーブル注文', notesPlaceholder: 'キッチンへのメモ...', sub: '小計', vat: 'VAT 14%', total: '合計金額', submit: '注文を確定する ✅', gpsChecking: '位置情報を確認中... 📍', gpsOut: '申し訳ありませんが、店内からのみご注文いただけます。', gpsDenied: '位置情報(GPS)を許可してください。', sending: '注文を送信中... ⏳', sent: '✅ 注文が送信されました！', err: '送信エラー、もう一度お試しください。', cur: 'EGP' }
   };
-
   function getT() { return ORDER_I18N[activeLang] || ORDER_I18N.en; }
   const urlParams = new URLSearchParams(window.location.search);
   const currentTable = urlParams.get('table');
