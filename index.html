@@ -1507,21 +1507,32 @@ if(isAdminUrl()){
   }
 </script>
 
-<button id="billFloatBtn" onclick="requestBillWithGPS()" style="display:none; position:fixed; bottom:75px; right:16px; background:#b94b4b; color:#fff; border:none; padding:12px 18px; border-radius:999px; font-size:14px; font-weight:bold; box-shadow:0 4px 20px rgba(0,0,0,0.8); z-index:2500;">
+<button id="billFloatBtn" onclick="openBillModal()" style="display:none; position:fixed; bottom:75px; right:16px; background:#b94b4b; color:#fff; border:none; padding:12px 18px; border-radius:999px; font-size:14px; font-weight:bold; box-shadow:0 4px 20px rgba(0,0,0,0.8); z-index:2500;">
   🧾 <span id="billFloatLabel">طلب الشيك</span>
 </button>
 
+<div id="billModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:3500; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#111413; border:1px solid #d7a33a; border-radius:16px; width:100%; max-width:360px; padding:22px; color:#f7f3eb; text-align:center;">
+    <h3 id="billModalTitle" style="margin:0 0 18px; color:#d7a33a; font-size:19px;">اختر طريقة الدفع</h3>
+    <div style="display:flex; gap:12px; margin-bottom:14px;">
+      <button id="payCashBtn" onclick="sendBillChoice('Cash')" style="flex:1; background:#2e7d32; color:#fff; border:none; padding:14px 10px; border-radius:10px; font-size:16px; font-weight:bold;">💵 كاش</button>
+      <button id="payVisaBtn" onclick="sendBillChoice('Visa')" style="flex:1; background:#1565c0; color:#fff; border:none; padding:14px 10px; border-radius:10px; font-size:16px; font-weight:bold;">💳 فيزا</button>
+    </div>
+    <button id="billCancelBtn" onclick="closeBillModal()" style="width:100%; background:#222; color:#aaa49b; border:1px solid #302b23; padding:10px; border-radius:8px; font-size:14px;">إلغاء</button>
+  </div>
+</div>
+
 <script>
   const BILL_I18N = {
-    ar: { btn: 'طلب الشيك', confirm: 'هل تريد طلب الشيك لترابيزة', sent: 'تم إرسال طلب الشيك للكاشير بنجاح ✅' },
-    en: { btn: 'Request Bill', confirm: 'Request bill for table', sent: 'Bill request sent to cashier ✅' },
-    fr: { btn: 'L\'addition', confirm: 'Demander l\'addition pour la table', sent: 'Demande d\'addition envoyée ✅' },
-    de: { btn: 'Rechnung', confirm: 'Rechnung anfordern für Tisch', sent: 'Rechnung wurde angefordert ✅' },
-    it: { btn: 'Il conto', confirm: 'Chiedere il conto per il tavolo', sent: 'Richiesta conto inviata ✅' },
-    es: { btn: 'La cuenta', confirm: 'Pedir la cuenta para la mesa', sent: 'Solicitud de cuenta enviada ✅' },
-    ru: { btn: 'Счёт', confirm: 'Попросить счёт для стола', sent: 'Запрос счёта отправлен ✅' },
-    zh: { btn: '结账', confirm: '呼叫结账 桌号', sent: '结账请求已发送 ✅' },
-    ja: { btn: 'お会計', confirm: 'お会計をお願いします テーブル', sent: 'お会計のリクエストを送信しました ✅' }
+    ar: { btn: 'طلب الشيك', title: 'اختر طريقة الدفع', cash: '💵 كاش', visa: '💳 فيزا', cancel: 'إلغاء', sent: 'تم إرسال طلب الشيك للكاشير بنجاح ✅' },
+    en: { btn: 'Request Bill', title: 'Choose Payment Method', cash: '💵 Cash', visa: '💳 Visa', cancel: 'Cancel', sent: 'Bill request sent to cashier ✅' },
+    fr: { btn: 'L\'addition', title: 'Mode de paiement', cash: '💵 Espèces', visa: '💳 Carte', cancel: 'Annuler', sent: 'Demande d\'addition envoyée ✅' },
+    de: { btn: 'Rechnung', title: 'Zahlungsmethode', cash: '💵 Bar', visa: '💳 Karte', cancel: 'Abbrechen', sent: 'Rechnung wurde angefordert ✅' },
+    it: { btn: 'Il conto', title: 'Metodo di pagamento', cash: '💵 Contanti', visa: '💳 Carta', cancel: 'Annulla', sent: 'Richiesta conto inviata ✅' },
+    es: { btn: 'La cuenta', title: 'Método de pago', cash: '💵 Efectivo', visa: '💳 Tarjeta', cancel: 'Cancelar', sent: 'Solicitud de cuenta enviada ✅' },
+    ru: { btn: 'Счёт', title: 'Способ оплаты', cash: '💵 Наличные', visa: '💳 Карта', cancel: 'Отмена', sent: 'Запрос счёта отправлен ✅' },
+    zh: { btn: '结账', title: '选择付款方式', cash: '💵 现金', visa: '💳 刷卡', cancel: '取消', sent: '结账请求已发送 ✅' },
+    ja: { btn: 'お会計', title: 'お支払い方法', cash: '💵 現金', visa: '💳 カード', cancel: 'キャンセル', sent: 'お会計のリクエストを送信しました ✅' }
   };
 
   function updateBillLang() {
@@ -1529,6 +1540,10 @@ if(isAdminUrl()){
     const b = BILL_I18N[activeLang] || BILL_I18N.en;
     document.getElementById('billFloatBtn').style.display = 'block';
     document.getElementById('billFloatLabel').textContent = b.btn;
+    document.getElementById('billModalTitle').textContent = b.title;
+    document.getElementById('payCashBtn').textContent = b.cash;
+    document.getElementById('payVisaBtn').textContent = b.visa;
+    document.getElementById('billCancelBtn').textContent = b.cancel;
   }
 
   updateBillLang();
@@ -1538,21 +1553,33 @@ if(isAdminUrl()){
     updateBillLang();
   };
 
-  function requestBillWithGPS() {
+  function openBillModal() {
+    updateBillLang();
+    document.getElementById('billModal').style.display = 'flex';
+  }
+
+  function closeBillModal() {
+    document.getElementById('billModal').style.display = 'none';
+  }
+
+  function sendBillChoice(method) {
     const t = getT(), b = BILL_I18N[activeLang] || BILL_I18N.en;
-    const btn = document.getElementById('billFloatBtn');
-    if (!confirm(`${b.confirm} ${currentTable}؟`)) return;
+    const payLabel = method === 'Visa' ? 'فيزا (Visa 💳)' : 'كاش (Cash 💵)';
+    closeBillModal();
+
     if (!navigator.geolocation) { alert(t.gpsDenied); return; }
+    const btn = document.getElementById('billFloatBtn');
     btn.disabled = true;
+
     navigator.geolocation.getCurrentPosition(async (pos) => {
       if (getDistanceMeters(pos.coords.latitude, pos.coords.longitude, RESTAURANT_LAT, RESTAURANT_LNG) > MAX_DISTANCE_METERS) {
         alert(t.gpsOut); btn.disabled = false; return;
       }
       const { error } = await sb.from('orders').insert([{
         table_number: currentTable,
-        items: [{ name: '🧾 طلب الشيك (Request Bill)', price: 0, qty: 1 }],
+        items: [{ name: `🧾 طلب الشيك - الدفع: ${payLabel}`, price: 0, qty: 1 }],
         total_price: 0,
-        notes: 'العميل يطلب الشيك',
+        notes: `طريقة الدفع المطلوبة: ${payLabel}`,
         status: 'pending'
       }]);
       btn.disabled = false;
