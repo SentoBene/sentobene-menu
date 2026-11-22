@@ -1505,8 +1505,7 @@ if(isAdminUrl()){
       cart = []; document.getElementById('orderNotes').value = ''; updateCartUI(); closeCart(); alert(t.sent);
     }, () => { btn.disabled = false; statusEl.textContent = t.gpsDenied; }, { enableHighAccuracy: true, timeout: 10000 });
   }
-</script>
-  <button id="billFloatBtn" onclick="requestBillWithGPS()" style="display:none; position:fixed; bottom:20px; right:16px; background:#b94b4b; color:#fff; border:none; padding:12px 18px; border-radius:999px; font-size:14px; font-weight:bold; box-shadow:0 4px 20px rgba(0,0,0,0.8); z-index:1500;">
+<button id="billFloatBtn" onclick="requestBillWithGPS()" style="display:none; position:fixed; bottom:75px; right:16px; background:#b94b4b; color:#fff; border:none; padding:12px 18px; border-radius:999px; font-size:14px; font-weight:bold; box-shadow:0 4px 20px rgba(0,0,0,0.8); z-index:2500;">
   🧾 طلب الشيك
 </button>
 
@@ -1529,7 +1528,7 @@ if(isAdminUrl()){
         items: [{ name: '🧾 طلب الشيك (Request Bill)', price: 0, qty: 1 }],
         total_price: 0,
         notes: 'العميل يطلب الشيك',
-        status: 'bill_requested'
+        status: 'pending'
       }]);
       btn.disabled = false;
       if (error) { alert('حدث خطأ، حاول مرة أخرى.'); return; }
