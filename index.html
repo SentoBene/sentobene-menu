@@ -1506,5 +1506,36 @@ if(isAdminUrl()){
     }, () => { btn.disabled = false; statusEl.textContent = t.gpsDenied; }, { enableHighAccuracy: true, timeout: 10000 });
   }
 </script>
+  <button id="billFloatBtn" onclick="requestBillWithGPS()" style="display:none; position:fixed; bottom:20px; right:16px; background:#b94b4b; color:#fff; border:none; padding:12px 18px; border-radius:999px; font-size:14px; font-weight:bold; box-shadow:0 4px 20px rgba(0,0,0,0.8); z-index:1500;">
+  🧾 طلب الشيك
+</button>
+
+<script>
+  if (typeof currentTable !== 'undefined' && currentTable) {
+    document.getElementById('billFloatBtn').style.display = 'block';
+  }
+
+  function requestBillWithGPS() {
+    const btn = document.getElementById('billFloatBtn');
+    if (!confirm(`هل تريد طلب الشيك لترابيزة ${currentTable}؟`)) return;
+    if (!navigator.geolocation) { alert('يرجى السماح بتحديد الموقع (GPS).'); return; }
+    btn.disabled = true;
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      if (getDistanceMeters(pos.coords.latitude, pos.coords.longitude, RESTAURANT_LAT, RESTAURANT_LNG) > MAX_DISTANCE_METERS) {
+        alert('عذراً، الطلب متاح داخل المطعم فقط.'); btn.disabled = false; return;
+      }
+      const { error } = await sb.from('orders').insert([{
+        table_number: currentTable,
+        items: [{ name: '🧾 طلب الشيك (Request Bill)', price: 0, qty: 1 }],
+        total_price: 0,
+        notes: 'العميل يطلب الشيك',
+        status: 'bill_requested'
+      }]);
+      btn.disabled = false;
+      if (error) { alert('حدث خطأ، حاول مرة أخرى.'); return; }
+      alert('تم إرسال طلب الشيك للكاشير بنجاح ✅');
+    }, () => { btn.disabled = false; alert('يرجى السماح بتحديد الموقع (GPS).'); }, { enableHighAccuracy: true, timeout: 10000 });
+  }
+</script>
 </body>
 </html>
