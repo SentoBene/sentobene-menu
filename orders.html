@@ -324,7 +324,7 @@
               '</div>' +
               '<ul class="items-list">' + itemsHtml + '</ul>' +
               (order.notes ? '<div class="order-notes">📝 ملاحظات: ' + order.notes + '</div>' : '') +
-              (!isBill ? '<div class="order-total">الإجمالي (قبل الضريبة): ' + order.total_price + ' ج.م</div>' : '') +
+              (!isBill ? '<div class="order-total">الإجمالي (بعد الضريبة): ' + order.total_price + ' ج.م</div>' : '') +
               '<button class="done-btn" onclick="completeOrder(' + order.id + ')">' + (isBill ? 'تم تسليم الشيك ✅' : 'تم الإدخال على تنمية ✅') + '</button>' +
             '</div>';
           }
