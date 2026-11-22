@@ -1562,7 +1562,10 @@ if(isAdminUrl()){
     document.getElementById('billModal').style.display = 'none';
   }
 
+  let billCooldown = false;
+
   function sendBillChoice(method) {
+    if (billCooldown) return;
     const t = getT(), b = BILL_I18N[activeLang] || BILL_I18N.en;
     const payLabel = method === 'Visa' ? 'فيزا (Visa 💳)' : 'كاش (Cash 💵)';
     closeBillModal();
@@ -1582,9 +1585,18 @@ if(isAdminUrl()){
         notes: `طريقة الدفع المطلوبة: ${payLabel}`,
         status: 'pending'
       }]);
-      btn.disabled = false;
-      if (error) { alert(t.err); return; }
+      if (error) { btn.disabled = false; alert(t.err); return; }
+
       alert(b.sent);
+      billCooldown = true;
+      btn.style.background = '#2e7d32';
+      document.getElementById('billFloatLabel').textContent = '✅';
+      setTimeout(() => {
+        billCooldown = false;
+        btn.disabled = false;
+        btn.style.background = '#b94b4b';
+        updateBillLang();
+      }, 120000);
     }, () => { btn.disabled = false; alert(t.gpsDenied); }, { enableHighAccuracy: true, timeout: 10000 });
   }
 </script>
