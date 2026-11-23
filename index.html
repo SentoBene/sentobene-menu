@@ -658,6 +658,8 @@ body.adminMode .footer{ display:none; }
   </div>
   <div>SentoBene®</div>
 </footer>
+    </div>
+
 <section id="admin" class="admin">
   <div class="adminHead">
     <h2>SentoBene Admin</h2>
@@ -1524,26 +1526,43 @@ if(isAdminUrl()){
 
 <div id="billModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:3500; align-items:center; justify-content:center; padding:16px;">
   <div style="background:#111413; border:1px solid #d7a33a; border-radius:16px; width:100%; max-width:360px; padding:22px; color:#f7f3eb; text-align:center;">
-    <h3 id="billModalTitle" style="margin:0 0 18px; color:#d7a33a; font-size:19px;">اختر طريقة الدفع</h3>
-    <div style="display:flex; gap:12px; margin-bottom:14px;">
-      <button id="payCashBtn" onclick="sendBillChoice('Cash')" style="flex:1; background:#2e7d32; color:#fff; border:none; padding:14px 10px; border-radius:10px; font-size:16px; font-weight:bold;">💵 كاش</button>
-      <button id="payVisaBtn" onclick="sendBillChoice('Visa')" style="flex:1; background:#1565c0; color:#fff; border:none; padding:14px 10px; border-radius:10px; font-size:16px; font-weight:bold;">💳 فيزا</button>
+    
+    <div id="billStep1">
+      <h3 id="billModalTitle" style="margin:0 0 18px; color:#d7a33a; font-size:19px;">اختر طريقة الدفع</h3>
+      <div style="display:flex; gap:12px; margin-bottom:14px;">
+        <button id="payCashBtn" onclick="sendBillChoice('Cash')" style="flex:1; background:#2e7d32; color:#fff; border:none; padding:14px 10px; border-radius:10px; font-size:16px; font-weight:bold;">💵 كاش</button>
+        <button id="payVisaBtn" onclick="sendBillChoice('Visa')" style="flex:1; background:#1565c0; color:#fff; border:none; padding:14px 10px; border-radius:10px; font-size:16px; font-weight:bold;">💳 فيزا</button>
+      </div>
+      <button id="billCancelBtn" onclick="closeBillModal()" style="width:100%; background:#222; color:#aaa49b; border:1px solid #302b23; padding:10px; border-radius:8px; font-size:14px;">إلغاء</button>
     </div>
-    <button id="billCancelBtn" onclick="closeBillModal()" style="width:100%; background:#222; color:#aaa49b; border:1px solid #302b23; padding:10px; border-radius:8px; font-size:14px;">إلغاء</button>
+
+    <div id="billStep2" style="display:none;">
+      <div style="font-size:38px; margin-bottom:8px;">✅</div>
+      <h3 id="billSentTitle" style="margin:0 0 8px; color:#d7a33a; font-size:18px;">تم إرسال طلب الشيك للكاشير</h3>
+      <p id="billRateDesc" style="margin:0 0 14px; font-size:14px; color:#aaa49b; line-height:1.5;">
+        نورتنا في SentoBene! رأيك يهمنا جداً، قيم تجربتك معانا على جوجل:
+      </p>
+      <div style="color:#fbbc05; font-size:22px; letter-spacing:4px; margin-bottom:16px;">★★★★★</div>
+      <a id="billRateBtn" href="https://share.google/iwrmOAcPkg4WkbnRX" target="_blank" rel="noopener noreferrer" style="display:block; width:100%; background:#d7a33a; color:#111; padding:12px; border-radius:10px; font-size:15px; font-weight:bold; text-decoration:none; margin-bottom:10px;">
+        ⭐ قيمنا على جوجل
+      </a>
+      <button id="billDoneBtn" onclick="closeBillModal()" style="width:100%; background:#222; color:#aaa49b; border:1px solid #302b23; padding:10px; border-radius:8px; font-size:13px;">إغلاق</button>
+    </div>
+
   </div>
 </div>
 
 <script>
   const BILL_I18N = {
-    ar: { btn: 'طلب الشيك', title: 'اختر طريقة الدفع', cash: '💵 كاش', visa: '💳 فيزا', cancel: 'إلغاء', sent: 'تم إرسال طلب الشيك للكاشير بنجاح ✅' },
-    en: { btn: 'Request Bill', title: 'Choose Payment Method', cash: '💵 Cash', visa: '💳 Visa', cancel: 'Cancel', sent: 'Bill request sent to cashier ✅' },
-    fr: { btn: 'L\'addition', title: 'Mode de paiement', cash: '💵 Espèces', visa: '💳 Carte', cancel: 'Annuler', sent: 'Demande d\'addition envoyée ✅' },
-    de: { btn: 'Rechnung', title: 'Zahlungsmethode', cash: '💵 Bar', visa: '💳 Karte', cancel: 'Abbrechen', sent: 'Rechnung wurde angefordert ✅' },
-    it: { btn: 'Il conto', title: 'Metodo di pagamento', cash: '💵 Contanti', visa: '💳 Carta', cancel: 'Annulla', sent: 'Richiesta conto inviata ✅' },
-    es: { btn: 'La cuenta', title: 'Método de pago', cash: '💵 Efectivo', visa: '💳 Tarjeta', cancel: 'Cancelar', sent: 'Solicitud de cuenta enviada ✅' },
-    ru: { btn: 'Счёт', title: 'Способ оплаты', cash: '💵 Наличные', visa: '💳 Карта', cancel: 'Отмена', sent: 'Запрос счёта отправлен ✅' },
-    zh: { btn: '结账', title: '选择付款方式', cash: '💵 现金', visa: '💳 刷卡', cancel: '取消', sent: '结账请求已发送 ✅' },
-    ja: { btn: 'お会計', title: 'お支払い方法', cash: '💵 現金', visa: '💳 カード', cancel: 'キャンセル', sent: 'お会計のリクエストを送信しました ✅' }
+    ar: { btn: 'طلب الشيك', title: 'اختر طريقة الدفع', cash: '💵 كاش', visa: '💳 فيزا', cancel: 'إلغاء', sentTitle: 'تم إرسال طلب الشيك للكاشير', rateDesc: 'نورتنا في SentoBene! رأيك يهمنا جداً، قيم تجربتك معانا على جوجل:', rateBtn: '⭐ قيمنا على جوجل', doneBtn: 'إغلاق' },
+    en: { btn: 'Request Bill', title: 'Choose Payment Method', cash: '💵 Cash', visa: '💳 Visa', cancel: 'Cancel', sentTitle: 'Bill Request Sent!', rateDesc: 'Enjoyed your time at SentoBene? Rate your experience on Google:', rateBtn: '⭐ Rate us on Google', doneBtn: 'Close' },
+    fr: { btn: 'L\'addition', title: 'Mode de paiement', cash: '💵 Espèces', visa: '💳 Carte', cancel: 'Annuler', sentTitle: 'Demande d\'addition envoyée !', rateDesc: 'Vous avez apprécié SentoBene ? Notez-nous sur Google :', rateBtn: '⭐ Évaluez-nous sur Google', doneBtn: 'Fermer' },
+    de: { btn: 'Rechnung', title: 'Zahlungsmethode', cash: '💵 Bar', visa: '💳 Karte', cancel: 'Abbrechen', sentTitle: 'Rechnung angefordert!', rateDesc: 'Hat es Ihnen bei SentoBene gefallen? Bewerten Sie uns auf Google:', rateBtn: '⭐ Auf Google bewerten', doneBtn: 'Schließen' },
+    it: { btn: 'Il conto', title: 'Metodo di pagamento', cash: '💵 Contanti', visa: '💳 Carta', cancel: 'Annulla', sentTitle: 'Richiesta conto inviata!', rateDesc: 'Ti è piaciuto SentoBene? Valutaci su Google:', rateBtn: '⭐ Valutaci su Google', doneBtn: 'Chiudi' },
+    es: { btn: 'La cuenta', title: 'Método de pago', cash: '💵 Efectivo', visa: '💳 Tarjeta', cancel: 'Cancelar', sentTitle: '¡Solicitud de cuenta enviada!', rateDesc: '¿Disfrutaste SentoBene? Califícanos en Google:', rateBtn: '⭐ Califícanos en Google', doneBtn: 'Cerrar' },
+    ru: { btn: 'Счёт', title: 'Способ оплаты', cash: '💵 Наличные', visa: '💳 Карта', cancel: 'Отмена', sentTitle: 'Запрос счёта отправлен!', rateDesc: 'Понравилось в SentoBene? Оцените нас в Google:', rateBtn: '⭐ Оценить в Google', doneBtn: 'Закрыть' },
+    zh: { btn: '结账', title: '选择付款方式', cash: '💵 现金', visa: '💳 刷卡', cancel: '取消', sentTitle: '结账请求已发送！', rateDesc: '喜欢 SentoBene 吗？请在 Google 上为我们评分：', rateBtn: '⭐ 在 Google 上评分', doneBtn: '关闭' },
+    ja: { btn: 'お会計', title: 'お支払い方法', cash: '💵 現金', visa: '💳 カード', cancel: 'キャンセル', sentTitle: 'お会計を送信しました！', rateDesc: 'SentoBeneはいかがでしたか？Googleで評価をお願いします：', rateBtn: '⭐ Googleで評価する', doneBtn: '閉じる' }
   };
 
   function updateBillLang() {
@@ -1555,6 +1574,10 @@ if(isAdminUrl()){
     document.getElementById('payCashBtn').textContent = b.cash;
     document.getElementById('payVisaBtn').textContent = b.visa;
     document.getElementById('billCancelBtn').textContent = b.cancel;
+    document.getElementById('billSentTitle').textContent = b.sentTitle;
+    document.getElementById('billRateDesc').textContent = b.rateDesc;
+    document.getElementById('billRateBtn').textContent = b.rateBtn;
+    document.getElementById('billDoneBtn').textContent = b.doneBtn;
   }
 
   updateBillLang();
@@ -1566,6 +1589,8 @@ if(isAdminUrl()){
 
   function openBillModal() {
     updateBillLang();
+    document.getElementById('billStep1').style.display = 'block';
+    document.getElementById('billStep2').style.display = 'none';
     document.getElementById('billModal').style.display = 'flex';
   }
 
@@ -1577,17 +1602,16 @@ if(isAdminUrl()){
 
   function sendBillChoice(method) {
     if (billCooldown) return;
-    const t = getT(), b = BILL_I18N[activeLang] || BILL_I18N.en;
+    const t = getT();
     const payLabel = method === 'Visa' ? 'فيزا (Visa 💳)' : 'كاش (Cash 💵)';
-    closeBillModal();
 
-    if (!navigator.geolocation) { alert(t.gpsDenied); return; }
+    if (!navigator.geolocation) { closeBillModal(); alert(t.gpsDenied); return; }
     const btn = document.getElementById('billFloatBtn');
     btn.disabled = true;
 
     navigator.geolocation.getCurrentPosition(async (pos) => {
       if (getDistanceMeters(pos.coords.latitude, pos.coords.longitude, RESTAURANT_LAT, RESTAURANT_LNG) > MAX_DISTANCE_METERS) {
-        alert(t.gpsOut); btn.disabled = false; return;
+        closeBillModal(); alert(t.gpsOut); btn.disabled = false; return;
       }
       const { error } = await sb.from('orders').insert([{
         table_number: currentTable,
@@ -1596,19 +1620,21 @@ if(isAdminUrl()){
         notes: `طريقة الدفع المطلوبة: ${payLabel}`,
         status: 'pending'
       }]);
-      if (error) { btn.disabled = false; alert(t.err); return; }
+      if (error) { closeBillModal(); btn.disabled = false; alert(t.err); return; }
 
-      alert(b.sent);
+      document.getElementById('billStep1').style.display = 'none';
+      document.getElementById('billStep2').style.display = 'block';
+
       billCooldown = true;
       btn.style.background = '#2e7d32';
-      document.getElementById('billFloatLabel').textContent = '✅';
+      document.getElementById('billFloatLabel').textContent = '✓';
       setTimeout(() => {
         billCooldown = false;
         btn.disabled = false;
         btn.style.background = '#b94b4b';
         updateBillLang();
       }, 120000);
-    }, () => { btn.disabled = false; alert(t.gpsDenied); }, { enableHighAccuracy: true, timeout: 10000 });
+    }, () => { closeBillModal(); btn.disabled = false; alert(t.gpsDenied); }, { enableHighAccuracy: true, timeout: 10000 });
   }
 </script>
 </body>
