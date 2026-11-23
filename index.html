@@ -1540,15 +1540,15 @@ if(isAdminUrl()){
 
 <script>
   const BILL_I18N = {
-    ar: { btn: 'طلب الشيك', title: 'اختر طريقة الدفع', cash: '💵 كاش', visa: '💳 فيزا', cancel: 'إلغاء', sentTitle: 'تم إرسال طلب الشيك للكاشير', rateDesc: 'نورتنا في SentoBene! ، قيم تجربتك معانا:', rateBtn: '⭐ رأيك يهمنا جداً', doneBtn: 'إغلاق' },
-    en: { btn: 'Request Bill', title: 'Choose Payment Method', cash: '💵 Cash', visa: '💳 Visa', cancel: 'Cancel', sentTitle: 'Bill Request Sent!', rateDesc: 'Enjoyed your time at SentoBene? Rate your experience on Google:', rateBtn: '⭐ Rate us on Google', doneBtn: 'Close' },
-    fr: { btn: 'L\'addition', title: 'Mode de paiement', cash: '💵 Espèces', visa: '💳 Carte', cancel: 'Annuler', sentTitle: 'Demande d\'addition envoyée !', rateDesc: 'Vous avez apprécié SentoBene ? Notez-nous sur Google :', rateBtn: '⭐ Évaluez-nous sur Google', doneBtn: 'Fermer' },
-    de: { btn: 'Rechnung', title: 'Zahlungsmethode', cash: '💵 Bar', visa: '💳 Karte', cancel: 'Abbrechen', sentTitle: 'Rechnung angefordert!', rateDesc: 'Hat es Ihnen bei SentoBene gefallen? Bewerten Sie uns auf Google:', rateBtn: '⭐ Auf Google bewerten', doneBtn: 'Schließen' },
-    it: { btn: 'Il conto', title: 'Metodo di pagamento', cash: '💵 Contanti', visa: '💳 Carta', cancel: 'Annulla', sentTitle: 'Richiesta conto inviata!', rateDesc: 'Ti è piaciuto SentoBene? Valutaci su Google:', rateBtn: '⭐ Valutaci su Google', doneBtn: 'Chiudi' },
-    es: { btn: 'La cuenta', title: 'Método de pago', cash: '💵 Efectivo', visa: '💳 Tarjeta', cancel: 'Cancelar', sentTitle: '¡Solicitud de cuenta enviada!', rateDesc: '¿Disfrutaste SentoBene? Califícanos en Google:', rateBtn: '⭐ Califícanos en Google', doneBtn: 'Cerrar' },
-    ru: { btn: 'Счёт', title: 'Способ оплаты', cash: '💵 Наличные', visa: '💳 Карта', cancel: 'Отмена', sentTitle: 'Запрос счёта отправлен!', rateDesc: 'Понравилось в SentoBene? Оцените нас в Google:', rateBtn: '⭐ Оценить в Google', doneBtn: 'Закрыть' },
-    zh: { btn: '结账', title: '选择付款方式', cash: '💵 现金', visa: '💳 刷卡', cancel: '取消', sentTitle: '结账请求已发送！', rateDesc: '喜欢 SentoBene 吗？请在 Google 上为我们评分：', rateBtn: '⭐ 在 Google 上评分', doneBtn: '关闭' },
-    ja: { btn: 'お会計', title: 'お支払い方法', cash: '💵 現金', visa: '💳 カード', cancel: 'キャンセル', sentTitle: 'お会計を送信しました！', rateDesc: 'SentoBeneはいかがでしたか？Googleで評価をお願いします：', rateBtn: '⭐ Googleで評価する', doneBtn: '閉じる' }
+    ar: { btn: 'طلب الشيك', title: 'اختر طريقة الدفع', cash: '💵 كاش', visa: '💳 فيزا', cancel: 'إلغاء', sentTitle: 'تم إرسال طلب الشيك للكاشير', rateDesc: 'نورتنا في SentoBene! قيم تجربتك معانا:', rateBtn: '⭐ رأيك يهمنا جداً', doneBtn: 'إغلاق' },
+    en: { btn: 'Request Bill', title: 'Choose Payment Method', cash: '💵 Cash', visa: '💳 Visa', cancel: 'Cancel', sentTitle: 'Bill Request Sent!', rateDesc: 'Thanks for visiting SentoBene! Rate your experience with us:', rateBtn: '⭐ Your opinion matters to us', doneBtn: 'Close' },
+    fr: { btn: 'L\'addition', title: 'Mode de paiement', cash: '💵 Espèces', visa: '💳 Carte', cancel: 'Annuler', sentTitle: 'Demande d\'addition envoyée !', rateDesc: 'Merci de votre visite chez SentoBene ! Évaluez votre expérience :', rateBtn: '⭐ Votre avis compte beaucoup pour nous', doneBtn: 'Fermer' },
+    de: { btn: 'Rechnung', title: 'Zahlungsmethode', cash: '💵 Bar', visa: '💳 Karte', cancel: 'Abbrechen', sentTitle: 'Rechnung angefordert!', rateDesc: 'Schön, dass Sie bei SentoBene waren! Bewerten Sie Ihr Erlebnis:', rateBtn: '⭐ Ihre Meinung ist uns sehr wichtig', doneBtn: 'Schließen' },
+    it: { btn: 'Il conto', title: 'Metodo di pagamento', cash: '💵 Contanti', visa: '💳 Carta', cancel: 'Annulla', sentTitle: 'Richiesta conto inviata!', rateDesc: 'Grazie per averci visitato da SentoBene! Valuta la tua esperienza:', rateBtn: '⭐ La tua opinione è molto importante', doneBtn: 'Chiudi' },
+    es: { btn: 'La cuenta', title: 'Método de pago', cash: '💵 Efectivo', visa: '💳 Tarjeta', cancel: 'Cancelar', sentTitle: '¡Solicitud de cuenta enviada!', rateDesc: '¡Gracias por visitar SentoBene! Califica tu experiencia con nosotros:', rateBtn: '⭐ Tu opinión nos importa mucho', doneBtn: 'Cerrar' },
+    ru: { btn: 'Счёт', title: 'Способ оплаты', cash: '💵 Наличные', visa: '💳 Карта', cancel: 'Отмена', sentTitle: 'Запрос счёта отправлен!', rateDesc: 'Спасибо, что посетили SentoBene! Оцените ваши впечатления:', rateBtn: '⭐ Ваше мнение очень важно для нас', doneBtn: 'Закрыть' },
+    zh: { btn: '结账', title: '选择付款方式', cash: '💵 现金', visa: '💳 刷卡', cancel: '取消', sentTitle: '结账请求已发送！', rateDesc: '感谢光临 SentoBene！请评价您的用餐体验：', rateBtn: '⭐ 您的意见对我们非常重要', doneBtn: '关闭' },
+    ja: { btn: 'お会計', title: 'お支払い方法', cash: '💵 現金', visa: '💳 カード', cancel: 'キャンセル', sentTitle: 'お会計を送信しました！', rateDesc: 'SentoBeneへのご来店ありがとうございます！体験を評価してください：', rateBtn: '⭐ お客様のご意見は大変重要です', doneBtn: '閉じる' }
   };
 
   function updateBillLang() {
